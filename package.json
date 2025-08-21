@@ -9,6 +9,7 @@
     "test": "turbo run test",
     "check-types": "turbo run check-types",
     "update-dependencies": "npx npm-check-updates -u && npm install && turbo run update-dependencies",
+    "generate": "turbo run generate",
     "prepare": "husky"
   },
   "devDependencies": {
