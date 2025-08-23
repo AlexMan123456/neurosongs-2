@@ -1,12 +1,12 @@
-import { newEnv } from "@alextheman/utility";
-import { createPrismaClient } from "@neurosongs/prisma-client"
-import dotenv from "dotenv"
 import path from "path";
 
-const nodeEnv = newEnv(process.env.NODE_ENV)
+import { newEnv } from "@alextheman/utility";
+import { createPrismaClient } from "@neurosongs/prisma-client";
+import dotenv from "dotenv";
 
-dotenv.config({ path: path.join(__dirname, '../../', `.env.${nodeEnv}`) });
+const nodeEnv = newEnv(process.env.NODE_ENV);
 
-const database = createPrismaClient()
-export default database
+dotenv.config({ path: path.join(__dirname, "../../", `.env.${nodeEnv}`) });
 
+const database = createPrismaClient();
+export default database;
