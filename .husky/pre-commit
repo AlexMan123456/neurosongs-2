@@ -6,8 +6,8 @@ if git diff --cached --quiet; then
   exit 1
 fi
 
-npm run format
-npm run lint
-npm test
+npm run format -- --no-color
+npm run lint -- --no-color
+npm test -- --no-color
 
 git update-index --again
