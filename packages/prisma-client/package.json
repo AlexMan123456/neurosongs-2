@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
+  "exports": {
+    "./prisma": "./dist/prisma.js",
+    "./fabbrica": "./dist/fabbrica.js"
+  },
   "scripts": {
     "generate": "prisma generate",
     "update-dependencies": "npx npm-check-updates -u && npm install",

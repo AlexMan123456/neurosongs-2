@@ -1,5 +1,5 @@
-import { createPrismaClient } from "@neurosongs/prisma-client";
+import { PrismaClient } from "@neurosongs/prisma-client/prisma";
 
-const database = createPrismaClient();
+const database = new PrismaClient();
 
 export default database;
