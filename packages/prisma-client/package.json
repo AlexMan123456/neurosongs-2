@@ -6,8 +6,8 @@
   "scripts": {
     "generate": "prisma generate",
     "update-dependencies": "npx npm-check-updates -u && npm install",
-    "format": "prettier --write --parser typescript 'src/**/*.ts' 'prisma.config.ts' && ESLINT_MODE=fix eslint --fix 'src/**/*.ts' 'prisma.config.ts'",
-    "lint": "ESLINT_MODE=lint eslint 'src/**/*.ts' 'prisma.config.ts' && prettier --check --parser typescript 'src/**/*.ts' 'prisma.config.ts'",
+    "format": "prettier --write --parser typescript 'src/**/*.ts' 'prisma.config.ts' 'fix-generated-prisma-imports.ts' && ESLINT_MODE=fix eslint --fix 'src/**/*.ts' 'prisma.config.ts' 'fix-generated-prisma-imports.ts'",
+    "lint": "ESLINT_MODE=lint eslint 'src/**/*.ts' 'prisma.config.ts' 'fix-generated-prisma-imports.ts' && prettier --check --parser typescript 'src/**/*.ts' 'prisma.config.ts' 'fix-generated-prisma-imports.ts'",
     "build": "rm -rf dist/generated && prisma generate && tsup && cp -r generated dist/generated && npx tsx fix-generated-prisma-imports.ts"
   },
   "keywords": [],
