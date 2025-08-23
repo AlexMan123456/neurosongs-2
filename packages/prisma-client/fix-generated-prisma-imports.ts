@@ -10,10 +10,12 @@ const distDir = path.resolve(__dirname, "./dist");
 function fixImports(filePath: string) {
   let content = fs.readFileSync(filePath, "utf8");
 
-  content = content.replace(
-    /from ['"]generated\/(.*?)['"]/g,
-    'from "./generated/$1"'
-  );
+  if (filePath.endsWith(".cjs")) {
+    content = content.replace('require("generated/prisma")', 'require("./generated/prisma")');
+  } else {
+    // We need to use a Regex here because index.d.ts uses single-quotes whereas index.js uses double-quotes. Because who needs consistency, am I right?
+    content = content.replace(/from ['"]generated\/prisma['"]/g, 'from "./generated/prisma"');
+  }
 
   fs.writeFileSync(filePath, content);
 }
@@ -26,11 +28,15 @@ function walk(dir: string) {
 
     if (stat.isDirectory()) {
       walk(fullPath);
-    } else if (fullPath.endsWith(".d.ts") || fullPath.endsWith(".d.cts") || fullPath.endsWith(".js")) {
+    } else if (
+      fullPath.endsWith(".d.ts") ||
+      fullPath.endsWith(".d.cts") ||
+      fullPath.endsWith(".js") ||
+      fullPath.endsWith(".cjs")
+    ) {
       fixImports(fullPath);
     }
   }
 }
 
 walk(distDir);
-console.log("Fixed imports in .d.ts and .js files for generated folder.");
