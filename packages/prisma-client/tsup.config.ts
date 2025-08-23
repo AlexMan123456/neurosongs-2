@@ -5,6 +5,6 @@ export default defineConfig({
   format: ["esm", "cjs"],
   dts: true,
   clean: true,
-  external: ["@prisma/client", "generated/prisma"],
+  external: ["@prisma/client", "generated/prisma", "generated/fabbrica"],
   noExternal: []
 });
