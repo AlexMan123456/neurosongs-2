@@ -1,0 +1,21 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: neurosongs-2-tests
+    restart: always
+    user: postgres
+    environment:
+      - POSTGRES_DB=tests
+      - POSTGRES_PASSWORD=prisma
+    volumes:
+      - database:/var/lib/postgresql/data
+    ports:
+      - "5433:5433"
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+volumes:
+  database:
+    driver: local
