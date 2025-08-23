@@ -2,19 +2,21 @@
   "name": "@neurosongs/prisma-client",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "generate": "prisma generate",
     "update-dependencies": "npx npm-check-updates -u && npm install",
     "format": "prettier --write --parser typescript 'src/**/*.ts' 'prisma.config.ts' && ESLINT_MODE=fix eslint --fix 'src/**/*.ts' 'prisma.config.ts'",
-    "lint": "ESLINT_MODE=lint eslint 'src/**/*.ts' 'prisma.config.ts' && prettier --check --parser typescript 'src/**/*.ts' 'prisma.config.ts'"
+    "lint": "ESLINT_MODE=lint eslint 'src/**/*.ts' 'prisma.config.ts' && prettier --check --parser typescript 'src/**/*.ts' 'prisma.config.ts'",
+    "build": "rm -rf dist && prisma generate && tsup && npx tsx fix-generated-prisma-imports.ts && cp -r generated dist/generated"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
-    "prisma": "^6.14.0"
+    "prisma": "^6.14.0",
+    "tsup": "^8.5.0"
   },
   "dependencies": {
     "@prisma/client": "^6.14.0",
