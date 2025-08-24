@@ -4,17 +4,17 @@ export default defineConfig([
   {
     entry: ["src/prisma.ts"],
     format: ["esm", "cjs"],
-    dts: true,
+    dts: false,
     clean: true,
-    external: ["@prisma/client", "generated/prisma"],
+    external: ["@prisma/client", "./generated/prisma"],
     noExternal: [],
   },
   {
     entry: ["src/fabbrica.ts"],
     format: ["esm", "cjs"],
-    dts: true,
+    dts: false,
     clean: true,
-    external: ["@prisma/client", "generated/fabbrica"],
+    external: ["@prisma/client", "./generated/fabbrica"],
     noExternal: [],
   },
 ]);

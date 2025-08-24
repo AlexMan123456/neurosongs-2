@@ -1,1 +1,1 @@
-export * from "generated/fabbrica";
+export * from "./generated/fabbrica";
