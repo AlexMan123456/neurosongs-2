@@ -9,6 +9,7 @@
     "lint": "ESLINT_MODE=lint eslint 'src/**/*.ts' 'tests/**/*.ts' && prettier --check --parser typescript 'src/**/*.ts' 'tests/**/*.ts'",
     "reset-database": "npx prisma migrate reset --force --skip-generate",
     "generate": "npx prisma generate",
+    "migrate-deploy": "prisma migrate deploy",
     "update-dependencies": "npx npm-check-updates -u && npm install"
   },
   "keywords": [],

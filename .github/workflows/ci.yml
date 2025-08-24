@@ -48,15 +48,19 @@ jobs:
     - name: Initialise environment variables
       run: |
         touch apps/back-end/.env.test
+        touch apps/back-end/.env.development
         touch packages/prisma-client/.env
         echo DATABASE_URL="${{ secrets.DATABASE_URL }}" >> apps/back-end/.env.test
+        echo DATABASE_URL="${{ secrets.DATABASE_URL }}" >> apps/back-end/.env.development
         echo DATABASE_URL="${{ secrets.DATABASE_URL }}" >> packages/prisma-client/.env.test
-    - name: Setup package
+    - name: Install dependencies
+      run: npm ci
+    - name: Build packages
+      run: npm run build --if-present
+    - name: Generate Prisma Client
       run: |
-        npm ci
-        npm run build --if-present
-    - name: Generate Prisma Client 
-      run: npm run generate-from-back-end
+        npm run migrate-deploy
+        npm run generate-from-back-end
     - name: Run linting checks
       run: npm run lint
     - name: Run tests
