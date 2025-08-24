@@ -21,6 +21,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: prisma
+          POSTGRES_DB: tests
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -44,12 +45,18 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    - name: Initialise environment variables
+      run: |
+        touch apps/back-end/.env.test
+        touch packages/prisma-client/.env
+        echo DATABASE_URL="${{ secrets.DATABASE_URL }}" >> apps/back-end/.env.test
+        echo DATABASE_URL="${{ secrets.DATABASE_URL }}" >> packages/prisma-client/.env.test
     - name: Setup package
       run: |
         npm ci
         npm run build --if-present
     - name: Generate Prisma Client 
-      run: npm run generate
+      run: npm run generate-from-back-end
     - name: Run linting checks
       run: npm run lint
     - name: Run tests
