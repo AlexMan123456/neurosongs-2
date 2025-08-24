@@ -1,6 +1,11 @@
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  output   = "../src/generated/prisma"
+}
+
+generator fabbrica {
+  provider = "prisma-fabbrica"
+  output = "../src/generated/fabbrica"
 }
 
 datasource db {
@@ -14,7 +19,7 @@ model User {
   artistName     String    @db.VarChar(100)
   description    String?
   profilePicture String    @default("Default")
-  id             String    @id
+  id             String    @id @db.Uuid @default(dbgenerated("gen_random_uuid()"))
   dateOfBirth    DateTime?
   memberSince    DateTime  @default(now())
 

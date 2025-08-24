@@ -8,6 +8,8 @@
     "format": "prettier --write --parser typescript 'src/**/*.ts' 'tests/**/*.ts' && ESLINT_MODE=fix eslint --fix 'src/**/*.ts' 'tests/**/*.ts'",
     "lint": "ESLINT_MODE=lint eslint 'src/**/*.ts' 'tests/**/*.ts' && prettier --check --parser typescript 'src/**/*.ts' 'tests/**/*.ts'",
     "reset-database": "npx prisma migrate reset --force --skip-generate",
+    "generate": "npx prisma generate",
+    "migrate-deploy": "prisma migrate deploy",
     "update-dependencies": "npx npm-check-updates -u && npm install"
   },
   "keywords": [],
@@ -21,6 +23,7 @@
     "express": "^5.1.0"
   },
   "devDependencies": {
+    "execa": "^9.6.0",
     "prisma": "^6.14.0",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^3.2.4"

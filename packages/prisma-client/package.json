@@ -3,18 +3,29 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
+  "exports": {
+    "./prisma": {
+      "types": "./src/prisma.ts",
+      "import": "./dist/generated/prisma/index.js",
+      "default": "./dist/generated/prisma/index.js"
+    },
+    "./fabbrica": {
+      "types": "./src/fabbrica.ts",
+      "import": "./dist/generated/fabbrica/index.js",
+      "default": "./dist/generated/fabbrica/index.js"
+    }
+  },
   "scripts": {
     "generate": "prisma generate",
     "update-dependencies": "npx npm-check-updates -u && npm install",
-    "format": "prettier --write --parser typescript 'src/**/*.ts' 'prisma.config.ts' 'fix-generated-prisma-imports.ts' && ESLINT_MODE=fix eslint --fix 'src/**/*.ts' 'prisma.config.ts' 'fix-generated-prisma-imports.ts'",
-    "lint": "ESLINT_MODE=lint eslint 'src/**/*.ts' 'prisma.config.ts' 'fix-generated-prisma-imports.ts' && prettier --check --parser typescript 'src/**/*.ts' 'prisma.config.ts' 'fix-generated-prisma-imports.ts'",
-    "build": "rm -rf dist/generated && prisma generate && tsup && cp -r generated dist/generated && npx tsx fix-generated-prisma-imports.ts"
+    "build": "rm -rf dist/generated && prisma generate && tsup && cp -r src/generated dist/generated"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "module",
   "devDependencies": {
+    "@quramy/prisma-fabbrica": "^2.3.1",
     "prisma": "^6.14.0",
     "tsup": "^8.5.0"
   },

@@ -25,6 +25,9 @@
     "test": {
       "dependsOn": ["^test"]
     },
+    "migrate-deploy": {
+      "dependsOn": ["^migrate-deploy"]
+    },
     "dev": {
       "cache": false,
       "persistent": true,
