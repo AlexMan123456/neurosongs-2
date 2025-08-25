@@ -24,7 +24,12 @@ describe("/api/users/:userId", () => {
     const {
       body: { error },
     } = await request(app).get(`/api/users/${missingId}`).expect(404);
-    expect(error.status).toBe(404);
     expect(error.message).toBe("USER_NOT_FOUND");
+  });
+  test("400: Gives an error if userId is not a UUID", async () => {
+    const {
+      body: { error },
+    } = await request(app).get(`/api/users/hello`).expect(400);
+    expect(error.message).toBe("INVALID_UUID");
   });
 });

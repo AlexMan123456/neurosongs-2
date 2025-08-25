@@ -11,3 +11,7 @@ export const customErrors: ErrorRequestHandler = (error, _request, response, nex
   }
   next(error);
 };
+
+export const internalServerError: ErrorRequestHandler = (_error, _request, response, _next) => {
+  response.status(500).send({ error: new APIError(500) });
+};

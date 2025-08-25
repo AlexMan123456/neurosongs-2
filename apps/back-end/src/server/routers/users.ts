@@ -1,6 +1,7 @@
 import express from "express";
 
 import { selectUserById } from "src/server/models/users";
+
 const usersRouter = express.Router();
 
 usersRouter.route("/:userId").get(async (request, response, next) => {
