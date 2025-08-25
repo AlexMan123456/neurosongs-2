@@ -32,7 +32,7 @@
     "packages/*"
   ],
   "dependencies": {
-    "@alextheman/utility": "^1.13.1",
+    "@alextheman/utility": "^1.13.2",
     "@neurosongs/prisma-client": "^1.0.0"
   }
 }
