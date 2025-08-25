@@ -7,12 +7,17 @@
     "./prisma": {
       "types": "./src/prisma.ts",
       "import": "./dist/generated/prisma/index.js",
+      "require": "./dist/generated/prisma/index.cjs",
       "default": "./dist/generated/prisma/index.js"
     },
     "./fabbrica": {
       "types": "./src/fabbrica.ts",
       "import": "./dist/generated/fabbrica/index.js",
+      "require": "./dist/generated/fabbrica/index.cjs",
       "default": "./dist/generated/fabbrica/index.js"
+    },
+    "./types": {
+      "types": "./src/types.ts"
     }
   },
   "scripts": {

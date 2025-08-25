@@ -1,4 +1,4 @@
-import type { User } from "@neurosongs/prisma-client/prisma";
+import type { PublicUser } from "@neurosongs/prisma-client/types";
 
 import { randomUUID } from "crypto";
 
@@ -24,7 +24,7 @@ describe("/api/users", () => {
 
       const {
         body: { users: apiUsers },
-      }: { body: { users: User[] } } = await request(app).get(`/api/users`).expect(200);
+      }: { body: { users: PublicUser[] } } = await request(app).get(`/api/users`).expect(200);
 
       expect(
         apiUsers.map((user) => {
