@@ -6,7 +6,19 @@ const publicUserSchema = UserModelSchema.omit({
     email: true,
     dateOfBirth: true
 });
+export type User = z.infer<typeof UserModelSchema>
 export type PublicUser = z.infer<typeof publicUserSchema>;
 export function newPublicUser(data: unknown){
     return publicUserSchema.safeParse(data);
+}
+
+const apiUserSchema = publicUserSchema.omit({
+    memberSince: true
+}).extend({
+    memberSince: z.string()
+})
+
+export type APIUser = z.infer<typeof apiUserSchema>
+export function newAPIUser(data: unknown){
+    return apiUserSchema.safeParse(data);
 }
