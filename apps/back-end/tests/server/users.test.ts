@@ -1,3 +1,5 @@
+import type { User } from "@neurosongs/prisma-client/prisma";
+
 import { randomUUID } from "crypto";
 
 import { isSameDate } from "@alextheman/utility";
@@ -6,6 +8,36 @@ import { userFactory } from "tests/test-utilities/dataFactory";
 import { describe, expect, test } from "vitest";
 
 import app from "src/server/app";
+
+describe("/api/users", () => {
+  describe("GET", () => {
+    test("200: Responds with an array of all users sorted by most recent", async () => {
+      const factoryUsers = await Promise.all(
+        new Array(5).fill(null).map(async () => {
+          return await userFactory.create();
+        }),
+      );
+
+      factoryUsers.sort((first, second) => {
+        return first.serial - second.serial;
+      });
+
+      const {
+        body: { users: apiUsers },
+      }: { body: { users: User[] } } = await request(app).get(`/api/users`).expect(200);
+
+      expect(
+        apiUsers.map((user) => {
+          return user.id;
+        }),
+      ).toEqual(
+        factoryUsers.map((user) => {
+          return user.id;
+        }),
+      );
+    });
+  });
+});
 
 describe("/api/users/:userId", () => {
   describe("GET", () => {
