@@ -1,13 +1,18 @@
 import express from "express";
 
-import { customErrors } from "src/server/routers/errors";
+import { customErrors, internalServerError } from "src/server/routers/errors";
 import usersRouter from "src/server/routers/users";
+import validateUUID from "src/server/validators/validateUUID";
 const app = express();
+
+// Parameter validators
+usersRouter.param("userId", validateUUID);
 
 // Routes
 app.use("/api/users", usersRouter);
 
 // Error handling
 app.use(customErrors);
+app.use(internalServerError);
 
 export default app;

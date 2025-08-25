@@ -1,9 +1,10 @@
 import express from "express";
 
 import { selectUserById } from "src/server/models/users";
+
 const usersRouter = express.Router();
 
-usersRouter.route("/:userId").get(async (request, response, next) => {
+usersRouter.route("/:userId").get<{ userId: string }>(async (request, response, next) => {
   try {
     const user = await selectUserById(request.params.userId);
     response.status(200).send({ user });
