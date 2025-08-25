@@ -24,5 +24,6 @@
     "noFallthroughCasesInSwitch": true,
     "declaration": true
   },
-  "include": ["src", "generated"]
+  "include": ["src"],
+  "exclude": ["src/generated"]
 }
