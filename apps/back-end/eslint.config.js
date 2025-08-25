@@ -20,29 +20,9 @@ export default [
     },
   },
   {
-    files: ["tests/test-utilities/setup.ts"],
-    rules: {
-      "no-restricted-imports": [
-        warnOnFixButErrorOnLint,
-        {
-          paths: [
-            {
-              /* The test setup file does need access to setPrismaClient() so that it can set the test client, so the setPrismaClient 
-              import is not restricted in this case, but we're still restricting access to importing the connection from the connection file itself
-              in favour of getPrismaClient() */
-              name: "src/database/connection",
-              message:
-                "Use the getPrismaClient() function from src/database/client to access the current client instead.",
-            }
-          ]
-        }
-      ]
-    }
-  },
-  {
     files: ["src/database/*", "tests/test-utilities/setup.ts"],
     rules: {
-      // Database files should have access to both the connection and client so it can set up.
+      // Setup files should be able to set the PrismaClient.
       "no-restricted-imports": "off",
     },
   },
