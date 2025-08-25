@@ -18,7 +18,9 @@
   "scripts": {
     "generate": "prisma generate",
     "update-dependencies": "npx npm-check-updates -u && npm install",
-    "build": "rm -rf dist/generated && prisma generate && tsup && cp -r src/generated dist/generated"
+    "build": "rm -rf dist/generated && prisma generate && tsup && cp -r src/generated dist/generated",
+    "format": "prisma format",
+    "lint": "prisma format --check"
   },
   "keywords": [],
   "author": "",
