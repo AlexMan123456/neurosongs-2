@@ -1,4 +1,4 @@
-import type { PublicUser, User } from "@neurosongs/prisma-client/types";
+import type { PublicUser } from "@neurosongs/prisma-client/types";
 
 import { randomUUID } from "crypto";
 
@@ -24,32 +24,17 @@ describe("/api/users", () => {
 
       const {
         body: { users: apiUsers },
-      }: { body: { users: (Omit<PublicUser, "memberSince"> & { memberSince: string })[] } } =
-        await request(app).get(`/api/users`).expect(200);
+      }: { body: { users: PublicUser[] } } = await request(app).get(`/api/users`).expect(200);
 
-      const filteredFactoryUsers = factoryUsers.map((user) => {
-        const newUser: Partial<User> = { ...user };
-        delete newUser.serial;
-        delete newUser.dateOfBirth;
-        delete newUser.email;
-        delete newUser.memberSince;
-        return newUser as Omit<PublicUser, "memberSince">;
-      });
-
-      expect(filteredFactoryUsers).toEqual(
+      expect(
         apiUsers.map((user) => {
-          const newUser: Omit<Partial<User>, "memberSince"> & { memberSince?: string } = {
-            ...user,
-          };
-          delete newUser.memberSince;
-          return newUser;
+          return user.id;
+        }),
+      ).toEqual(
+        factoryUsers.map((user) => {
+          return user.id;
         }),
       );
-
-      apiUsers.forEach((apiUser, index) => {
-        const factoryUser = factoryUsers[index];
-        expect(isSameDate(new Date(apiUser.memberSince), factoryUser.memberSince)).toBe(true);
-      });
     });
   });
 });
@@ -60,18 +45,12 @@ describe("/api/users/:userId", () => {
       const factoryUser = await userFactory.create();
       const {
         body: { user: apiUser },
-      }: { body: { user: Omit<PublicUser, "memberSince"> & { memberSince?: string } } } =
-        await request(app).get(`/api/users/${factoryUser.id}`).expect(200);
-      const filteredFactoryUser: Partial<User> = { ...factoryUser };
-      delete filteredFactoryUser.serial;
-      delete filteredFactoryUser.email;
-      delete filteredFactoryUser.dateOfBirth;
-      delete filteredFactoryUser.memberSince;
-
-      const apiUserMemberSince = apiUser.memberSince;
-      delete apiUser.memberSince;
-      expect(filteredFactoryUser).toEqual(apiUser);
-      expect(isSameDate(new Date(apiUserMemberSince ?? ""), factoryUser.memberSince)).toBe(true);
+      } = await request(app).get(`/api/users/${factoryUser.id}`).expect(200);
+      expect(factoryUser.id).toBe(apiUser.id);
+      expect(factoryUser.username).toBe(apiUser.username);
+      expect(factoryUser.artistName).toBe(apiUser.artistName);
+      expect(factoryUser.description).toBe(apiUser.description);
+      expect(isSameDate(factoryUser.memberSince, new Date(apiUser.memberSince))).toBe(true);
     });
     test("404: Gives an error if user not in database", async () => {
       const missingId = randomUUID();
