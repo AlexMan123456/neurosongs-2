@@ -7,18 +7,25 @@
     "./prisma": {
       "types": "./src/prisma.ts",
       "import": "./dist/generated/prisma/index.js",
+      "require": "./dist/generated/prisma/index.cjs",
       "default": "./dist/generated/prisma/index.js"
     },
     "./fabbrica": {
       "types": "./src/fabbrica.ts",
       "import": "./dist/generated/fabbrica/index.js",
+      "require": "./dist/generated/fabbrica/index.cjs",
       "default": "./dist/generated/fabbrica/index.js"
+    },
+    "./types": {
+      "types": "./src/types.ts"
     }
   },
   "scripts": {
     "generate": "prisma generate",
     "update-dependencies": "npx npm-check-updates -u && npm install",
-    "build": "rm -rf dist/generated && prisma generate && tsup && cp -r src/generated dist/generated"
+    "build": "rm -rf dist/generated && prisma generate && tsup && cp -r src/generated dist/generated",
+    "format": "prisma format",
+    "lint": "prisma format --check"
   },
   "keywords": [],
   "author": "",

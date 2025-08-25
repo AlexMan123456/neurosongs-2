@@ -16,5 +16,5 @@ export default defineConfig([
     clean: true,
     external: ["@prisma/client", "./generated/fabbrica"],
     noExternal: [],
-  },
+  }
 ]);

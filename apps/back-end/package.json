@@ -6,7 +6,7 @@
   "scripts": {
     "test": "vitest run",
     "format": "prettier --write --parser typescript 'src/**/*.ts' 'tests/**/*.ts' && ESLINT_MODE=fix eslint --fix 'src/**/*.ts' 'tests/**/*.ts'",
-    "lint": "ESLINT_MODE=lint eslint 'src/**/*.ts' 'tests/**/*.ts' && prettier --check --parser typescript 'src/**/*.ts' 'tests/**/*.ts'",
+    "lint": "tsc --noEmit && ESLINT_MODE=lint eslint 'src/**/*.ts' 'tests/**/*.ts' && prettier --check --parser typescript 'src/**/*.ts' 'tests/**/*.ts'",
     "reset-database": "npx prisma migrate reset --force --skip-generate",
     "generate": "npx prisma generate",
     "migrate-deploy": "prisma migrate deploy",
