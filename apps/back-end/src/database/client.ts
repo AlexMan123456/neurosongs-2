@@ -1,8 +1,18 @@
-import type { PrismaClient } from "@neurosongs/prisma-client/prisma";
+import path from "path";
+import { fileURLToPath } from "url";
 
-import database from "src/database/connection";
+import { newEnv } from "@alextheman/utility";
+import { PrismaClient } from "@neurosongs/prisma-client/prisma";
+import dotenv from "dotenv";
 
-let currentPrismaClient = database;
+const nodeEnv = newEnv(process.env.NODE_ENV);
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+dotenv.config({ path: path.join(__dirname, "../../", `.env.${nodeEnv}`) });
+
+let currentPrismaClient: PrismaClient = new PrismaClient();
 
 export function getPrismaClient(): PrismaClient {
   return currentPrismaClient;
