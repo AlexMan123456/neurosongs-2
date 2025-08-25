@@ -1,3 +1,5 @@
+import { randomUUID } from "crypto";
+
 import { isSameDate } from "@alextheman/utility";
 import request from "supertest";
 import { userFactory } from "tests/test-utilities/dataFactory";
@@ -16,5 +18,13 @@ describe("/api/users/:userId", () => {
     expect(factoryUser.artistName).toBe(apiUser.artistName);
     expect(factoryUser.description).toBe(apiUser.description);
     expect(isSameDate(factoryUser.memberSince, new Date(apiUser.memberSince))).toBe(true);
+  });
+  test("404: Gives an error if user not in database", async () => {
+    const missingId = randomUUID();
+    const {
+      body: { error },
+    } = await request(app).get(`/api/users/${missingId}`).expect(404);
+    expect(error.status).toBe(404);
+    expect(error.message).toBe("USER_NOT_FOUND");
   });
 });
