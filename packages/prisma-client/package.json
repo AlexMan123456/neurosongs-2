@@ -6,21 +6,21 @@
   "exports": {
     "./prisma": {
       "types": "./src/prisma.ts",
-      "import": "./dist/generated/prisma/index.js",
-      "require": "./dist/generated/prisma/index.cjs",
-      "default": "./dist/generated/prisma/index.js"
+      "import": "./dist/prisma.js",
+      "require": "./dist/prisma.cjs",
+      "default": "./dist/prisma.js"
     },
     "./fabbrica": {
       "types": "./src/fabbrica.ts",
-      "import": "./dist/generated/fabbrica/index.js",
-      "require": "./dist/generated/fabbrica/index.cjs",
-      "default": "./dist/generated/fabbrica/index.js"
+      "import": "./dist/fabbrica.js",
+      "require": "./dist/fabbrica.cjs",
+      "default": "./dist/fabbrica.js"
     },
     "./types": {
       "types": "./src/types.ts",
-      "import": "./dist/generated/types/schemas/index.js",
-      "require": "./dist/generated/types/schemas/index.cjs",
-      "default": "./dist/generated/types/schemas/index.js"
+      "import": "./dist/types.js",
+      "require": "./dist/types.cjs",
+      "default": "./dist/types.js"
     }
   },
   "scripts": {
