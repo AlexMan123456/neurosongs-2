@@ -8,6 +8,11 @@ generator fabbrica {
   output   = "../src/generated/fabbrica"
 }
 
+generator zod {
+  provider = "prisma-zod-generator"
+  output   = "../src/generated/types"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
