@@ -5,7 +5,6 @@ import { initialize } from "@neurosongs/prisma-client/fabbrica";
 import { afterEach, beforeAll, beforeEach } from "vitest";
 
 import { getPrismaClient, setPrismaClient } from "src/database/client";
-import database from "src/database/connection";
 
 let prismaTestingHelper: PrismaTestingHelper<PrismaClient> | undefined;
 let testPrismaClient: PrismaClient;
@@ -16,11 +15,11 @@ beforeAll(() => {
 
 beforeEach(async () => {
   if (!prismaTestingHelper) {
-    prismaTestingHelper = new PrismaTestingHelper(database);
+    prismaTestingHelper = new PrismaTestingHelper(getPrismaClient());
+    testPrismaClient = prismaTestingHelper.getProxyClient();
+    setPrismaClient(testPrismaClient);
+    initialize({ prisma: getPrismaClient() });
   }
-  testPrismaClient = prismaTestingHelper.getProxyClient();
-  initialize({ prisma: testPrismaClient });
-  setPrismaClient(testPrismaClient);
   await prismaTestingHelper.startNewTransaction();
 });
 
