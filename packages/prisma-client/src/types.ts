@@ -1,13 +1,17 @@
+import { UserInputSchema, UserModelSchema } from "./generated/types/schemas";
 import z from "zod";
 
-import { UserModelSchema } from "./generated/types/schemas";
+
+export type User = z.infer<typeof UserModelSchema>
+export function parseUser(data: unknown){
+    return UserModelSchema.parse(data)
+}
 
 const publicUserSchema = UserModelSchema.omit({
   serial: true,
   email: true,
   dateOfBirth: true,
 });
-export type User = z.infer<typeof UserModelSchema>;
 export type PublicUser = z.infer<typeof publicUserSchema>;
 export function parsePublicUser(data: unknown) {
   return publicUserSchema.parse(data);
@@ -24,4 +28,17 @@ const apiUserSchema = publicUserSchema
 export type APIUser = z.infer<typeof apiUserSchema>;
 export function parseAPIUser(data: unknown) {
   return apiUserSchema.parse(data);
+}
+
+const userToPostSchema = UserInputSchema.omit({
+    id: true,
+    serial: true,
+    memberSince: true
+}).extend({
+    memberSince: z.date().optional(),
+})
+
+export type UserToPost = z.infer<typeof userToPostSchema>
+export function parseUserToPost(data: unknown){
+    return userToPostSchema.parse(data);
 }
