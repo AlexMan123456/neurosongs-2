@@ -19,15 +19,15 @@ datasource db {
 }
 
 model User {
-  username       String    @unique @db.VarChar(100)
-  email          String    @unique
-  artistName     String    @map("artist_name") @db.VarChar(100)
+  username       String   @unique @db.VarChar(100)
+  email          String   @unique
+  artistName     String   @map("artist_name") @db.VarChar(100)
   description    String?
-  profilePicture String    @default("Default") @map("profile_picture")
-  id             String    @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  dateOfBirth    DateTime? @map("date_of_birth")
-  memberSince    DateTime  @default(now()) @map("member_since")
-  serial         Int       @unique @default(autoincrement())
+  profilePicture String   @default("Default") @map("profile_picture")
+  id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  dateOfBirth    DateTime @map("date_of_birth")
+  memberSince    DateTime @default(now()) @map("member_since")
+  serial         Int      @unique @default(autoincrement())
 
   @@map("users")
 }
