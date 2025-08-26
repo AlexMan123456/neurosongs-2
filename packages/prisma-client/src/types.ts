@@ -8,8 +8,8 @@ const publicUserSchema = UserModelSchema.omit({
 });
 export type User = z.infer<typeof UserModelSchema>
 export type PublicUser = z.infer<typeof publicUserSchema>;
-export function newPublicUser(data: unknown){
-    return publicUserSchema.safeParse(data);
+export function parsePublicUser(data: unknown){
+    return publicUserSchema.parse(data);
 }
 
 const apiUserSchema = publicUserSchema.omit({
@@ -19,6 +19,6 @@ const apiUserSchema = publicUserSchema.omit({
 })
 
 export type APIUser = z.infer<typeof apiUserSchema>
-export function newAPIUser(data: unknown){
-    return apiUserSchema.safeParse(data);
+export function parseAPIUser(data: unknown){
+    return apiUserSchema.parse(data);
 }

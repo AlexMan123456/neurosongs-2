@@ -3,7 +3,7 @@ import type { APIUser, PublicUser, User } from "@neurosongs/prisma-client/types"
 import { randomUUID } from "crypto";
 
 import { isSameDate } from "@alextheman/utility";
-import { newAPIUser, newPublicUser } from "@neurosongs/prisma-client/types";
+import { parseAPIUser, parsePublicUser } from "@neurosongs/prisma-client/types";
 import request from "supertest";
 import { userFactory } from "tests/test-utilities/dataFactory";
 import { describe, expect, test } from "vitest";
@@ -25,40 +25,38 @@ describe("/api/users", () => {
 
       const {
         body: { users: apiUsers },
-      }: { body: { users: (Omit<PublicUser, "memberSince"> & { memberSince: string })[] } } =
+      }: { body: { users: (Omit<APIUser, "memberSince"> & { memberSince: string })[] } } =
         await request(app).get(`/api/users`).expect(200);
 
-      const filteredFactoryUsers = factoryUsers.map((user) => {
+      const validatedFactoryUsers = factoryUsers.map((user) => {
         const newUser: Partial<User> = { ...user };
         delete newUser.serial;
         delete newUser.dateOfBirth;
         delete newUser.email;
 
-        const { success: isValidUser } = newPublicUser(newUser);
-        if (!isValidUser) {
-          throw new Error("INVALID_FACTORY_USER");
-        }
-
-        delete newUser.memberSince;
-        return newUser as Omit<PublicUser, "memberSince">;
+        return parsePublicUser(newUser);
       });
 
-      expect(filteredFactoryUsers).toEqual(
-        apiUsers.map((user) => {
-          const { data: validatedUser, success: isValidUser } = newAPIUser(user);
-          if (!isValidUser) {
-            throw new Error("INVALID_API_USER");
-          }
-          const newUser: Omit<Partial<User>, "memberSince"> & { memberSince?: string } = {
-            ...validatedUser,
-          };
+      const validatedAPIUsers = apiUsers.map((user) => {
+        return parseAPIUser(user);
+      });
+
+      expect(
+        validatedFactoryUsers.map((user) => {
+          const newUser: Partial<PublicUser> = { ...user };
+          delete newUser.memberSince;
+          return newUser;
+        }),
+      ).toEqual(
+        validatedAPIUsers.map((user) => {
+          const newUser: Partial<APIUser> = { ...user };
           delete newUser.memberSince;
           return newUser;
         }),
       );
 
-      apiUsers.forEach((apiUser, index) => {
-        const factoryUser = factoryUsers[index];
+      validatedAPIUsers.forEach((apiUser, index) => {
+        const factoryUser = validatedFactoryUsers[index];
         expect(isSameDate(new Date(apiUser.memberSince), factoryUser.memberSince)).toBe(true);
       });
     });
@@ -73,23 +71,14 @@ describe("/api/users/:userId", () => {
         body: { user: apiUser },
       } = await request(app).get(`/api/users/${factoryUser.id}`).expect(200);
 
-      const { data: validatedAPIUser, success: isValidAPIUser } = newAPIUser(apiUser);
-      if (!isValidAPIUser) {
-        // We need to do this over an expect(validatedAPIUser).not.toBe(undefined) because otherwise TypeScript still
-        // gives an error when we try an invoke isSameDate with it, since it doesn't know that expect stops execution on failure,
-        throw new Error("INVALID_API_USER");
-      }
+      const validatedAPIUser = parseAPIUser(apiUser);
 
       const filteredFactoryUser: Partial<User> = { ...factoryUser };
       delete filteredFactoryUser.serial;
       delete filteredFactoryUser.email;
       delete filteredFactoryUser.dateOfBirth;
 
-      const { data: validatedPublicFactoryUser, success: isValidPublicFactoryUser } =
-        newPublicUser(filteredFactoryUser);
-      if (!isValidPublicFactoryUser) {
-        throw new Error("INVALID_FACTORY_USER");
-      }
+      const validatedPublicFactoryUser = parsePublicUser(filteredFactoryUser);
 
       const filteredPublicFactoryUser = { ...filteredFactoryUser };
       delete filteredPublicFactoryUser.memberSince;
