@@ -33,14 +33,24 @@ describe("/api/users", () => {
         delete newUser.serial;
         delete newUser.dateOfBirth;
         delete newUser.email;
+
+        const { success: isValidUser } = newPublicUser(newUser);
+        if (!isValidUser) {
+          throw new Error("INVALID_FACTORY_USER");
+        }
+
         delete newUser.memberSince;
         return newUser as Omit<PublicUser, "memberSince">;
       });
 
       expect(filteredFactoryUsers).toEqual(
         apiUsers.map((user) => {
+          const { data: validatedUser, success: isValidUser } = newAPIUser(user);
+          if (!isValidUser) {
+            throw new Error("INVALID_API_USER");
+          }
           const newUser: Omit<Partial<User>, "memberSince"> & { memberSince?: string } = {
-            ...user,
+            ...validatedUser,
           };
           delete newUser.memberSince;
           return newUser;
