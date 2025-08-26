@@ -1,9 +1,9 @@
-import type { PublicUser, User } from "@neurosongs/prisma-client/types";
+import type { APIUser, PublicUser, User } from "@neurosongs/prisma-client/types";
 
 import { randomUUID } from "crypto";
 
 import { isSameDate } from "@alextheman/utility";
-import { newAPIUser } from "@neurosongs/prisma-client/types";
+import { newAPIUser, newPublicUser } from "@neurosongs/prisma-client/types";
 import request from "supertest";
 import { userFactory } from "tests/test-utilities/dataFactory";
 import { describe, expect, test } from "vitest";
@@ -63,26 +63,34 @@ describe("/api/users/:userId", () => {
         body: { user: apiUser },
       } = await request(app).get(`/api/users/${factoryUser.id}`).expect(200);
 
-      const { data: validatedAPIUser } = newAPIUser(apiUser);
-      if (!validatedAPIUser) {
+      const { data: validatedAPIUser, success: isValidAPIUser } = newAPIUser(apiUser);
+      if (!isValidAPIUser) {
         // We need to do this over an expect(validatedAPIUser).not.toBe(undefined) because otherwise TypeScript still
         // gives an error when we try an invoke isSameDate with it, since it doesn't know that expect stops execution on failure,
-        throw new Error("TEST_FAILED");
+        throw new Error("INVALID_API_USER");
       }
 
       const filteredFactoryUser: Partial<User> = { ...factoryUser };
       delete filteredFactoryUser.serial;
       delete filteredFactoryUser.email;
       delete filteredFactoryUser.dateOfBirth;
-      delete filteredFactoryUser.memberSince;
 
-      const filteredAPIUser: Partial<PublicUser> = { ...apiUser };
+      const { data: validatedPublicFactoryUser, success: isValidPublicFactoryUser } =
+        newPublicUser(filteredFactoryUser);
+      if (!isValidPublicFactoryUser) {
+        throw new Error("INVALID_FACTORY_USER");
+      }
+
+      const filteredPublicFactoryUser = { ...filteredFactoryUser };
+      delete filteredPublicFactoryUser.memberSince;
+
+      const filteredAPIUser: Partial<APIUser> = { ...validatedAPIUser };
       delete filteredAPIUser.memberSince;
 
-      expect(filteredFactoryUser).toEqual(filteredAPIUser);
-      expect(isSameDate(new Date(validatedAPIUser.memberSince), factoryUser.memberSince)).toBe(
-        true,
-      );
+      expect(filteredAPIUser).toEqual(filteredPublicFactoryUser);
+      expect(
+        isSameDate(new Date(validatedAPIUser.memberSince), validatedPublicFactoryUser.memberSince),
+      ).toBe(true);
     });
     test("404: Gives an error if user not in database", async () => {
       const missingId = randomUUID();
