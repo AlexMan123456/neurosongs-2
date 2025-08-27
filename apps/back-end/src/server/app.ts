@@ -5,6 +5,9 @@ import usersRouter from "src/server/routers/users";
 import validateUUID from "src/server/validators/validateUUID";
 const app = express();
 
+// Parse request body
+app.use(express.json());
+
 // Parameter validators
 usersRouter.param("userId", validateUUID);
 

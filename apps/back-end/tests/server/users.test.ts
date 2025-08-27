@@ -3,11 +3,17 @@ import type { APIUser, PublicUser, User } from "@neurosongs/prisma-client/types"
 import { randomUUID } from "crypto";
 
 import { isSameDate } from "@alextheman/utility";
-import { parseAPIUser, parsePublicUser } from "@neurosongs/prisma-client/types";
+import {
+  parseAPIUser,
+  parsePublicUser,
+  parseUser,
+  parseUserToPost,
+} from "@neurosongs/prisma-client/types";
 import request from "supertest";
 import { userFactory } from "tests/test-utilities/dataFactory";
 import { describe, expect, test } from "vitest";
 
+import { getPrismaClient } from "src/database/client";
 import app from "src/server/app";
 
 describe("/api/users", () => {
@@ -59,6 +65,26 @@ describe("/api/users", () => {
         const factoryUser = validatedFactoryUsers[index];
         expect(isSameDate(new Date(apiUser.memberSince), factoryUser.memberSince)).toBe(true);
       });
+    });
+  });
+  describe("POST", () => {
+    test("201: Posts a user to the database and responds with the ID", async () => {
+      const user = parseUserToPost({
+        username: "alextheman",
+        artistName: "Alex The Man",
+        description: "I am an artist on Neurosongs",
+        profilePicture: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+        dateOfBirth: new Date("2003-07-16T00:00:00.000"),
+        email: "alex@neurosongs.com",
+      });
+
+      const {
+        body: { userId },
+      } = await request(app).post("/api/users").send(user).expect(201);
+
+      const database = getPrismaClient();
+      const postedUser = parseUser(await database.user.findUnique({ where: { id: userId } }));
+      expect(postedUser).toMatchObject(user);
     });
   });
 });
