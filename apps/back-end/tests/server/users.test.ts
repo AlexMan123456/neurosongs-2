@@ -1,15 +1,9 @@
-import type { APIUser, PublicUser, User } from "@neurosongs/prisma-client/types";
+import type { APIUser } from "@neurosongs/prisma-client/types";
 import type { ZodError } from "zod";
 
 import { randomUUID } from "crypto";
 
-import { isSameDate } from "@alextheman/utility";
-import {
-  parseAPIUser,
-  parsePublicUser,
-  parseUser,
-  parseUserToPost,
-} from "@neurosongs/prisma-client/types";
+import { parseAPIUser, parseUser, parseUserToPost } from "@neurosongs/prisma-client/types";
 import request from "supertest";
 import { userFactory } from "tests/test-utilities/dataFactory";
 import { describe, expect, test } from "vitest";
@@ -35,36 +29,18 @@ describe("/api/users", () => {
       }: { body: { users: (Omit<APIUser, "memberSince"> & { memberSince: string })[] } } =
         await request(app).get(`/api/users`).expect(200);
 
-      const validatedFactoryUsers = factoryUsers.map((user) => {
-        const newUser: Partial<User> = { ...user };
-        delete newUser.serial;
-        delete newUser.dateOfBirth;
-        delete newUser.email;
-
-        return parsePublicUser(newUser);
-      });
-
-      const validatedAPIUsers = apiUsers.map((user) => {
-        return parseAPIUser(user);
-      });
-
-      expect(
-        validatedFactoryUsers.map((user) => {
-          const newUser: Partial<PublicUser> = { ...user };
-          delete newUser.memberSince;
-          return newUser;
-        }),
-      ).toEqual(
-        validatedAPIUsers.map((user) => {
-          const newUser: Partial<APIUser> = { ...user };
-          delete newUser.memberSince;
-          return newUser;
+      expect(factoryUsers).toMatchObject(
+        apiUsers.map((apiUser) => {
+          return parseAPIUser(apiUser);
         }),
       );
 
-      validatedAPIUsers.forEach((apiUser, index) => {
-        const factoryUser = validatedFactoryUsers[index];
-        expect(isSameDate(new Date(apiUser.memberSince), factoryUser.memberSince)).toBe(true);
+      apiUsers.forEach((apiUser) => {
+        const validatedAPIUser = parseAPIUser(apiUser);
+
+        expect(validatedAPIUser).not.toHaveProperty("serial");
+        expect(validatedAPIUser).not.toHaveProperty("email");
+        expect(validatedAPIUser).not.toHaveProperty("dateOfBirth");
       });
     });
   });
@@ -171,24 +147,11 @@ describe("/api/users/:userId", () => {
       } = await request(app).get(`/api/users/${factoryUser.id}`).expect(200);
 
       const validatedAPIUser = parseAPIUser(apiUser);
+      expect(factoryUser).toMatchObject(validatedAPIUser);
 
-      const filteredFactoryUser: Partial<User> = { ...factoryUser };
-      delete filteredFactoryUser.serial;
-      delete filteredFactoryUser.email;
-      delete filteredFactoryUser.dateOfBirth;
-
-      const validatedPublicFactoryUser = parsePublicUser(filteredFactoryUser);
-
-      const filteredPublicFactoryUser = { ...filteredFactoryUser };
-      delete filteredPublicFactoryUser.memberSince;
-
-      const filteredAPIUser: Partial<APIUser> = { ...validatedAPIUser };
-      delete filteredAPIUser.memberSince;
-
-      expect(filteredAPIUser).toEqual(filteredPublicFactoryUser);
-      expect(
-        isSameDate(new Date(validatedAPIUser.memberSince), validatedPublicFactoryUser.memberSince),
-      ).toBe(true);
+      expect(validatedAPIUser).not.toHaveProperty("serial");
+      expect(validatedAPIUser).not.toHaveProperty("email");
+      expect(validatedAPIUser).not.toHaveProperty("dateOfBirth");
     });
     test("404: Gives an error if user not in database", async () => {
       const missingId = randomUUID();
