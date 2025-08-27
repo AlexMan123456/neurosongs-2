@@ -35,6 +35,7 @@ const userToPostSchema = UserInputSchema.omit({
   serial: true,
   memberSince: true,
   dateOfBirth: true,
+  profilePicture: true,
 }).extend({
   dateOfBirth: z.preprocess((value) => {
     if (typeof value === "string" || typeof value === "number") {
@@ -42,6 +43,7 @@ const userToPostSchema = UserInputSchema.omit({
     }
     return value;
   }, z.date()),
+  profilePicture: z.url().optional(),
 });
 
 export type UserToPost = z.infer<typeof userToPostSchema>;
