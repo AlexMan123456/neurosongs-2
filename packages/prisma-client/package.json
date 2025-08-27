@@ -41,6 +41,7 @@
     "tsup": "^8.5.0"
   },
   "dependencies": {
+    "@neurosongs/utility": "^1.0.0",
     "@prisma/client": "^6.15.0",
     "@types/node": "^24.3.0",
     "zod": "^4.1.4"
