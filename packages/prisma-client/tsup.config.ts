@@ -20,7 +20,7 @@ export default defineConfig([
   {
     entry: ["src/types.ts"],
     format: ["esm", "cjs"],
-    dts: false,
+    dts: true,
     clean: true,
     external: ["./generated/types/schemas"],
     noExternal: [],

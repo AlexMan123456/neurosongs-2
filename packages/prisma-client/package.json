@@ -17,7 +17,7 @@
       "default": "./dist/fabbrica.js"
     },
     "./types": {
-      "types": "./src/types.ts",
+      "types": "./dist/types.d.ts",
       "import": "./dist/types.js",
       "require": "./dist/types.cjs",
       "default": "./dist/types.js"
