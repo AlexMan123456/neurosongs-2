@@ -1,6 +1,6 @@
 import express from "express";
 
-import { customErrors, internalServerError } from "src/server/routers/errors";
+import { customErrors, internalServerError, zodErrors } from "src/server/routers/errors";
 import usersRouter from "src/server/routers/users";
 import validateUUID from "src/server/validators/validateUUID";
 const app = express();
@@ -15,6 +15,7 @@ usersRouter.param("userId", validateUUID);
 app.use("/api/users", usersRouter);
 
 // Error handling
+app.use(zodErrors);
 app.use(customErrors);
 app.use(internalServerError);
 
