@@ -6,11 +6,6 @@
     "types": ["eslint", "node"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "src/*": ["src/*"],
-      "generated/*": ["generated/*"]
-    },
     "esModuleInterop": true,
 
     "moduleResolution": "bundler",
