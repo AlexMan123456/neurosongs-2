@@ -25,9 +25,9 @@
   },
   "scripts": {
     "generate": "prisma generate",
-    "update-dependencies": "npx npm-check-updates -u && npm install",
+    "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --",
     "build": "rm -rf dist/generated && prisma generate && tsup && cp -r src/generated dist/generated",
-    "format": "prisma format && prettier --write --parser typescript \"src/types.ts\" && eslint --fix --quiet \"src/types.ts\"",
+    "format": "prisma format && prettier --write --parser typescript \"src/types.ts\" && eslint --fix --suppress-all \"src/types.ts\" && rm -f eslint-suppressions.json",
     "lint": "prisma format --check && eslint \"src/types.ts\" && prettier --check --parser typescript \"src/types.ts\""
   },
   "keywords": [],
@@ -36,13 +36,13 @@
   "type": "module",
   "devDependencies": {
     "@quramy/prisma-fabbrica": "^2.3.1",
-    "prisma": "^6.14.0",
+    "prisma": "^6.15.0",
     "prisma-zod-generator": "^1.17.1",
     "tsup": "^8.5.0"
   },
   "dependencies": {
-    "@prisma/client": "^6.14.0",
+    "@prisma/client": "^6.15.0",
     "@types/node": "^24.3.0",
-    "zod": "^4.1.3"
+    "zod": "^4.1.4"
   }
 }
