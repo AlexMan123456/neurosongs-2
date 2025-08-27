@@ -42,14 +42,6 @@ const userToPostSchema = UserInputSchema.omit({
     }
     return value;
   }, z.date()),
-  memberSince: z
-    .preprocess((value) => {
-      if (typeof value === "string" || typeof value === "number") {
-        return new Date(value);
-      }
-      return value;
-    }, z.date())
-    .optional(),
 });
 
 export type UserToPost = z.infer<typeof userToPostSchema>;
