@@ -33,9 +33,21 @@ export function parseAPIUser(data: unknown) {
 const userToPostSchema = UserInputSchema.omit({
     id: true,
     serial: true,
-    memberSince: true
+    memberSince: true,
+    dateOfBirth: true
 }).extend({
-    memberSince: z.date().optional(),
+    dateOfBirth: z.preprocess((value) => {
+        if(typeof value === "string" || typeof value === "number"){
+            return new Date(value)
+        }
+        return value
+    }, z.date()),
+    memberSince: z.preprocess((value) => {
+        if(typeof value === "string" || typeof value === "number"){
+            return new Date(value)
+        }
+        return value
+    }, z.date()).optional(),
 })
 
 export type UserToPost = z.infer<typeof userToPostSchema>
