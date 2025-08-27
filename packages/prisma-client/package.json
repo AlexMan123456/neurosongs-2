@@ -37,12 +37,12 @@
   "devDependencies": {
     "@quramy/prisma-fabbrica": "^2.3.1",
     "prisma": "^6.14.0",
-    "prisma-zod-generator": "^1.16.6",
+    "prisma-zod-generator": "^1.17.1",
     "tsup": "^8.5.0"
   },
   "dependencies": {
     "@prisma/client": "^6.14.0",
     "@types/node": "^24.3.0",
-    "zod": "^4.1.2"
+    "zod": "^4.1.3"
   }
 }

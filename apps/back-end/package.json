@@ -6,8 +6,8 @@
   "scripts": {
     "test": "vitest run",
     "test-watch": "vitest",
-    "format": "prettier --write --parser typescript \"src/**/*.ts\" \"tests/**/*.ts\" && ESLINT_MODE=fix eslint --fix --quiet \"src/**/*.ts\" \"tests/**/*.ts\"",
-    "lint": "ESLINT_MODE=lint eslint \"src/**/*.ts\" \"tests/**/*.ts\" && prettier --check --parser typescript \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "format": "prettier --write --parser typescript \"src/**/*.ts\" \"tests/**/*.ts\" && eslint --fix --quiet \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "lint": "eslint \"src/**/*.ts\" \"tests/**/*.ts\" && prettier --check --parser typescript \"src/**/*.ts\" \"tests/**/*.ts\"",
     "build": "tsup",
     "reset-database": "npx prisma migrate reset --force --skip-generate",
     "dev": "npx tsx src/server/index.ts",

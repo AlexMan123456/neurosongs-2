@@ -1,11 +1,11 @@
-import plugin, { warnOnFixButErrorOnLint } from "@alextheman/eslint-plugin";
+import plugin from "@alextheman/eslint-plugin";
 
 export default [
   ...plugin.configs.alexTypeScriptBase,
   {
     rules: {
       "no-restricted-imports": [
-        warnOnFixButErrorOnLint,
+        "error",
         {
           paths: [
             {
@@ -31,7 +31,7 @@ export default [
     rules: {
       /* Function declarations in these files need to be arrow functions so we can type the whole signature
       using the Express types. */
-      "func-style": [warnOnFixButErrorOnLint, "expression", { allowArrowFunctions: true }],
+      "func-style": ["error", "expression", { allowArrowFunctions: true }],
     },
   },
 ];
