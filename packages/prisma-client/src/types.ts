@@ -1,3 +1,4 @@
+import { parseDate } from "@neurosongs/utility";
 import z from "zod";
 
 import { UserInputSchema, UserModelSchema } from "./generated/types/schemas";
@@ -11,6 +12,8 @@ const publicUserSchema = UserModelSchema.omit({
   serial: true,
   email: true,
   dateOfBirth: true,
+}).extend({
+  memberSince: z.preprocess(parseDate, z.date()),
 });
 export type PublicUser = z.infer<typeof publicUserSchema>;
 export function parsePublicUser(data: unknown) {
@@ -22,7 +25,7 @@ const apiUserSchema = publicUserSchema
     memberSince: true,
   })
   .extend({
-    memberSince: z.string(),
+    memberSince: z.preprocess(parseDate, z.date()),
   });
 
 export type APIUser = z.infer<typeof apiUserSchema>;
@@ -37,12 +40,7 @@ const userToPostSchema = UserInputSchema.omit({
   dateOfBirth: true,
   profilePicture: true,
 }).extend({
-  dateOfBirth: z.preprocess((value) => {
-    if (typeof value === "string" || typeof value === "number") {
-      return new Date(value);
-    }
-    return value;
-  }, z.date()),
+  dateOfBirth: z.preprocess(parseDate, z.date()),
   profilePicture: z.url().optional(),
 });
 
