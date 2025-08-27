@@ -1,10 +1,10 @@
-import { UserInputSchema, UserModelSchema } from "./generated/types/schemas";
 import z from "zod";
 
+import { UserInputSchema, UserModelSchema } from "./generated/types/schemas";
 
-export type User = z.infer<typeof UserModelSchema>
-export function parseUser(data: unknown){
-    return UserModelSchema.parse(data)
+export type User = z.infer<typeof UserModelSchema>;
+export function parseUser(data: unknown) {
+  return UserModelSchema.parse(data);
 }
 
 const publicUserSchema = UserModelSchema.omit({
@@ -31,26 +31,28 @@ export function parseAPIUser(data: unknown) {
 }
 
 const userToPostSchema = UserInputSchema.omit({
-    id: true,
-    serial: true,
-    memberSince: true,
-    dateOfBirth: true
+  id: true,
+  serial: true,
+  memberSince: true,
+  dateOfBirth: true,
 }).extend({
-    dateOfBirth: z.preprocess((value) => {
-        if(typeof value === "string" || typeof value === "number"){
-            return new Date(value)
-        }
-        return value
-    }, z.date()),
-    memberSince: z.preprocess((value) => {
-        if(typeof value === "string" || typeof value === "number"){
-            return new Date(value)
-        }
-        return value
-    }, z.date()).optional(),
-})
+  dateOfBirth: z.preprocess((value) => {
+    if (typeof value === "string" || typeof value === "number") {
+      return new Date(value);
+    }
+    return value;
+  }, z.date()),
+  memberSince: z
+    .preprocess((value) => {
+      if (typeof value === "string" || typeof value === "number") {
+        return new Date(value);
+      }
+      return value;
+    }, z.date())
+    .optional(),
+});
 
-export type UserToPost = z.infer<typeof userToPostSchema>
-export function parseUserToPost(data: unknown){
-    return userToPostSchema.parse(data);
+export type UserToPost = z.infer<typeof userToPostSchema>;
+export function parseUserToPost(data: unknown) {
+  return userToPostSchema.parse(data);
 }
