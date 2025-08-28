@@ -14,6 +14,11 @@ export default [
               importNames: ["setPrismaClient"],
               message: "Do not attempt to reset the Prisma Client outside setup files.",
             },
+            {
+              // Do not allow imports from the generated types from PrismaClient. Instead use the processed Zod types from @neurosongs/types
+              name: "@neurosongs/prisma-client/types",
+              message: "Do not use the generated Prisma types. Use the types exported from @neurosongs/types instead."
+            }
           ],
         },
       ],
