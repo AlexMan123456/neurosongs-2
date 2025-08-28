@@ -1,7 +1,7 @@
-import type { PublicUser, UserToPost } from "@neurosongs/prisma-client/types";
+import type { PublicUser, UserToPost } from "@neurosongs/types";
 
 import { APIError } from "@alextheman/utility";
-import { parseUserToPost } from "@neurosongs/prisma-client/types";
+import { parseUserToPost } from "@neurosongs/types";
 
 import { getPrismaClient } from "src/database/client";
 

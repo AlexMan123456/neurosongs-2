@@ -1,9 +1,9 @@
-import type { APIUser } from "@neurosongs/prisma-client/types";
+import type { APIUser } from "@neurosongs/types";
 import type { ZodError } from "zod";
 
 import { randomUUID } from "crypto";
 
-import { parseAPIUser, parseUser } from "@neurosongs/prisma-client/types";
+import { parseAPIUser, parseUser } from "@neurosongs/types";
 import request from "supertest";
 import { userFactory } from "tests/test-utilities/dataFactory";
 import { describe, expect, test } from "vitest";
