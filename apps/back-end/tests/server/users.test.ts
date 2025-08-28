@@ -8,7 +8,7 @@ import request from "supertest";
 import { userFactory } from "tests/test-utilities/dataFactory";
 import { describe, expect, test } from "vitest";
 
-import { getPrismaClient } from "src/database/client";
+import getPrismaClient from "src/database/client";
 import app from "src/server/app";
 
 describe("/api/users", () => {

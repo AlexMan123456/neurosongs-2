@@ -14,7 +14,7 @@ dotenv.config({ path: path.join(__dirname, "../../", `.env.${nodeEnv}`) });
 
 let currentPrismaClient: PrismaClient = new PrismaClient();
 
-export function getPrismaClient(): PrismaClient {
+export default function getPrismaClient(): PrismaClient {
   return currentPrismaClient;
 }
 

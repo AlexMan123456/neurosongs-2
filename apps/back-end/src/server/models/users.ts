@@ -3,7 +3,7 @@ import type { PublicUser, UserToPost } from "@neurosongs/types";
 import { APIError } from "@alextheman/utility";
 import { parseUserToPost } from "@neurosongs/types";
 
-import { getPrismaClient } from "src/database/client";
+import getPrismaClient from "src/database/client";
 
 export async function selectUsers(): Promise<PublicUser[]> {
   const database = getPrismaClient();

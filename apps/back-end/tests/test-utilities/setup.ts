@@ -4,7 +4,7 @@ import { PrismaTestingHelper } from "@chax-at/transactional-prisma-testing";
 import { initialize } from "@neurosongs/prisma-client/fabbrica";
 import { afterEach, beforeEach } from "vitest";
 
-import { getPrismaClient, setPrismaClient } from "src/database/client";
+import getPrismaClient, { setPrismaClient } from "src/database/client";
 
 let prismaTestingHelper: PrismaTestingHelper<PrismaClient> | undefined;
 let testPrismaClient: PrismaClient;
