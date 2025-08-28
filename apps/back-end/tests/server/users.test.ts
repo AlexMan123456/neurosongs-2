@@ -3,7 +3,7 @@ import type { ZodError } from "zod";
 
 import { randomUUID } from "crypto";
 
-import { parseAPIUser, parseUser, parseUserToPost } from "@neurosongs/prisma-client/types";
+import { parseAPIUser, parseUser } from "@neurosongs/prisma-client/types";
 import request from "supertest";
 import { userFactory } from "tests/test-utilities/dataFactory";
 import { describe, expect, test } from "vitest";
@@ -46,14 +46,14 @@ describe("/api/users", () => {
   });
   describe("POST", () => {
     test("201: Posts a user to the database and responds with the ID", async () => {
-      const user = parseUserToPost({
+      const user = {
         username: "alextheman",
         artistName: "Alex The Man",
         description: "I am an artist on Neurosongs",
         profilePicture: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         dateOfBirth: new Date("2003-07-16T00:00:00.000"),
         email: "alex@neurosongs.com",
-      });
+      };
 
       const {
         body: { userId },
@@ -64,13 +64,13 @@ describe("/api/users", () => {
       expect(postedUser).toMatchObject(user);
     });
     test("201: Allow optional properties to be left out", async () => {
-      const user = parseUserToPost({
+      const user = {
         username: "alextheman",
         artistName: "Alex The Man",
         profilePicture: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         dateOfBirth: new Date("2003-07-16T00:00:00.000"),
         email: "alex@neurosongs.com",
-      });
+      };
 
       const {
         body: { userId },
