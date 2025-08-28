@@ -1,7 +1,7 @@
-import type { PublicUser, UserToPost } from "@neurosongs/types";
+import type { PublicUser, UserToPost, UserToPut } from "@neurosongs/types";
 
 import { APIError } from "@alextheman/utility";
-import { parseUserToPost } from "@neurosongs/types";
+import { parseUserToPost, parseUserToPut } from "@neurosongs/types";
 
 import getPrismaClient from "src/database/client";
 
@@ -44,9 +44,15 @@ export async function selectUserById(id: string): Promise<PublicUser> {
   return user;
 }
 
-export async function postUser(user: UserToPost): Promise<string> {
+export async function insertUser(user: UserToPost): Promise<string> {
   const database = getPrismaClient();
   const validatedUser = parseUserToPost(user);
   const { id } = await database.user.create({ data: validatedUser });
   return id;
+}
+
+export async function updateUser(id: string, user: UserToPut): Promise<void> {
+  const database = getPrismaClient();
+  const validatedUser = parseUserToPut(user);
+  await database.user.update({ where: { id }, data: validatedUser });
 }

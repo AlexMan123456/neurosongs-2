@@ -40,10 +40,28 @@ const userToPostSchema = UserInputSchema.omit({
   profilePicture: true,
 }).extend({
   dateOfBirth: z.preprocess(parseDate, z.date()),
-  profilePicture: z.url().optional(),
+  profilePicture: z.string().optional(),
 });
 
 export type UserToPost = z.infer<typeof userToPostSchema>;
 export function parseUserToPost(data: unknown) {
   return userToPostSchema.parse(data);
+}
+
+const userToPutSchema = UserInputSchema.omit({
+  id: true,
+  serial: true,
+  memberSince: true,
+  dateOfBirth: true,
+  email: true,
+}).extend({
+  username: z.string().optional(),
+  artistName: z.string().optional(),
+  profilePicture: z.string().optional(),
+  description: z.string().optional(),
+});
+
+export type UserToPut = Partial<z.infer<typeof userToPutSchema>>;
+export function parseUserToPut(data: unknown) {
+  return userToPutSchema.parse(data);
 }
