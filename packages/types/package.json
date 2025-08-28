@@ -1,0 +1,22 @@
+{
+  "name": "@neurosongs/types",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsup",
+    "format": "prettier --write --parser typescript \"src/**/*.ts\" \"*.ts\" && eslint --fix --suppress-all \"src/**/*.ts\" && rm -f eslint-suppressions.json",
+    "lint": "eslint \"src/**/*.ts\" && prettier --check --parser typescript \"src/**/*.ts\" \"*.ts\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@neurosongs/prisma-client": "^1.0.0"
+  },
+  "devDependencies": {
+    "tsup": "^8.5.0"
+  }
+}

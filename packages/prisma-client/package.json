@@ -27,8 +27,8 @@
     "generate": "prisma generate",
     "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --",
     "build": "rm -rf dist/generated && prisma generate && tsup && cp -r src/generated dist/generated",
-    "format": "prisma format && prettier --write --parser typescript \"src/types.ts\" && eslint --fix --suppress-all \"src/types.ts\" && rm -f eslint-suppressions.json",
-    "lint": "prisma format --check && eslint \"src/types.ts\" && prettier --check --parser typescript \"src/types.ts\""
+    "format": "prisma format",
+    "lint": "prisma format --check"
   },
   "keywords": [],
   "author": "",
