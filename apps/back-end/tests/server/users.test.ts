@@ -1,4 +1,4 @@
-import type { APIUser } from "@neurosongs/types";
+import type { APIUser, PublicUser, UserToPut } from "@neurosongs/types";
 import type { ZodError } from "zod";
 
 import { randomUUID } from "crypto";
@@ -8,7 +8,7 @@ import request from "supertest";
 import { userFactory } from "tests/test-utilities/dataFactory";
 import { describe, expect, test } from "vitest";
 
-import { getPrismaClient } from "src/database/client";
+import getPrismaClient from "src/database/client";
 import app from "src/server/app";
 
 describe("/api/users", () => {
@@ -165,6 +165,89 @@ describe("/api/users/:userId", () => {
         body: { error },
       } = await request(app).get(`/api/users/hello`).expect(400);
       expect(error.message).toBe("INVALID_UUID");
+    });
+  });
+  describe("PUT", () => {
+    test("204: Edits the user with the new given data", async () => {
+      const factoryUser = await userFactory.create();
+      const changedProperties: UserToPut = {
+        username: "alextheman",
+        artistName: "Alex The Man",
+        description: "I am a Neurosongs artist",
+        profilePicture: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      };
+
+      // PUT returns nothing - the general pattern in practice would be to make the request then query GET again.
+      await request(app).put(`/api/users/${factoryUser.id}`).send(changedProperties).expect(204);
+
+      const database = getPrismaClient();
+      const changedUser = await database.user.findUnique({ where: { id: factoryUser.id } });
+      if (!changedUser) {
+        throw new Error("USER_NOT_FOUND");
+      }
+
+      expect(changedUser).toMatchObject(changedProperties);
+
+      // Check other properties are unaffected
+      const filteredChangedUser: Partial<PublicUser> = { ...changedUser };
+      delete filteredChangedUser.username;
+      delete filteredChangedUser.artistName;
+      delete filteredChangedUser.description;
+      delete filteredChangedUser.profilePicture;
+
+      expect(factoryUser).toMatchObject(filteredChangedUser);
+    });
+    test("204: Allow any property to be left out", async () => {
+      const factoryUser = await userFactory.create();
+      const changedProperties: UserToPut = {
+        username: "alextheman",
+        artistName: "Alex The Man",
+        description: "I am a Neurosongs artist",
+      };
+
+      await request(app).put(`/api/users/${factoryUser.id}`).send(changedProperties).expect(204);
+
+      const database = getPrismaClient();
+      const changedUser = await database.user.findUnique({ where: { id: factoryUser.id } });
+      if (!changedUser) {
+        throw new Error("USER_NOT_FOUND");
+      }
+
+      expect(changedUser).toMatchObject(changedProperties);
+
+      // Check other properties are unaffected
+      const filteredChangedUser: Partial<PublicUser> = { ...changedUser };
+      delete filteredChangedUser.username;
+      delete filteredChangedUser.artistName;
+      delete filteredChangedUser.description;
+
+      expect(factoryUser).toMatchObject(filteredChangedUser);
+    });
+    test("400: Gives an error if userId is not UUID", async () => {
+      const changedProperties: UserToPut = {
+        username: "alextheman",
+        artistName: "Alex The Man",
+        description: "I am a Neurosongs artist",
+        profilePicture: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      };
+      const {
+        body: { error },
+      } = await request(app).put(`/api/users/1`).send(changedProperties).expect(400);
+      expect(error.message).toBe("INVALID_UUID");
+    });
+    test("404: Gives an error if user not in database", async () => {
+      const missingId = randomUUID();
+      const changedProperties: UserToPut = {
+        username: "alextheman",
+        artistName: "Alex The Man",
+        description: "I am a Neurosongs artist",
+        profilePicture: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      };
+
+      const {
+        body: { error },
+      } = await request(app).put(`/api/users/${missingId}`).send(changedProperties).expect(404);
+      expect(error.message).toBe("USER_NOT_FOUND");
     });
   });
 });
