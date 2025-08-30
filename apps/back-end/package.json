@@ -15,7 +15,8 @@
     "generate": "npx prisma generate",
     "migrate-deploy": "prisma migrate deploy",
     "migrate-dev": "prisma migrate dev",
-    "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --"
+    "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --",
+    "ci-update": "bash ../../ci-update.sh"
   },
   "keywords": [],
   "author": "",

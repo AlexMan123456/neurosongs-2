@@ -6,7 +6,11 @@
       "outputs": [""]
     },
     "update-dependencies": {
+      "dependsOn": ["^update-dependencies"],
       "cache": false
+    },
+    "ci-update": {
+      "dependsOn": ["^ci-update"]
     },
     "build": {
       "dependsOn": ["^build", "^generate"],

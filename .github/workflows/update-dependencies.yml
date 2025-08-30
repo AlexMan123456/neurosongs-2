@@ -1,0 +1,42 @@
+name: Update Dependencies
+on:
+  workflow_dispatch:
+  schedule:
+  - cron: 0 0 * * 6
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-dependencies:
+    runs-on: ubuntu-latest
+    env:
+      HUSKY: 0
+    
+    strategy:
+      matrix:
+        node-version: [22.x]
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: "npm"
+    - name: Setup GitHub user
+      run: |
+        git config --global user.name "AlexUpBot"
+        git config --global user.email "alexupbot@bot.com"
+    - name: Update dependencies
+      run: npm run ci-update
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v6
+      with:
+        token: ${{ secrets.PAT_GITHUB }}
+        branch: update-dependencies
+        base: main
+        commit-message: Update dependencies
+        title: "Update dependencies"
+
