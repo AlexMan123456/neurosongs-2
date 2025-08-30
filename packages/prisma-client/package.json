@@ -26,6 +26,7 @@
   "scripts": {
     "generate": "prisma generate",
     "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --",
+    "ci-update": "bash ../../ci-update.sh",
     "build": "rm -rf dist/generated && prisma generate && tsup && cp -r src/generated dist/generated",
     "format": "prisma format",
     "lint": "prisma format --check"
