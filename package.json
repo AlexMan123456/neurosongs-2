@@ -13,7 +13,7 @@
     "generate": "turbo run generate",
     "generate-from-back-end": "turbo run generate --filter=back-end",
     "migrate-deploy": "turbo run migrate-deploy --filter=back-end",
-    "ci-update": "turbo run ci-update && bash ./ci-update.sh",
+    "clean-update": "turbo run clean-update && bash ./clean-update.sh",
     "prepare": "husky"
   },
   "devDependencies": {

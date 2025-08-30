@@ -9,7 +9,7 @@
     "format": "prettier --write --parser typescript \"src/**/*.{ts,tsx}\" && eslint --fix --suppress-all \"src/**/*.{ts,tsx}\" && rm -f eslint-suppressions.json",
     "lint": "eslint \"src/**/*.{ts,tsx}\" && prettier --check --parser typescript \"src/**/*.{ts,tsx}\"",
     "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --",
-    "ci-update": "bash ../../ci-update.sh",
+    "clean-update": "bash ../../clean-update.sh",
     "preview": "vite preview"
   },
   "dependencies": {
