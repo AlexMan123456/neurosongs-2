@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsup",
     "format": "prettier --write --parser typescript \"src/**/*.ts\" && eslint --fix --suppress-all \"src/**/*.ts\" && rm -f eslint-suppressions.json",
-    "lint": "eslint \"src/**/*.ts\" && prettier --check --parser typescript \"src/**/*.ts\""
+    "lint": "eslint \"src/**/*.ts\" && prettier --check --parser typescript \"src/**/*.ts\"",
+    "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --"
   },
   "keywords": [],
   "author": "",
