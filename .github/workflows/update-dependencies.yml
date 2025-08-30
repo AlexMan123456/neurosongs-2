@@ -29,8 +29,10 @@ jobs:
       run: |
         git config --global user.name "AlexUpBot"
         git config --global user.email "alexupbot@bot.com"
+    - name: Install dependencies
+      run: npm ci
     - name: Update dependencies
-      run: npm run ci-update
+      run: npm run clean-update
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v6
       with:

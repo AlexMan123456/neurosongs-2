@@ -9,8 +9,8 @@
       "dependsOn": ["^update-dependencies"],
       "cache": false
     },
-    "ci-update": {
-      "dependsOn": ["^ci-update"]
+    "clean-update": {
+      "dependsOn": ["^clean-update"]
     },
     "build": {
       "dependsOn": ["^build", "^generate"],
