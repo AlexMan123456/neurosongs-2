@@ -5,7 +5,7 @@ CALL_DIRECTORY="$(pwd)"
 LOCKFILE="$REPOSITORY_ROOT/package-lock.json"
 
 cd "$CALL_DIRECTORY"
-npx npm-check-updates -u "$@"
+npx npm-check-updates -u
 
 if [[ "$CALL_DIRECTORY" == "$REPOSITORY_ROOT" ]]; then
     cp "$LOCKFILE" "$LOCKFILE.backup.json"
