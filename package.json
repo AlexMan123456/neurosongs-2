@@ -33,7 +33,6 @@
     "packages/*"
   ],
   "dependencies": {
-    "@alextheman/utility": "^1.15.0",
-    "@neurosongs/prisma-client": "^1.0.0"
+    "@alextheman/utility": "^1.16.0"
   }
 }

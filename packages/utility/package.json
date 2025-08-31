@@ -14,6 +14,9 @@
   "author": "",
   "license": "ISC",
   "type": "module",
+  "peerDependencies": {
+    "@alextheman/utility": "^1.16.0"
+  },
   "devDependencies": {
     "tsup": "^8.5.0"
   }
