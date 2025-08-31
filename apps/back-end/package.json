@@ -7,7 +7,7 @@
     "test": "vitest run",
     "test-watch": "vitest",
     "format": "prettier --write --parser typescript \"src/**/*.ts\" \"tests/**/*.ts\" && eslint --fix --suppress-all \"src/**/*.ts\" \"tests/**/*.ts\" && rm -f eslint-suppressions.json",
-    "lint": "eslint \"src/**/*.ts\" \"tests/**/*.ts\" && prettier --check --parser typescript \"src/**/*.ts\" \"tests/**/*.ts\"",
+    "lint": "tsc --noEmit && eslint \"src/**/*.ts\" \"tests/**/*.ts\" && prettier --check --parser typescript \"src/**/*.ts\" \"tests/**/*.ts\"",
     "build": "tsup",
     "reset-database": "npx prisma migrate reset --force --skip-generate",
     "dev": "nodemon src/server/index.ts",
