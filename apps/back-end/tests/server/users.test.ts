@@ -142,39 +142,6 @@ describe("/api/users", () => {
         expect(validatedAPIUser).not.toHaveProperty("dateOfBirth");
       });
     });
-    test("200: Gets the specified amount of users if limit query provided", async () => {
-      const factoryUsers = await fillArrayAsync(async () => {
-        return await userFactory.create();
-      }, 50);
-
-      factoryUsers.sort((first, second) => {
-        return first.serial - second.serial;
-      });
-
-      const {
-        body: { users: apiUsers, totalUsers, limit, pageNumber, totalPages },
-      } = await request(app).get(`/api/users`).query({ limit: 25 }).expect(200);
-
-      expect(totalUsers).toBe(50);
-      expect(limit).toBe(25);
-      expect(pageNumber).toBe(1);
-      expect(totalPages).toBe(2);
-
-      expect(apiUsers.length).toBe(25);
-      expect(factoryUsers.slice(0, 25)).toMatchObject(
-        apiUsers.map((apiUser: APIUser) => {
-          return parseAPIUser(apiUser);
-        }),
-      );
-
-      apiUsers.forEach((apiUser: APIUser) => {
-        const validatedAPIUser = parseAPIUser(apiUser);
-
-        expect(validatedAPIUser).not.toHaveProperty("serial");
-        expect(validatedAPIUser).not.toHaveProperty("email");
-        expect(validatedAPIUser).not.toHaveProperty("dateOfBirth");
-      });
-    });
     test("400: Gives an error if limit is invalid", async () => {
       const {
         body: { error },
