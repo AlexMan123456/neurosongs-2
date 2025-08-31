@@ -12,7 +12,7 @@
     "reset-database": "npx prisma migrate reset --force --skip-generate",
     "dev": "nodemon src/server/index.ts",
     "start": "node dist/index.js",
-    "generate": "npx prisma generate",
+    "generate": "npx prisma generate && npx tsx disableTscInDirectory.ts",
     "migrate-deploy": "prisma migrate deploy",
     "migrate-dev": "prisma migrate dev",
     "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --",

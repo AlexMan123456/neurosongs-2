@@ -24,10 +24,10 @@
     }
   },
   "scripts": {
-    "generate": "prisma generate",
+    "generate": "prisma generate && npx tsx disableTscInDirectory.ts",
     "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --",
     "clean-update": "bash ../../clean-update.sh",
-    "build": "rm -rf dist/generated && prisma generate && npx tsx disableTscInFile.ts && tsup && cp -r src/generated dist/generated",
+    "build": "rm -rf dist/generated && npm run generate && tsup && cp -r src/generated dist/generated",
     "format": "prisma format",
     "lint": "prisma format --check"
   },
