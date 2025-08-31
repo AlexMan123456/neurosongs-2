@@ -1,10 +1,10 @@
 import { defineConfig } from "@prisma/config";
 import path from "path";
 
-import { newEnv } from "@alextheman/utility";
+import { parseEnv } from "@alextheman/utility";
 import dotenv from "dotenv";
 
-const nodeEnv = newEnv(process.env.NODE_ENV);
+const nodeEnv = parseEnv(process.env.NODE_ENV);
 
 dotenv.config({ path: path.join(__dirname, "./", `.env.${nodeEnv}`) });
 
