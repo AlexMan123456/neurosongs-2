@@ -7,7 +7,6 @@
     "lint": "turbo run lint",
     "format": "turbo run format",
     "test": "turbo run test",
-    "check-types": "turbo run check-types",
     "update-dependencies": "turbo run update-dependencies && npm run update-root-dependencies",
     "update-root-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --",
     "generate": "turbo run generate",
