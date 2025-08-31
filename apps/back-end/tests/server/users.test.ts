@@ -3,6 +3,7 @@ import type { ZodError } from "zod";
 
 import { randomUUID } from "crypto";
 
+import { fillArrayAsync } from "@alextheman/utility";
 import { parseAPIUser, parseUser } from "@neurosongs/types";
 import request from "supertest";
 import { userFactory } from "tests/test-utilities/dataFactory";
@@ -14,11 +15,9 @@ import app from "src/server/app";
 describe("/api/users", () => {
   describe("GET", () => {
     test("200: Responds with an array of all users sorted by most recent", async () => {
-      const factoryUsers = await Promise.all(
-        new Array(5).fill(null).map(async () => {
-          return await userFactory.create();
-        }),
-      );
+      const factoryUsers = await fillArrayAsync(async () => {
+        return await userFactory.create();
+      }, 10);
 
       factoryUsers.sort((first, second) => {
         return first.serial - second.serial;
@@ -29,6 +28,7 @@ describe("/api/users", () => {
       }: { body: { users: (Omit<APIUser, "memberSince"> & { memberSince: string })[] } } =
         await request(app).get(`/api/users`).expect(200);
 
+      expect(apiUsers.length).toBe(10);
       expect(factoryUsers).toMatchObject(
         apiUsers.map((apiUser) => {
           return parseAPIUser(apiUser);
@@ -42,6 +42,117 @@ describe("/api/users", () => {
         expect(validatedAPIUser).not.toHaveProperty("email");
         expect(validatedAPIUser).not.toHaveProperty("dateOfBirth");
       });
+    });
+    test("200: Gets the first 50 if there are more than 50 users", async () => {
+      const factoryUsers = await fillArrayAsync(async () => {
+        return await userFactory.create();
+      }, 70);
+
+      factoryUsers.sort((first, second) => {
+        return first.serial - second.serial;
+      });
+
+      const {
+        body: { users: apiUsers, totalUsers, limit, pageNumber, totalPages },
+      } = await request(app).get(`/api/users`).expect(200);
+
+      expect(totalUsers).toBe(70);
+      expect(limit).toBe(50);
+      expect(pageNumber).toBe(1);
+      expect(totalPages).toBe(2);
+
+      expect(apiUsers.length).toBe(50);
+      expect(factoryUsers.slice(0, 50)).toMatchObject(
+        apiUsers.map((apiUser: APIUser) => {
+          return parseAPIUser(apiUser);
+        }),
+      );
+
+      apiUsers.forEach((apiUser: APIUser) => {
+        const validatedAPIUser = parseAPIUser(apiUser);
+
+        expect(validatedAPIUser).not.toHaveProperty("serial");
+        expect(validatedAPIUser).not.toHaveProperty("email");
+        expect(validatedAPIUser).not.toHaveProperty("dateOfBirth");
+      });
+    });
+    test("200: Gets the specified amount of users if limit query provided", async () => {
+      const factoryUsers = await fillArrayAsync(async () => {
+        return await userFactory.create();
+      }, 50);
+
+      factoryUsers.sort((first, second) => {
+        return first.serial - second.serial;
+      });
+
+      const {
+        body: { users: apiUsers, totalUsers, limit, pageNumber, totalPages },
+      } = await request(app).get(`/api/users`).query({ limit: 25 }).expect(200);
+
+      expect(totalUsers).toBe(50);
+      expect(limit).toBe(25);
+      expect(pageNumber).toBe(1);
+      expect(totalPages).toBe(2);
+
+      expect(apiUsers.length).toBe(25);
+      expect(factoryUsers.slice(0, 25)).toMatchObject(
+        apiUsers.map((apiUser: APIUser) => {
+          return parseAPIUser(apiUser);
+        }),
+      );
+
+      apiUsers.forEach((apiUser: APIUser) => {
+        const validatedAPIUser = parseAPIUser(apiUser);
+
+        expect(validatedAPIUser).not.toHaveProperty("serial");
+        expect(validatedAPIUser).not.toHaveProperty("email");
+        expect(validatedAPIUser).not.toHaveProperty("dateOfBirth");
+      });
+    });
+    test("200: Gets 50 users starting at the given page if page query provided", async () => {
+      const factoryUsers = await fillArrayAsync(async () => {
+        return await userFactory.create();
+      }, 150);
+
+      factoryUsers.sort((first, second) => {
+        return first.serial - second.serial;
+      });
+
+      const {
+        body: { users: apiUsers, totalUsers, limit, pageNumber, totalPages },
+      } = await request(app).get(`/api/users`).query({ page: 2 }).expect(200);
+
+      expect(totalUsers).toBe(150);
+      expect(limit).toBe(50);
+      expect(pageNumber).toBe(2);
+      expect(totalPages).toBe(3);
+
+      expect(apiUsers.length).toBe(50);
+      expect(factoryUsers.slice(50, 100)).toMatchObject(
+        apiUsers.map((apiUser: APIUser) => {
+          return parseAPIUser(apiUser);
+        }),
+      );
+
+      apiUsers.forEach((apiUser: APIUser) => {
+        const validatedAPIUser = parseAPIUser(apiUser);
+
+        expect(validatedAPIUser).not.toHaveProperty("serial");
+        expect(validatedAPIUser).not.toHaveProperty("email");
+        expect(validatedAPIUser).not.toHaveProperty("dateOfBirth");
+      });
+    });
+    test("400: Gives an error if limit is invalid", async () => {
+      const {
+        body: { error },
+      } = await request(app).get(`/api/users`).query({ limit: "Invalid" }).expect(400);
+      expect(error.message).toBe("INVALID_LIMIT");
+    });
+    test("400: Gives an error if page is invalid", async () => {
+      const {
+        body: { error },
+      } = await request(app).get(`/api/users`).query({ page: "Invalid" }).expect(400);
+      expect(error.message).toBe("INVALID_PAGE_NUMBER");
     });
   });
   describe("POST", () => {

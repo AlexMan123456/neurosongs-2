@@ -14,7 +14,7 @@ beforeEach(async () => {
     prismaTestingHelper = new PrismaTestingHelper(getPrismaClient());
     testPrismaClient = prismaTestingHelper.getProxyClient();
     setPrismaClient(testPrismaClient);
-    initialize({ prisma: testPrismaClient });
+    initialize({ prisma: getPrismaClient() });
   }
   await prismaTestingHelper.startNewTransaction();
 });

@@ -2,27 +2,44 @@ import type { PublicUser, UserToPost, UserToPut } from "@neurosongs/types";
 
 import { APIError } from "@alextheman/utility";
 import { parseUserToPost, parseUserToPut } from "@neurosongs/types";
+import { paginate } from "@neurosongs/utility";
 
 import getPrismaClient from "src/database/client";
 
-export async function selectUsers(): Promise<PublicUser[]> {
+export interface PaginatedUsers {
+  users: PublicUser[];
+  totalUsers: number;
+  limit: number;
+  pageNumber: number;
+  totalPages: number;
+}
+
+export async function selectUsers(
+  limit: number = 50,
+  pageNumber: number = 1,
+): Promise<PaginatedUsers> {
   const database = getPrismaClient();
-  const users = await database.user.findMany({
-    select: {
-      id: true,
-      username: true,
-      description: true,
-      artistName: true,
-      memberSince: true,
-      profilePicture: true,
-    },
-    orderBy: [
-      {
-        serial: "asc",
+  const [users, totalUsers] = await Promise.all([
+    database.user.findMany({
+      select: {
+        id: true,
+        username: true,
+        description: true,
+        artistName: true,
+        memberSince: true,
+        profilePicture: true,
       },
-    ],
-  });
-  return users;
+      orderBy: [
+        {
+          serial: "asc",
+        },
+      ],
+      ...paginate(limit, pageNumber),
+    }),
+    database.user.count(),
+  ]);
+
+  return { users, totalUsers, limit, pageNumber, totalPages: Math.ceil(totalUsers / limit) };
 }
 
 export async function selectUserById(id: string): Promise<PublicUser> {

@@ -1,3 +1,4 @@
+import { parseQueryParameter } from "@neurosongs/utility";
 import express from "express";
 
 import { insertUser, selectUserById, selectUsers, updateUser } from "src/server/models/users";
@@ -6,10 +7,12 @@ const usersRouter = express.Router();
 
 usersRouter
   .route("/")
-  .get(async (_request, response, next) => {
+  .get(async (request, response, next) => {
     try {
-      const users = await selectUsers();
-      response.status(200).send({ users });
+      const limit = parseQueryParameter(request.query.limit, "INVALID_LIMIT");
+      const pageNumber = parseQueryParameter(request.query.page, "INVALID_PAGE_NUMBER");
+      const usersResponse = await selectUsers(limit, pageNumber);
+      response.status(200).send(usersResponse);
     } catch (error) {
       next(error);
     }
