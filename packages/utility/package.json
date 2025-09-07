@@ -1,23 +1,22 @@
 {
   "name": "@neurosongs/utility",
   "version": "1.0.0",
-  "description": "",
+  "description": "Common utility functions for use throughout Neurosongs",
+  "license": "ISC",
+  "author": "alextheman",
+  "type": "module",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsup",
+    "clean-update": "bash ../../clean-update.sh",
     "format": "prettier --write --parser typescript \"src/**/*.ts\" && eslint --fix --suppress-all \"src/**/*.ts\" && rm -f eslint-suppressions.json",
     "lint": "tsc --noEmit && eslint \"src/**/*.ts\" && prettier --check --parser typescript \"src/**/*.ts\"",
-    "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --",
-    "clean-update": "bash ../../clean-update.sh"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module",
-  "peerDependencies": {
-    "@alextheman/utility": "^1.16.0"
+    "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --"
   },
   "devDependencies": {
     "tsup": "^8.5.0"
+  },
+  "peerDependencies": {
+    "@alextheman/utility": "^1.16.0"
   }
 }

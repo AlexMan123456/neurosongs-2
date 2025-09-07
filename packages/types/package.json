@@ -1,20 +1,19 @@
 {
   "name": "@neurosongs/types",
   "version": "1.0.0",
-  "description": "",
+  "description": "Shared type variables for Neurosongs models",
+  "license": "ISC",
+  "author": "alextheman",
+  "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsup",
+    "clean-update": "bash ../../clean-update.sh",
     "format": "prettier --write --parser typescript \"src/**/*.ts\" \"*.ts\" && eslint --fix --suppress-all \"src/**/*.ts\" && rm -f eslint-suppressions.json",
     "lint": "tsc --noEmit && eslint \"src/**/*.ts\" && prettier --check --parser typescript \"src/**/*.ts\" \"*.ts\"",
-    "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --",
-    "clean-update": "bash ../../clean-update.sh"
+    "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module",
   "dependencies": {
     "@neurosongs/prisma-client": "^1.0.0"
   },
