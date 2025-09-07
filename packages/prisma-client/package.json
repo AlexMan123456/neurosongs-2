@@ -1,20 +1,22 @@
 {
   "name": "@neurosongs/prisma-client",
   "version": "1.0.0",
-  "description": "",
-  "main": "dist/index.js",
+  "description": "Prisma Client for use in Neurosongs back-end",
+  "license": "ISC",
+  "author": "alextheman",
+  "type": "module",
   "exports": {
-    "./prisma": {
-      "types": "./src/prisma.ts",
-      "import": "./dist/prisma.js",
-      "require": "./dist/prisma.cjs",
-      "default": "./dist/prisma.js"
-    },
     "./fabbrica": {
       "types": "./src/fabbrica.ts",
       "import": "./dist/fabbrica.js",
       "require": "./dist/fabbrica.cjs",
       "default": "./dist/fabbrica.js"
+    },
+    "./prisma": {
+      "types": "./src/prisma.ts",
+      "import": "./dist/prisma.js",
+      "require": "./dist/prisma.cjs",
+      "default": "./dist/prisma.js"
     },
     "./types": {
       "types": "./dist/types.d.ts",
@@ -23,28 +25,25 @@
       "default": "./dist/types.js"
     }
   },
+  "main": "dist/index.js",
   "scripts": {
-    "generate": "prisma generate && npx tsx disableTscInDirectory.ts",
-    "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --",
-    "clean-update": "bash ../../clean-update.sh",
     "build": "rm -rf dist/generated && npm run generate && tsup && cp -r src/generated dist/generated",
+    "clean-update": "bash ../../clean-update.sh",
     "format": "prisma format",
-    "lint": "prisma format --check"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "module",
-  "devDependencies": {
-    "@quramy/prisma-fabbrica": "^2.3.1",
-    "prisma": "^6.15.0",
-    "prisma-zod-generator": "^1.18.5",
-    "tsup": "^8.5.0"
+    "generate": "prisma generate && npx tsx disableTscInDirectory.ts",
+    "lint": "prisma format --check",
+    "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --"
   },
   "dependencies": {
     "@neurosongs/utility": "^1.0.0",
     "@prisma/client": "^6.15.0",
     "@types/node": "^24.3.1",
     "zod": "^4.1.5"
+  },
+  "devDependencies": {
+    "@quramy/prisma-fabbrica": "^2.3.1",
+    "prisma": "^6.15.0",
+    "prisma-zod-generator": "^1.18.5",
+    "tsup": "^8.5.0"
   }
 }
