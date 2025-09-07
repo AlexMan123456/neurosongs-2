@@ -11,7 +11,7 @@ function disableTscInDirectory(directory: string) {
     } else if (file.endsWith(".ts")) {
       const content = readFileSync(fullPath, "utf8");
       if (!content.startsWith("// @ts-nocheck")) {
-        writeFileSync(fullPath, "// @ts-nocheck\n" + content, "utf8");
+        writeFileSync(fullPath, `// @ts-nocheck\n${content}`, "utf8");
       }
     }
   }
