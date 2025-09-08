@@ -10,9 +10,13 @@
     "clean-update": "bash ../../clean-update.sh",
     "dev": "vite",
     "format": "prettier --write --parser typescript \"src/**/*.{ts,tsx}\" && eslint --fix --suppress-all \"src/**/*.{ts,tsx}\" && rm -f eslint-suppressions.json",
-    "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" && prettier --check --parser typescript \"src/**/*.{ts,tsx}\"",
+    "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" && npx alex-c-line check-for-file-dependencies && prettier --check --parser typescript \"src/**/*.{ts,tsx}\"",
     "preview": "vite preview",
-    "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --"
+    "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --",
+    "use-live-components": "npm uninstall @alextheman/components && npm install @alextheman/components",
+    "use-live-eslint-plugin": "npm uninstall @alextheman/eslint-plugin && npm install --save-dev @alextheman/eslint-plugin",
+    "use-local-components": "dotenv -e .env -- sh -c 'npm --prefix \"$LOCAL_COMPONENTS_PATH\" run create-local-package && npm uninstall @alextheman/components && npm install \"$LOCAL_COMPONENTS_PATH\"/alextheman-components-*.tgz'",
+    "use-local-eslint-plugin": "dotenv -e .env -- sh -c 'npm --prefix \"$LOCAL_ESLINT_PLUGIN_PATH\" run create-local-package && npm uninstall @alextheman/eslint-plugin && npm install --save-dev \"$LOCAL_ESLINT_PLUGIN_PATH\"/alextheman-eslint-plugin-*.tgz'"
   },
   "dependencies": {
     "@alextheman/components": "^3.7.0",
@@ -28,6 +32,7 @@
     "@types/react": "^19.1.12",
     "@types/react-dom": "^19.1.9",
     "@vitejs/plugin-react": "^5.0.2",
+    "dotenv-cli": "^10.0.0",
     "eslint": "^9.35.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.20",
