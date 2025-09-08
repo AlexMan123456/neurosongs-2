@@ -1,5 +1,11 @@
+import Navigation from "src/Navigation";
+
 function App() {
-  return <h1>Neurosongs!</h1>;
+  return (
+    <Navigation>
+      <h1>Neurosongs!</h1>
+    </Navigation>
+  );
 }
 
 export default App;
