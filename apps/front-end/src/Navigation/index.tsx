@@ -1,7 +1,10 @@
 import type { ReactNode } from "react";
 
-import { DarkModeToggle, NavigationDrawer, ScreenSizeContext } from "@alextheman/components";
+import { ScreenSizeContext } from "@alextheman/components";
 import { useContext } from "react";
+
+import NavigationBottom from "src/Navigation/NavigationBottom";
+import NavigationDrawer from "src/Navigation/NavigationDrawer";
 
 export interface NavigationProps {
   children: ReactNode;
@@ -10,25 +13,9 @@ export interface NavigationProps {
 function Navigation({ children }: NavigationProps) {
   const { isLargeScreen } = useContext(ScreenSizeContext);
   return isLargeScreen ? (
-    <NavigationDrawer
-      title="Neurosongs"
-      headerElements={<DarkModeToggle />}
-      navItems={[
-        {
-          category: "Main",
-          options: [
-            {
-              label: "Homepage",
-              to: "/",
-            },
-          ],
-        },
-      ]}
-    >
-      {children}
-    </NavigationDrawer>
+    <NavigationDrawer>{children}</NavigationDrawer>
   ) : (
-    children
+    <NavigationBottom>{children}</NavigationBottom>
   );
 }
 
