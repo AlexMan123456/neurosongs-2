@@ -36,14 +36,14 @@
   },
   "dependencies": {
     "@neurosongs/utility": "^1.0.0",
-    "@prisma/client": "^6.15.0",
-    "@types/node": "^24.3.1",
-    "zod": "^4.1.5"
+    "@prisma/client": "^6.16.1",
+    "@types/node": "^24.3.2",
+    "zod": "^4.1.8"
   },
   "devDependencies": {
     "@quramy/prisma-fabbrica": "^2.3.1",
-    "prisma": "^6.15.0",
-    "prisma-zod-generator": "^1.18.5",
+    "prisma": "^6.16.1",
+    "prisma-zod-generator": "^1.20.2",
     "tsup": "^8.5.0"
   }
 }
