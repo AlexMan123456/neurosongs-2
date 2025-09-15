@@ -37,7 +37,7 @@
   "dependencies": {
     "@neurosongs/utility": "^1.0.0",
     "@prisma/client": "^6.16.1",
-    "@types/node": "^24.3.2",
+    "@types/node": "^24.5.0",
     "zod": "^4.1.8"
   },
   "devDependencies": {
