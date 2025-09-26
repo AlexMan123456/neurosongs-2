@@ -22,20 +22,20 @@
     "update-root-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --"
   },
   "dependencies": {
-    "@alextheman/utility": "^1.16.3",
-    "react-router-dom": "^7.9.1"
+    "@alextheman/utility": "^1.19.1",
+    "react-router-dom": "^7.9.3"
   },
   "devDependencies": {
-    "@alextheman/eslint-plugin": "^1.14.1",
+    "@alextheman/eslint-plugin": "^1.14.2",
     "@types/node": "^24.5.2",
     "eslint": "^9.36.0",
     "husky": "^9.1.7",
-    "npm-check-updates": "^18.2.1",
+    "npm-check-updates": "^18.3.0",
     "prettier": "^3.6.2",
-    "turbo": "^2.5.6",
+    "turbo": "^2.5.8",
     "typescript": "5.9.2"
   },
-  "packageManager": "npm@11.6.0",
+  "packageManager": "npm@11.6.1",
   "engines": {
     "node": ">=18"
   }
