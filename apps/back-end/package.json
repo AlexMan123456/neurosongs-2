@@ -8,7 +8,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsup",
-    "clean-update": "bash -c 'npx npm-check-updates -u \"$@\"",
+    "clean-update": "bash -c 'npx npm-check-updates -u \"$@\"'",
     "dev": "nodemon src/server/index.ts",
     "format": "prettier --write --parser typescript \"src/**/*.ts\" \"tests/**/*.ts\" && eslint --fix --suppress-all \"src/**/*.ts\" \"tests/**/*.ts\" && rm -f eslint-suppressions.json",
     "generate": "npx prisma generate && npx tsx disableTscInDirectory.ts",
