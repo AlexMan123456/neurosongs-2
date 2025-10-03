@@ -19,7 +19,7 @@
     "prepare": "husky",
     "test": "turbo run test",
     "update-dependencies": "turbo run clean-update && npm run update-root-dependencies",
-    "update-root-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --"
+    "update-root-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install --workspaces' --"
   },
   "dependencies": {
     "@alextheman/utility": "^1.19.1",
