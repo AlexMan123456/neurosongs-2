@@ -7,7 +7,7 @@
   "type": "module",
   "scripts": {
     "build": "tsc -b && vite build",
-    "clean-update": "bash -c 'npx npm-check-updates -u \"$@\"",
+    "clean-update": "bash -c 'npx npm-check-updates -u \"$@\"'",
     "dev": "vite",
     "format": "prettier --write --parser typescript \"src/**/*.{ts,tsx}\" && eslint --fix --suppress-all \"src/**/*.{ts,tsx}\" && rm -f eslint-suppressions.json",
     "lint": "tsc --noEmit && eslint \"src/**/*.{ts,tsx}\" && npx alex-c-line check-for-file-dependencies && prettier --check --parser typescript \"src/**/*.{ts,tsx}\"",
