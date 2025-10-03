@@ -9,7 +9,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "build": "tsup",
-    "clean-update": "bash -c 'npx npm-check-updates -u \"$@\"",
+    "clean-update": "bash -c 'npx npm-check-updates -u \"$@\"'",
     "format": "prettier --write --parser typescript \"src/**/*.ts\" \"*.ts\" && eslint --fix --suppress-all \"src/**/*.ts\" && rm -f eslint-suppressions.json",
     "lint": "tsc --noEmit && eslint \"src/**/*.ts\" && prettier --check --parser typescript \"src/**/*.ts\" \"*.ts\"",
     "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --"

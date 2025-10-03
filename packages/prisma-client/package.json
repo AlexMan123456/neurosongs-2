@@ -28,7 +28,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "rm -rf dist/generated && npm run generate && tsup && cp -r src/generated dist/generated",
-    "clean-update": "bash -c 'npx npm-check-updates -u \"$@\"",
+    "clean-update": "bash -c 'npx npm-check-updates -u \"$@\"'",
     "format": "prisma format",
     "generate": "prisma generate && npx tsx disableTscInDirectory.ts",
     "lint": "prisma format --check",

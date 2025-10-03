@@ -9,6 +9,7 @@
   ],
   "scripts": {
     "build": "turbo run build",
+    "clean-update": "turbo run clean-update && npm-check-updates -u",
     "dev": "turbo run dev",
     "format": "eslint --fix --suppress-all \"./**/package.json\" && rm -f eslint-suppressions.json && turbo run format",
     "generate": "turbo run generate",
