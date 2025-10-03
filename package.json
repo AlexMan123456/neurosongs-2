@@ -9,7 +9,6 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "clean-update": "turbo run clean-update && bash ./clean-update.sh",
     "dev": "turbo run dev",
     "format": "eslint --fix --suppress-all \"./**/package.json\" && rm -f eslint-suppressions.json && turbo run format",
     "generate": "turbo run generate",
@@ -18,7 +17,7 @@
     "migrate-deploy": "turbo run migrate-deploy --filter=back-end",
     "prepare": "husky",
     "test": "turbo run test",
-    "update-dependencies": "turbo run update-dependencies && npm run update-root-dependencies",
+    "update-dependencies": "turbo run clean-update && npm run update-root-dependencies",
     "update-root-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --"
   },
   "dependencies": {
