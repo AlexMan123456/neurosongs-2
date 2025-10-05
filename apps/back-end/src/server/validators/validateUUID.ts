@@ -1,10 +1,10 @@
 import type { RequestParamHandler } from "express";
 
-import { validateUUID as validateUUIDUtility } from "@alextheman/utility";
+import { parseUUID } from "@alextheman/utility";
 
 const validateUUID: RequestParamHandler = (_request, _response, next, id) => {
   try {
-    validateUUIDUtility(id);
+    parseUUID(id);
     next();
   } catch (error) {
     next(error);
