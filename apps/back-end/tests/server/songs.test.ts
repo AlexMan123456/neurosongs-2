@@ -32,6 +32,12 @@ describe("/api/songs/:songId", () => {
       expect(validatedAPISong.userId).toBe(factoryUser.id);
       expect(validatedAPISong.artistName).toBe(factoryUser.artistName);
     });
+    test("400: Gives an error if songId is not a UUID", async () => {
+      const {
+        body: { error },
+      } = await request(app).get("/api/songs/hello").expect(400);
+      expect(error.message).toBe("INVALID_UUID");
+    });
     test("404: Gives an error if song not in database", async () => {
       const missingId = randomUUID();
 
