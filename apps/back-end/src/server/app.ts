@@ -11,6 +11,7 @@ app.use(express.json());
 
 // Parameter validators
 usersRouter.param("userId", validateUUID);
+songsRouter.param("songId", validateUUID);
 
 // Routes
 app.use("/api/users", usersRouter);
