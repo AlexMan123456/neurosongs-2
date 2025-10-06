@@ -1,3 +1,3 @@
-import { disableTscInDirectory } from "@neurosongs/utility"
+import { disableTscInDirectory } from "@neurosongs/utility";
 
-disableTscInDirectory("./../../packages/prisma-client/src/generated")
+disableTscInDirectory("./../../packages/prisma-client/src/generated");

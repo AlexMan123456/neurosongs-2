@@ -9,8 +9,17 @@
   "scripts": {
     "build": "tsup",
     "clean-update": "bash -c 'npx npm-check-updates -u \"$@\"'",
-    "format": "prettier --write --parser typescript \"src/**/*.ts\" && eslint --fix --suppress-all \"src/**/*.ts\" && rm -f eslint-suppressions.json",
-    "lint": "tsc --noEmit && eslint \"src/**/*.ts\" && prettier --check --parser typescript \"src/**/*.ts\"",
+    "format": "npm run format-prettier && npm run format-eslint",
+    "format-eslint": "eslint --fix --suppress-all \"src/**/*.ts\" && rm -f eslint-suppressions.json",
+    "format-prettier": "npm run format-prettier-typescript && npm run format-prettier-javascript",
+    "format-prettier-javascript": "prettier --write \"./**/*.js\"",
+    "format-prettier-typescript": "prettier --write --parser typescript \"./**/*.ts\"",
+    "lint": "npm run lint-tsc && npm run lint-eslint && npm run lint-prettier",
+    "lint-eslint": "eslint \"src/**/*.ts\"",
+    "lint-prettier": "npm run lint-prettier-typescript && npm run lint-prettier-javascript",
+    "lint-prettier-javascript": "prettier --check \"./**/*.js\"",
+    "lint-prettier-typescript": "prettier --check --parser typescript \"./**/*.ts\"",
+    "lint-tsc": "tsc --noEmit",
     "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --"
   },
   "devDependencies": {
