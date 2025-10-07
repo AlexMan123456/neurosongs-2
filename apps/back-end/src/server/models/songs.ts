@@ -15,6 +15,9 @@ export async function selectSongById(id: string): Promise<PublicSong | null> {
         },
       },
     },
+    omit: {
+      serial: true,
+    },
   });
 
   if (!song) {

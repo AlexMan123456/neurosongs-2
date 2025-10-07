@@ -11,6 +11,7 @@ const publicSongSchema = SongModelSchema.omit({
   userId: true,
   artist: true,
   releaseDate: true,
+  serial: true,
 }).extend({
   releaseDate: z.coerce.date(),
   userId: z.uuid(),
