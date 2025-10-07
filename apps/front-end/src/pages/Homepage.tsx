@@ -10,7 +10,7 @@ function Homepage() {
         variant="contained"
         sx={{ display: "flex", justifySelf: "center" }}
       >
-        Go to featured content
+        Go to recent content
       </Button>
     </main>
   );

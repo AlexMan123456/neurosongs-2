@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 
 import Navigation from "src/Navigation";
-import Featured from "src/pages/Featured";
 import Homepage from "src/pages/Homepage";
+import Recent from "src/pages/Recent";
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
       <h1>Neurosongs!</h1>
       <Routes>
         <Route path="/" element={<Homepage />} />
-        <Route path="/featured" element={<Featured />} />
+        <Route path="/recent" element={<Recent />} />
       </Routes>
     </Navigation>
   );
