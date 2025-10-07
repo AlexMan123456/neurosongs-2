@@ -6,7 +6,9 @@
   "author": "alextheman",
   "type": "module",
   "main": "dist/index.js",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "tsup",
     "clean-update": "bash -c 'npx npm-check-updates -u \"$@\"'",

@@ -3,7 +3,7 @@ import type { ZodError } from "zod";
 
 import { randomUUID } from "crypto";
 
-import { fillArrayAsync } from "@alextheman/utility";
+import { fillArray } from "@alextheman/utility";
 import { parseAPIUser, parseUser } from "@neurosongs/types";
 import request from "supertest";
 import { userFactory } from "tests/test-utilities/dataFactory";
@@ -15,7 +15,7 @@ import app from "src/server/app";
 describe("/api/users", () => {
   describe("GET", () => {
     test("200: Responds with an array of all users sorted by most recent", async () => {
-      const factoryUsers = await fillArrayAsync(async () => {
+      const factoryUsers = await fillArray(async () => {
         return await userFactory.create();
       }, 10);
 
@@ -44,7 +44,7 @@ describe("/api/users", () => {
       });
     });
     test("200: Gets the first 50 if there are more than 50 users", async () => {
-      const factoryUsers = await fillArrayAsync(async () => {
+      const factoryUsers = await fillArray(async () => {
         return await userFactory.create();
       }, 70);
 
@@ -77,7 +77,7 @@ describe("/api/users", () => {
       });
     });
     test("200: Gets the specified amount of users if limit query provided", async () => {
-      const factoryUsers = await fillArrayAsync(async () => {
+      const factoryUsers = await fillArray(async () => {
         return await userFactory.create();
       }, 50);
 
@@ -110,7 +110,7 @@ describe("/api/users", () => {
       });
     });
     test("200: Gets 50 users starting at the given page if page query provided", async () => {
-      const factoryUsers = await fillArrayAsync(async () => {
+      const factoryUsers = await fillArray(async () => {
         return await userFactory.create();
       }, 150);
 

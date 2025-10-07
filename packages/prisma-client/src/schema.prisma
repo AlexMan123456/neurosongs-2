@@ -45,6 +45,7 @@ model Song {
   albumIndex  Int      @map("album_index")
   albumId     String   @map("album_id") @db.Uuid
   album       Album    @relation(fields: [albumId], references: [id], onDelete: Cascade)
+  serial      Int      @unique @default(autoincrement())
 
   @@map("songs")
 }
