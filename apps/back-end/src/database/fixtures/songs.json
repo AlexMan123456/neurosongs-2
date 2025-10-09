@@ -1,0 +1,22 @@
+[
+  {
+    "id": "8e316ec5-c827-4cf6-a997-ed8579491b4a",
+    "userId": "a05cadd9-479c-43f7-a86f-487e38a282f7",
+    "albumId": "b72b1389-7895-4002-a645-6dacf26bd250",
+    "albumIndex": 1,
+    "name": "A New Era",
+    "description": "First song on Neural Anthems",
+    "releaseDate": "21/09/2023",
+    "source": "link/to/source/coming.soon"
+  },
+  {
+    "id": "c6d90a9b-f5e4-47af-bbd8-5494fe9e9555",
+    "userId": "a05cadd9-479c-43f7-a86f-487e38a282f7",
+    "albumId": "b72b1389-7895-4002-a645-6dacf26bd250",
+    "albumIndex": 2,
+    "name": "Neural Anthems",
+    "description": "Title track",
+    "releaseDate": "21/09/2023",
+    "source": "link/to/source/coming.soon"
+  }
+]
