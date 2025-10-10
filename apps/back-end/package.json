@@ -38,11 +38,11 @@
     "@neurosongs/prisma-client": "^1.0.0",
     "@neurosongs/types": "^1.0.0",
     "@neurosongs/utility": "^1.0.0",
-    "@prisma/client": "^6.16.3",
+    "@prisma/client": "^6.17.1",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
-    "zod": "^4.1.11"
+    "zod": "^4.1.12"
   },
   "devDependencies": {
     "@chax-at/transactional-prisma-testing": "^1.4.0",
@@ -51,7 +51,7 @@
     "@types/supertest": "^6.0.3",
     "execa": "^9.6.0",
     "nodemon": "^3.1.10",
-    "prisma": "^6.16.3",
+    "prisma": "^6.17.1",
     "supertest": "^7.1.4",
     "tsup": "^8.5.0",
     "vite-tsconfig-paths": "^5.1.4",
