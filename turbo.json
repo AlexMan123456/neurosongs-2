@@ -29,9 +29,9 @@
       "dependsOn": ["^migrate-deploy"]
     },
     "dev": {
+      "dependsOn": ["^dev"],
       "cache": false,
-      "persistent": true,
-      "dependsOn": ["^generate"]
+      "persistent": true
     }
   }
 }
