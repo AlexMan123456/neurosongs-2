@@ -26,8 +26,7 @@
     "update-root-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install --workspaces' --"
   },
   "dependencies": {
-    "@alextheman/utility": "^1.22.0",
-    "react-router-dom": "^7.9.4"
+    "@alextheman/utility": "^1.22.0"
   },
   "devDependencies": {
     "@alextheman/eslint-plugin": "^1.14.2",
