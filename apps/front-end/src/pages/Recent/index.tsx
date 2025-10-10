@@ -1,6 +1,6 @@
+import { useHash } from "@alextheman/components";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
-import { useState } from "react";
 
 import RecentAlbums from "src/pages/Recent/RecentAlbums";
 import RecentSongs from "src/pages/Recent/RecentSongs";
@@ -8,7 +8,7 @@ import RecentSongs from "src/pages/Recent/RecentSongs";
 type TabState = "songs" | "albums";
 
 function Recent() {
-  const [tab, setTab] = useState<TabState>("songs");
+  const [tab, setTab] = useHash<TabState>("songs");
   return (
     <main>
       <h1>Recent</h1>

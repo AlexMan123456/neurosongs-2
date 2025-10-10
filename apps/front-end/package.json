@@ -29,11 +29,14 @@
     "use-local-eslint-plugin": "dotenv -e .env -- sh -c 'ESLINT_PLUGIN_PATH=${LOCAL_ESLINT_PLUGIN_PATH:-../../../components}; npm --prefix \"$ESLINT_PLUGIN_PATH\" run create-local-package && npm uninstall @alextheman/eslint-plugin && npm install --save-dev \"$ESLINT_PLUGIN_PATH\"/alextheman-eslint-plugin-*.tgz'"
   },
   "dependencies": {
-    "@alextheman/components": "^4.1.0",
+    "@alextheman/components": "^4.2.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.3.4",
     "@mui/material": "^7.3.4",
+    "@neurosongs/types": "^1.0.0",
+    "@tanstack/react-query": "^5.90.2",
+    "axios": "^1.12.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-router-dom": "^7.9.3"
