@@ -16,6 +16,7 @@ const publicSongSchema = SongModelSchema.omit({
   releaseDate: z.coerce.date(),
   userId: z.uuid(),
   artistName: z.string(),
+  artistUsername: z.string(),
 });
 export type PublicSong = z.infer<typeof publicSongSchema>;
 export function parsePublicSong(data: unknown): PublicSong {

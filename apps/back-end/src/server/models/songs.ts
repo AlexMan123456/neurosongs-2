@@ -21,7 +21,7 @@ export async function selectSongs(
   const [songs, totalSongs] = await Promise.all([
     database.song.findMany({
       omit: { serial: true },
-      include: { artist: { select: { artistName: true } } },
+      include: { artist: { select: { artistName: true, username: true } } },
       orderBy: [{ serial: "asc" }],
       ...paginate(limit, pageNumber),
     }),
@@ -30,7 +30,11 @@ export async function selectSongs(
 
   return {
     songs: songs.map((song) => {
-      return { ...omitProperties(song, "artist"), artistName: song.artist.artistName };
+      return {
+        ...omitProperties(song, "artist"),
+        artistName: song.artist.artistName,
+        artistUsername: song.artist.username,
+      };
     }),
     totalSongs,
     limit,
@@ -47,6 +51,7 @@ export async function selectSongById(id: string): Promise<PublicSong | null> {
       artist: {
         select: {
           artistName: true,
+          username: true,
         },
       },
     },
@@ -59,5 +64,9 @@ export async function selectSongById(id: string): Promise<PublicSong | null> {
     throw new APIError(404, "SONG_NOT_FOUND");
   }
 
-  return { ...omitProperties(song, "artist"), artistName: song.artist.artistName };
+  return {
+    ...omitProperties(song, "artist"),
+    artistName: song.artist.artistName,
+    artistUsername: song.artist.username,
+  };
 }

@@ -21,9 +21,12 @@ describe("/api/songs/:songId", () => {
 
       const validatedAPISong = parsePublicSong(apiSong);
 
-      expect(factorySong).toMatchObject(omitProperties(validatedAPISong, "artistName"));
+      expect(factorySong).toMatchObject(
+        omitProperties(validatedAPISong, ["artistName", "artistUsername"]),
+      );
       expect(validatedAPISong.userId).toBe(factoryUser.id);
       expect(validatedAPISong.artistName).toBe(factoryUser.artistName);
+      expect(validatedAPISong.artistUsername).toBe(factoryUser.username);
     });
     test("400: Gives an error if songId is not a UUID", async () => {
       const {
@@ -63,8 +66,9 @@ describe("/api/songs", () => {
         apiSongs.map((apiSong) => {
           const validatedAPISong = parsePublicSong(apiSong);
           expect(validatedAPISong.artistName).toBe(factoryUser.artistName);
+          expect(validatedAPISong.artistUsername).toBe(factoryUser.username);
           expect(validatedAPISong.userId).toBe(factoryUser.id);
-          return omitProperties(parsePublicSong(apiSong), "artistName");
+          return omitProperties(parsePublicSong(apiSong), ["artistName", "artistUsername"]);
         }),
       );
     });
@@ -92,8 +96,9 @@ describe("/api/songs", () => {
         apiSongs.map((apiSong: PublicSong) => {
           const validatedAPISong = parsePublicSong(apiSong);
           expect(validatedAPISong.artistName).toBe(factoryUser.artistName);
+          expect(validatedAPISong.artistUsername).toBe(factoryUser.username);
           expect(validatedAPISong.userId).toBe(factoryUser.id);
-          return omitProperties(parsePublicSong(apiSong), "artistName");
+          return omitProperties(parsePublicSong(apiSong), ["artistName", "artistUsername"]);
         }),
       );
     });
