@@ -10,7 +10,7 @@ const nodeEnv = parseEnv(process.env.NODE_ENV);
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-dotenv.config({ path: path.join(__dirname, "../../", `.env.${nodeEnv}`) });
+dotenv.config({ path: path.join(__dirname, "../../", `.env.${nodeEnv}`), override: true });
 
 let currentPrismaClient: PrismaClient = new PrismaClient();
 
