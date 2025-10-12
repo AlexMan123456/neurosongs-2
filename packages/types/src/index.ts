@@ -1,3 +1,4 @@
+export * from "src/albums";
 export * from "src/songs";
 export * from "src/users";
 
