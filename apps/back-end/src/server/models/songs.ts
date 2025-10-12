@@ -1,9 +1,7 @@
-import type { PublicSong } from "@neurosongs/types";
+import type { PrismaClient, PublicSong } from "@neurosongs/types";
 
 import { APIError, omitProperties } from "@alextheman/utility";
 import { paginate } from "@neurosongs/utility";
-
-import getPrismaClient from "src/database/client";
 
 export interface PaginatedSongs {
   songs: PublicSong[];
@@ -14,10 +12,10 @@ export interface PaginatedSongs {
 }
 
 export async function selectSongs(
+  database: PrismaClient,
   limit: number = 50,
   pageNumber: number = 1,
 ): Promise<PaginatedSongs> {
-  const database = getPrismaClient();
   const [songs, totalSongs] = await Promise.all([
     database.song.findMany({
       omit: { serial: true },
@@ -47,8 +45,10 @@ export async function selectSongs(
   };
 }
 
-export async function selectSongById(id: string): Promise<PublicSong | null> {
-  const database = getPrismaClient();
+export async function selectSongById(
+  database: PrismaClient,
+  id: string,
+): Promise<PublicSong | null> {
   const song = await database.song.findUnique({
     where: { id },
     include: {

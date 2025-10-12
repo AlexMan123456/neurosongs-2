@@ -1,6 +1,7 @@
 import { parseQueryParameter } from "@neurosongs/utility";
 import express from "express";
 
+import getPrismaClient from "src/database/client";
 import { insertUser, selectUserById, selectUsers, updateUser } from "src/server/models/users";
 
 const usersRouter = express.Router();
@@ -8,18 +9,20 @@ const usersRouter = express.Router();
 usersRouter
   .route("/")
   .get(async (request, response, next) => {
+    const database = getPrismaClient();
     try {
       const limit = parseQueryParameter(request.query.limit, "INVALID_LIMIT");
       const pageNumber = parseQueryParameter(request.query.page, "INVALID_PAGE_NUMBER");
-      const usersResponse = await selectUsers(limit, pageNumber);
+      const usersResponse = await selectUsers(database, limit, pageNumber);
       response.status(200).send(usersResponse);
     } catch (error) {
       next(error);
     }
   })
   .post(async (request, response, next) => {
+    const database = getPrismaClient();
     try {
-      const userId = await insertUser(request.body);
+      const userId = await insertUser(database, request.body);
       response.status(201).send({ userId });
     } catch (error) {
       next(error);
@@ -29,18 +32,22 @@ usersRouter
 usersRouter
   .route("/:userId")
   .get<{ userId: string }>(async (request, response, next) => {
+    const database = getPrismaClient();
     try {
-      const user = await selectUserById(request.params.userId);
+      const user = await selectUserById(database, request.params.userId);
       response.status(200).send({ user });
     } catch (error) {
       next(error);
     }
   })
   .put<{ userId: string }>(async (request, response, next) => {
+    const database = getPrismaClient();
     try {
-      await selectUserById(request.params.userId);
-      await updateUser(request.params.userId, request.body);
-      response.status(204).send({});
+      await database.$transaction(async (transaction) => {
+        await selectUserById(transaction, request.params.userId);
+        await updateUser(transaction, request.params.userId, request.body);
+        response.status(204).send({});
+      });
     } catch (error) {
       next(error);
     }

@@ -20,6 +20,12 @@ export default [
               message:
                 "Do not use the generated Prisma types. Use the types exported from @neurosongs/types instead.",
             },
+            {
+              // The PrismaClient from @neurosongs/types is generally better to use as a type annotation as it can be either a transaction client or a main client.
+              name: "@neurosongs/prisma-client/prisma",
+              importNames: ["PrismaClient"],
+              message: "Please use the PrismaClient from @neurosongs/types instead.",
+            },
           ],
         },
       ],
@@ -28,7 +34,7 @@ export default [
   {
     files: ["src/database/**/*.ts", "tests/test-utilities/setup.ts"],
     rules: {
-      // Setup files should be able to set the PrismaClient.
+      // Setup files should be able to set the PrismaClient and use the regular PrismaClient from @neurosongs/prisma-client/prisma.
       "no-restricted-imports": "off",
     },
   },
