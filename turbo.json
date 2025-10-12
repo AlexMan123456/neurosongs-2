@@ -32,6 +32,12 @@
       "dependsOn": ["^dev"],
       "cache": false,
       "persistent": true
+    },
+    "use-local-components": {
+      "dependsOn": ["^use-local-components"]
+    },
+    "use-live-components": {
+      "dependsOn": ["^use-live-components"]
     }
   }
 }
