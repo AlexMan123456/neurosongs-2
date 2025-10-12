@@ -7,6 +7,15 @@ export default [
       "no-restricted-imports": [
         "error",
         {
+          paths: [
+            {
+              // Disable the PrismaClient from @neurosongs/types for the same reason as below.
+              name: "@neurosongs/types",
+              importNames: ["PrismaClient"],
+              message:
+                "Do not use the Prisma Client directly in the front-end. Query an endpoint from the back-end instead.",
+            },
+          ],
           patterns: [
             {
               /* Direct database queries from the front-end using the Prisma Client is generally bad practice, since
