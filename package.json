@@ -23,7 +23,9 @@
     "prepare": "husky",
     "test": "turbo run test",
     "update-dependencies": "turbo run clean-update && npm run update-root-dependencies",
-    "update-root-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install --workspaces' --"
+    "update-root-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install --workspaces' --",
+    "use-live-components": "turbo run use-live-components --filter=front-end --cache=local:,remote:",
+    "use-local-components": "turbo run use-local-components --filter=front-end --cache=local:,remote:"
   },
   "dependencies": {
     "@alextheman/utility": "^1.22.0"
