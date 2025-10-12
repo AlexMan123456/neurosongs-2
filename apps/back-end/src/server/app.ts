@@ -2,6 +2,7 @@ import { APIError } from "@alextheman/utility";
 import cors from "cors";
 import express from "express";
 
+import albumsRouter from "src/server/routers/albums";
 import { customErrors, internalServerError, zodErrors } from "src/server/routers/errors";
 import songsRouter from "src/server/routers/songs";
 import usersRouter from "src/server/routers/users";
@@ -35,12 +36,14 @@ app.use(
 app.use(express.json());
 
 // Parameter validators
-usersRouter.param("userId", validateUUID);
+albumsRouter.param("albumId", validateUUID);
 songsRouter.param("songId", validateUUID);
+usersRouter.param("userId", validateUUID);
 
 // Routes
-app.use("/api/users", usersRouter);
+app.use("/api/albums", albumsRouter);
 app.use("/api/songs", songsRouter);
+app.use("/api/users", usersRouter);
 
 // Error handling
 app.use(zodErrors);
