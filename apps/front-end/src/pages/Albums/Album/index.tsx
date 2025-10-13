@@ -4,8 +4,7 @@ import CardHeader from "@mui/material/CardHeader";
 import Divider from "@mui/material/Divider";
 import { useParams } from "react-router-dom";
 
-import ErrorMessage from "src/components/ErrorMessage";
-import Loading from "src/components/Loading";
+import Loader from "src/components/Loader";
 import { useAlbumQuery } from "src/queries/albums";
 
 function Album() {
@@ -15,22 +14,16 @@ function Album() {
   }
   const { data: album, isLoading, error } = useAlbumQuery(albumId);
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (error) {
-    return <ErrorMessage error={error} />;
-  }
-
   return (
-    <main>
-      <Card>
-        <CardHeader title={album?.name} />
-        <Divider />
-        <CardContent>{album?.description}</CardContent>
-      </Card>
-    </main>
+    <Loader isLoading={isLoading} error={error}>
+      <main>
+        <Card>
+          <CardHeader title={album?.name} />
+          <Divider />
+          <CardContent>{album?.description}</CardContent>
+        </Card>
+      </main>
+    </Loader>
   );
 }
 

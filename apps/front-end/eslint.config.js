@@ -7,15 +7,6 @@ export default [
       "no-restricted-imports": [
         "error",
         {
-          paths: [
-            {
-              // Disable the PrismaClient from @neurosongs/types for the same reason as below.
-              name: "@neurosongs/types",
-              importNames: ["PrismaClient"],
-              message:
-                "Do not use the Prisma Client directly in the front-end. Query an endpoint from the back-end instead.",
-            },
-          ],
           patterns: [
             {
               /* Direct database queries from the front-end using the Prisma Client is generally bad practice, since
@@ -25,6 +16,22 @@ export default [
               group: ["@neurosongs/prisma-client"],
               message:
                 "Do not use the Prisma Client directly in the front-end. Query an endpoint from the back-end instead.",
+            },
+          ],
+          paths: [
+            {
+              // Disable the PrismaClient from @neurosongs/types for the same reason as above.
+              name: "@neurosongs/types",
+              importNames: ["PrismaClient"],
+              message:
+                "Do not use the Prisma Client directly in the front-end. Query an endpoint from the back-end instead.",
+            },
+            {
+              /* Disable use of the Loader from @alextheman/components since Neurosongs provides its own Loader that wraps around
+               the Loader from components, which provides a more suitable default errorComponent for Neurosongs-specific errors. */
+              name: "@alextheman/components",
+              importNames: ["Loader"],
+              message: "Use the internal Loader from src/components/Loader instead.",
             },
           ],
         },

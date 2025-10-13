@@ -3,7 +3,7 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import { useParams } from "react-router-dom";
 
-import Loading from "src/components/Loading";
+import Loader from "src/components/Loader";
 import UserAlbums from "src/pages/Users/User/UserAlbums";
 import UserSongs from "src/pages/Users/User/UserSongs";
 import { useUserQuery } from "src/queries/users";
@@ -20,24 +20,22 @@ function UserProfile() {
   const { data: user, isLoading } = useUserQuery(userId);
   const [tab, setTab] = useHash<TabState>("songs");
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
   return (
-    <section>
-      <h1>{user?.artistName}</h1>
-      <Tabs
-        value={tab}
-        onChange={(_, value) => {
-          setTab(value as TabState);
-        }}
-      >
-        <Tab label="Songs" value="songs" />
-        <Tab label="Albums" value="albums" />
-      </Tabs>
-      {{ songs: <UserSongs userId={userId} />, albums: <UserAlbums userId={userId} /> }[tab]}
-    </section>
+    <Loader isLoading={isLoading}>
+      <section>
+        <h1>{user?.artistName}</h1>
+        <Tabs
+          value={tab}
+          onChange={(_, value) => {
+            setTab(value as TabState);
+          }}
+        >
+          <Tab label="Songs" value="songs" />
+          <Tab label="Albums" value="albums" />
+        </Tabs>
+        {{ songs: <UserSongs userId={userId} />, albums: <UserAlbums userId={userId} /> }[tab]}
+      </section>
+    </Loader>
   );
 }
 
