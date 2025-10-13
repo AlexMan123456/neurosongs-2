@@ -4,11 +4,18 @@ import { NavigationDrawer as AlexNavigationDrawer, DarkModeToggle } from "@alext
 import AccessTime from "@mui/icons-material/AccessTime";
 import Home from "@mui/icons-material/Home";
 
+import UserDropdown from "src/components/resources/users/UserDropdown";
+
 function NavigationDrawer({ children }: NavigationProps) {
   return (
     <AlexNavigationDrawer
       title="Neurosongs"
-      headerElements={<DarkModeToggle />}
+      headerElements={
+        <>
+          <DarkModeToggle />
+          <UserDropdown />
+        </>
+      }
       navItems={[
         {
           category: "Main",
