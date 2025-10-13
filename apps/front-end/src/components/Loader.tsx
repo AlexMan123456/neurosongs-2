@@ -1,5 +1,6 @@
 import type { LoaderProps } from "@alextheman/components";
 
+// eslint-disable-next-line no-restricted-imports
 import { Loader as AlexLoader } from "@alextheman/components";
 
 import ErrorMessage from "src/components/ErrorMessage";
