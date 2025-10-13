@@ -7,7 +7,9 @@ export interface ErrorProps {
 function ErrorMessage({ error }: ErrorProps) {
   return (
     <Alert severity="error">
-      {error instanceof Error ? error.message : "An error has occured"}
+      {error instanceof Error
+        ? `Error ${error.message} occurred`
+        : "An unknown error has occured. Please try again later."}
     </Alert>
   );
 }
