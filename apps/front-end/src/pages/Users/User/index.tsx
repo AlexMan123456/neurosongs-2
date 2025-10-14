@@ -1,9 +1,15 @@
-import { useHash } from "@alextheman/components";
+import { LoaderContent, LoaderError, useHash } from "@alextheman/components";
+import Avatar from "@mui/material/Avatar";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
+import CardHeader from "@mui/material/CardHeader";
+import CardMedia from "@mui/material/CardMedia";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import { useParams } from "react-router-dom";
 
-import Loader from "src/components/Loader";
+import LoaderProvider from "src/components/LoaderProvider";
+import neurosongsNote from "src/images/Neurosongs_note.png";
 import UserAlbums from "src/pages/Users/User/UserAlbums";
 import UserSongs from "src/pages/Users/User/UserSongs";
 import { useUserQuery } from "src/queries/users";
@@ -21,21 +27,34 @@ function UserProfile() {
   const [tab, setTab] = useHash<TabState>("songs");
 
   return (
-    <Loader isLoading={isLoading} error={error}>
+    <LoaderProvider isLoading={isLoading} error={error}>
       <section>
-        <h1>{user?.artistName}</h1>
-        <Tabs
-          value={tab}
-          onChange={(_, value) => {
-            setTab(value as TabState);
-          }}
-        >
-          <Tab label="Songs" value="songs" />
-          <Tab label="Albums" value="albums" />
-        </Tabs>
-        {{ songs: <UserSongs userId={userId} />, albums: <UserAlbums userId={userId} /> }[tab]}
+        <LoaderError />
+        <Card>
+          <LoaderContent>
+            <CardMedia>
+              <Avatar
+                src={neurosongsNote}
+                alt={`${user?.artistName}'s profile picture`}
+                sx={{ width: 56, height: 56, margin: 2 }}
+              />
+            </CardMedia>
+            <CardHeader title={user?.artistName} />
+            <CardContent>{user?.description}</CardContent>
+          </LoaderContent>
+          <Tabs
+            value={tab}
+            onChange={(_, value) => {
+              setTab(value as TabState);
+            }}
+          >
+            <Tab label="Songs" value="songs" />
+            <Tab label="Albums" value="albums" />
+          </Tabs>
+          {{ songs: <UserSongs userId={userId} />, albums: <UserAlbums userId={userId} /> }[tab]}
+        </Card>
       </section>
-    </Loader>
+    </LoaderProvider>
   );
 }
 
