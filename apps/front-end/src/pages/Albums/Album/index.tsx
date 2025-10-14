@@ -1,10 +1,11 @@
+import { LoaderContent, LoaderError } from "@alextheman/components";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
 import Divider from "@mui/material/Divider";
 import { useParams } from "react-router-dom";
 
-import Loader from "src/components/Loader";
+import LoaderProvider from "src/components/LoaderProvider";
 import { useAlbumQuery } from "src/queries/albums";
 
 function Album() {
@@ -15,15 +16,18 @@ function Album() {
   const { data: album, isLoading, error } = useAlbumQuery(albumId);
 
   return (
-    <Loader isLoading={isLoading} error={error}>
+    <LoaderProvider isLoading={isLoading} error={error}>
       <main>
-        <Card>
-          <CardHeader title={album?.name} />
-          <Divider />
-          <CardContent>{album?.description}</CardContent>
-        </Card>
+        <LoaderError />
+        <LoaderContent>
+          <Card>
+            <CardHeader title={album?.name} />
+            <Divider />
+            <CardContent>{album?.description}</CardContent>
+          </Card>
+        </LoaderContent>
       </main>
-    </Loader>
+    </LoaderProvider>
   );
 }
 

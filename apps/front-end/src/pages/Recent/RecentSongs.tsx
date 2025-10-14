@@ -1,6 +1,6 @@
-import { useScreenSize } from "@alextheman/components";
+import { LoaderContent, LoaderError, useScreenSize } from "@alextheman/components";
 
-import Loader from "src/components/Loader";
+import LoaderProvider from "src/components/LoaderProvider";
 import SongList from "src/components/resources/songs/SongList";
 import SongTable from "src/components/resources/songs/SongTable";
 import { useSongsQuery } from "src/queries/songs";
@@ -10,12 +10,15 @@ function RecentSongs() {
   const { isLargeScreen } = useScreenSize();
 
   return (
-    <section>
-      <h2>Songs</h2>
-      <Loader isLoading={isLoading} error={error}>
-        {isLargeScreen ? <SongTable songs={songs ?? []} /> : <SongList songs={songs ?? []} />}
-      </Loader>
-    </section>
+    <LoaderProvider isLoading={isLoading} error={error}>
+      <section>
+        <h2>Songs</h2>
+        <LoaderError />
+        <LoaderContent>
+          {isLargeScreen ? <SongTable songs={songs ?? []} /> : <SongList songs={songs ?? []} />}
+        </LoaderContent>
+      </section>
+    </LoaderProvider>
   );
 }
 

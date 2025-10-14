@@ -27,11 +27,12 @@ export default [
                 "Do not use the Prisma Client directly in the front-end. Query an endpoint from the back-end instead.",
             },
             {
-              /* Disable use of the Loader from @alextheman/components since Neurosongs provides its own Loader that wraps around
-               the Loader from components, which provides a more suitable default errorComponent for Neurosongs-specific errors. */
+              /* Disable use of the LoaderProvider from @alextheman/components since Neurosongs provides its own LoaderProvider that wraps around
+               the LoaderProvider from components, which provides a more suitable default errorComponent for Neurosongs-specific errors. */
               name: "@alextheman/components",
-              importNames: ["Loader"],
-              message: "Use the internal Loader from src/components/Loader instead.",
+              importNames: ["LoaderProvider"],
+              message:
+                "Use the internal LoaderProvider from src/components/LoaderProvider instead.",
             },
           ],
         },
