@@ -28,7 +28,7 @@
     "use-local-components": "turbo run use-local-components --filter=front-end --cache=local:,remote:"
   },
   "dependencies": {
-    "@alextheman/utility": "^1.22.0"
+    "@alextheman/utility": "^1.23.0"
   },
   "devDependencies": {
     "@alextheman/eslint-plugin": "^1.14.2",
