@@ -28,7 +28,7 @@ function UserProfile() {
 
   return (
     <LoaderProvider isLoading={isLoading} error={error}>
-      <section>
+      <main>
         <LoaderError />
         <Card>
           <LoaderContent>
@@ -53,7 +53,7 @@ function UserProfile() {
           </Tabs>
           {{ songs: <UserSongs userId={userId} />, albums: <UserAlbums userId={userId} /> }[tab]}
         </Card>
-      </section>
+      </main>
     </LoaderProvider>
   );
 }
