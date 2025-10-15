@@ -5,5 +5,6 @@
         "**/.hg/store/**": true,
         "**/src/generated/prisma/**": true,
         "**/src/generated/fabbrica/**": true
-    }
+    },
+    "prisma.fileWatcher": false
 }

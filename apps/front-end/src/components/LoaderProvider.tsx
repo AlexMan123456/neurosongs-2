@@ -5,9 +5,9 @@ import { LoaderProvider as AlexLoaderProvider } from "@alextheman/components";
 
 import ErrorMessage from "src/components/ErrorMessage";
 
-function LoaderProvider({ children, ...props }: LoaderProviderProps) {
+function LoaderProvider<T>({ children, ...props }: LoaderProviderProps<T>) {
   return (
-    <AlexLoaderProvider
+    <AlexLoaderProvider<T>
       errorComponent={(error) => {
         return <ErrorMessage error={error} />;
       }}
