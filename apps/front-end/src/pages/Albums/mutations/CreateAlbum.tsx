@@ -4,8 +4,8 @@ import { useSnackbar } from "@alextheman/components";
 import { useNavigate } from "react-router-dom";
 
 import AlbumForm from "src/components/resources/albums/AlbumForm";
+import formatError from "src/errors/formatError";
 import { useCreateAlbumMutation } from "src/queries/albums";
-import formatError from "src/utility/formatError";
 
 function CreateAlbum() {
   const userId = "a05cadd9-479c-43f7-a86f-487e38a282f7";
