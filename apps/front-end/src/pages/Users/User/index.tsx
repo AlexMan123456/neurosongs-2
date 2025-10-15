@@ -1,4 +1,6 @@
-import { LoaderContent, LoaderError, useHash } from "@alextheman/components";
+import type { PublicUser } from "@neurosongs/types";
+
+import { LoaderData, LoaderError, useHash } from "@alextheman/components";
 import Avatar from "@mui/material/Avatar";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -27,21 +29,27 @@ function UserProfile() {
   const [tab, setTab] = useHash<TabState>("songs");
 
   return (
-    <LoaderProvider isLoading={isLoading} error={error}>
+    <LoaderProvider data={user} isLoading={isLoading} error={error}>
       <main>
         <LoaderError />
         <Card>
-          <LoaderContent>
-            <CardMedia>
-              <Avatar
-                src={neurosongsNote}
-                alt={`${user?.artistName}'s profile picture`}
-                sx={{ width: 56, height: 56, margin: 2 }}
-              />
-            </CardMedia>
-            <CardHeader title={user?.artistName} />
-            <CardContent>{user?.description}</CardContent>
-          </LoaderContent>
+          <LoaderData<PublicUser>>
+            {(user) => {
+              return (
+                <>
+                  <CardMedia>
+                    <Avatar
+                      src={neurosongsNote}
+                      alt={`${user.artistName}'s profile picture`}
+                      sx={{ width: 56, height: 56, margin: 2 }}
+                    />
+                  </CardMedia>
+                  <CardHeader title={user.artistName} />
+                  <CardContent>{user.description}</CardContent>
+                </>
+              );
+            }}
+          </LoaderData>
           <Tabs
             value={tab}
             onChange={(_, value) => {
