@@ -1,4 +1,4 @@
-import type { APIErrorMap } from "src/errors/formatError";
+import type { APIErrorMap } from "src/errors/defaultAPIErrors";
 
 import Alert from "@mui/material/Alert";
 
