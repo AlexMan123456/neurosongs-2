@@ -3,7 +3,7 @@ import type { AlbumToPost, PublicAlbum } from "@neurosongs/types";
 import { parsePublicAlbum } from "@neurosongs/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import neurosongsAxiosClient from "src/queries/neurosongsAxiosClient";
+import neurosongsAxiosClient from "src/neurosongsAxiosClient";
 
 export function useAlbumQuery(albumId: string) {
   return useQuery<PublicAlbum>({

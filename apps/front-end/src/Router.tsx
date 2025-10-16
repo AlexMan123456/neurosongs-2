@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 
-import Album from "src/pages/Albums/Album";
-import CreateAlbum from "src/pages/Albums/mutations/CreateAlbum";
 import Homepage from "src/pages/Homepage";
 import Recent from "src/pages/Recent";
-import User from "src/pages/Users/User";
+import Album from "src/resources/Albums/pages/Album";
+import CreateAlbum from "src/resources/Albums/pages/mutations/CreateAlbum";
+import User from "src/resources/Users/pages/User";
 
 function Router() {
   return (

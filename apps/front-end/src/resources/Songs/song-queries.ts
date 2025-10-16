@@ -3,7 +3,7 @@ import type { PublicSong } from "@neurosongs/types";
 import { parsePublicSong } from "@neurosongs/types";
 import { useQuery } from "@tanstack/react-query";
 
-import neurosongsAxiosClient from "src/queries/neurosongsAxiosClient";
+import neurosongsAxiosClient from "src/neurosongsAxiosClient";
 
 export function useSongsQuery() {
   return useQuery<PublicSong[]>({
