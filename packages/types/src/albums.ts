@@ -10,6 +10,7 @@ export function parseAlbum(data: unknown): Album {
 const publicAlbumSchema = AlbumModelSchema.omit({
   songs: true,
   artist: true,
+  serial: true,
 }).extend({
   artistName: z.string(),
   artistUsername: z.string(),
@@ -23,6 +24,7 @@ const albumMutationSchema = AlbumInputSchema.omit({
   id: true,
   songs: true,
   artist: true,
+  serial: true,
 });
 
 const albumToPostSchema = albumMutationSchema;

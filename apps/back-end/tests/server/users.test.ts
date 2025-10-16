@@ -3,10 +3,10 @@ import type { ZodError } from "zod";
 
 import { randomUUID } from "crypto";
 
-import { fillArray } from "@alextheman/utility";
-import { parseAPIUser, parseUser } from "@neurosongs/types";
+import { APIError, fillArray, omitProperties } from "@alextheman/utility";
+import { parseAPIUser, parsePublicAlbum, parseUser } from "@neurosongs/types";
 import request from "supertest";
-import { userFactory } from "tests/test-utilities/dataFactory";
+import { albumFactory, userFactory } from "tests/test-utilities/dataFactory";
 import { describe, expect, test } from "vitest";
 
 import getPrismaClient from "src/database/client";
@@ -358,6 +358,47 @@ describe("/api/users/:userId", () => {
       const {
         body: { error },
       } = await request(app).put(`/api/users/${missingId}`).send(changedProperties).expect(404);
+      expect(error.message).toBe("USER_NOT_FOUND");
+    });
+  });
+});
+
+describe("/api/users/:userId/albums", () => {
+  describe("GET", () => {
+    test("200: Returns all albums for a given user", async () => {
+      const factoryUser = await userFactory.create();
+      const factoryAlbums = await fillArray(async () => {
+        return await albumFactory.create({ artist: { connect: { id: factoryUser.id } } });
+      }, 10);
+
+      await fillArray(async () => {
+        return await albumFactory.create();
+      }, 5);
+
+      factoryAlbums.sort((first, second) => {
+        return first.serial - second.serial;
+      });
+
+      const {
+        body: { albums: apiAlbums },
+      } = await request(app).get(`/api/users/${factoryUser.id}/albums`).expect(200);
+      expect(apiAlbums.length).toBe(10);
+      expect(factoryAlbums).toMatchObject(
+        apiAlbums.map((album: unknown) => {
+          const validatedAPIAlbum = parsePublicAlbum(album);
+          expect(validatedAPIAlbum.userId).toBe(factoryUser.id);
+          expect(validatedAPIAlbum.artistName).toBe(factoryUser.artistName);
+          expect(validatedAPIAlbum.artistUsername).toBe(factoryUser.username);
+          return omitProperties(validatedAPIAlbum, ["artistName", "artistUsername"]);
+        }),
+      );
+    });
+    test("404: Gives an error if user is not found", async () => {
+      const missingId = randomUUID();
+      const {
+        body: { error },
+      } = await request(app).get(`/api/users/${missingId}/albums`).expect(404);
+      expect(APIError.check(error)).toBe(true);
       expect(error.message).toBe("USER_NOT_FOUND");
     });
   });
