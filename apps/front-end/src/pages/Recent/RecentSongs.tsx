@@ -1,8 +1,8 @@
 import { Loader, useScreenSize } from "@alextheman/components";
 
-import SongList from "src/components/resources/songs/SongList";
-import SongTable from "src/components/resources/songs/SongTable";
-import { useSongsQuery } from "src/queries/songs";
+import SongList from "src/resources/Songs/components/SongList";
+import SongTable from "src/resources/Songs/components/SongTable";
+import { useSongsQuery } from "src/resources/Songs/song-queries";
 
 function RecentSongs() {
   const { data: songs, isLoading, error } = useSongsQuery();

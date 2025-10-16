@@ -1,4 +1,4 @@
-import type { NavigationProps } from "src/Navigation";
+import type { NavigationProps } from "src/components/Navigation";
 
 import { NavigationBottom as AlexNavigationBottom } from "@alextheman/components";
 import Home from "@mui/icons-material/Home";

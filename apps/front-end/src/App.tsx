@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-import Navigation from "src/Navigation";
+import Navigation from "src/components/Navigation";
 import Router from "src/Router";
 
 function App() {

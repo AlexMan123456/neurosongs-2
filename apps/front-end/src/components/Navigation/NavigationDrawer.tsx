@@ -1,10 +1,10 @@
-import type { NavigationProps } from "src/Navigation";
+import type { NavigationProps } from "src/components/Navigation";
 
 import { NavigationDrawer as AlexNavigationDrawer, DarkModeToggle } from "@alextheman/components";
 import AccessTime from "@mui/icons-material/AccessTime";
 import Home from "@mui/icons-material/Home";
 
-import UserDropdown from "src/components/resources/users/UserDropdown";
+import UserDropdown from "src/resources/Users/components/UserDropdown";
 
 function NavigationDrawer({ children }: NavigationProps) {
   return (

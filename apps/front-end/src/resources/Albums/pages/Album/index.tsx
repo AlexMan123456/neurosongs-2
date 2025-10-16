@@ -5,7 +5,7 @@ import Divider from "@mui/material/Divider";
 import { useParams } from "react-router-dom";
 
 import Loader from "src/components/Loader";
-import { useAlbumQuery } from "src/queries/albums";
+import { useAlbumQuery } from "src/resources/Albums/album-queries";
 
 function Album() {
   const { albumId } = useParams<{ albumId: string }>();
