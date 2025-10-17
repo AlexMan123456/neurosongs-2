@@ -28,14 +28,14 @@
     "use-local-components": "turbo run use-local-components --filter=front-end --cache=local:,remote:"
   },
   "dependencies": {
-    "@alextheman/utility": "^1.23.0"
+    "@alextheman/utility": "^1.25.0"
   },
   "devDependencies": {
     "@alextheman/eslint-plugin": "^1.14.2",
-    "@types/node": "^24.7.1",
-    "eslint": "^9.37.0",
+    "@types/node": "^24.8.1",
+    "eslint": "^9.38.0",
     "husky": "^9.1.7",
-    "npm-check-updates": "^19.0.0",
+    "npm-check-updates": "^19.1.1",
     "prettier": "^3.6.2",
     "turbo": "^2.5.8",
     "typescript": "5.9.3"

@@ -37,13 +37,13 @@
   "dependencies": {
     "@neurosongs/utility": "^1.0.0",
     "@prisma/client": "^6.17.1",
-    "@types/node": "^24.7.1",
+    "@types/node": "^24.8.1",
     "zod": "^4.1.12"
   },
   "devDependencies": {
     "@quramy/prisma-fabbrica": "^2.3.1",
     "prisma": "^6.17.1",
-    "prisma-zod-generator": "^1.27.6",
+    "prisma-zod-generator": "^1.28.3",
     "tsup": "^8.5.0"
   }
 }
