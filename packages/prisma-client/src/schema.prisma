@@ -59,6 +59,7 @@ model Album {
   backCover   String? @map("back_cover")
   songs       Song[]
   artist      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  serial      Int     @unique @default(autoincrement())
 
   @@map("albums")
 }

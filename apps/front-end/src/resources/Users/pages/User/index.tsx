@@ -14,7 +14,7 @@ import LoaderProvider from "src/components/LoaderProvider";
 import neurosongsNote from "src/images/Neurosongs_note.png";
 import UserAlbums from "src/resources/Users/pages/User/UserAlbums";
 import UserSongs from "src/resources/Users/pages/User/UserSongs";
-import { useUserQuery } from "src/resources/Users/user-queries";
+import { useUserQuery } from "src/resources/Users/queries";
 
 type TabState = "songs" | "albums";
 
