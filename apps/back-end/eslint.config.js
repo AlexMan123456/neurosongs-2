@@ -1,7 +1,7 @@
 import plugin from "@alextheman/eslint-plugin";
 
 export default [
-  ...plugin.configs.alexTypeScriptBase,
+  ...plugin.configs["combined/typescript"],
   {
     rules: {
       "no-restricted-imports": [

@@ -1,7 +1,7 @@
 import plugin from "@alextheman/eslint-plugin";
 
 export default [
-  ...plugin.configs.alexTypeScriptBase,
+  ...plugin.configs["combined/typescript"],
   {
     rules: {
       // This package literally exists to export types. Would be kinda silly not to give strict type annotations to parser functions

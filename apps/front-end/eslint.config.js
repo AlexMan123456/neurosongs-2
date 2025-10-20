@@ -1,7 +1,7 @@
 import plugin from "@alextheman/eslint-plugin";
 
 export default [
-  ...plugin.configs.alexTypeScriptReactBase,
+  ...plugin.configs["combined/typescript-react"],
   {
     rules: {
       "no-restricted-imports": [
