@@ -1,8 +1,8 @@
-import alexPlugin from "@alextheman/eslint-plugin";
+import packageJson from "eslint-plugin-package-json";
 
 export default [
     {
         ignores: ["**/generated/**"]
     },
-    ...alexPlugin.configs.alexTypeScriptBase
+    packageJson.configs.recommended
 ]

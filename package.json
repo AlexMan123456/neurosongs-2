@@ -31,9 +31,10 @@
     "@alextheman/utility": "^1.25.0"
   },
   "devDependencies": {
-    "@alextheman/eslint-plugin": "^1.14.2",
+    "@alextheman/eslint-plugin": "^2.2.0",
     "@types/node": "^24.8.1",
     "eslint": "^9.38.0",
+    "eslint-plugin-package-json": "^0.57.0",
     "husky": "^9.1.7",
     "npm-check-updates": "^19.1.1",
     "prettier": "^3.6.2",
