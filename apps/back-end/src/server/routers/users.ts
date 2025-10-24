@@ -1,9 +1,9 @@
-import { parseQueryParameter } from "@neurosongs/utility";
 import express from "express";
 
 import getPrismaClient from "src/database/client";
 import { selectAlbums } from "src/server/models/albums";
 import { insertUser, selectUserById, selectUsers, updateUser } from "src/server/models/users";
+import parseQueryParameter from "src/utility/parseQueryParameter";
 
 const usersRouter = express.Router();
 
