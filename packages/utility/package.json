@@ -24,8 +24,5 @@
   },
   "devDependencies": {
     "tsup": "^8.5.0"
-  },
-  "peerDependencies": {
-    "@alextheman/utility": "^1.16.0"
   }
 }
