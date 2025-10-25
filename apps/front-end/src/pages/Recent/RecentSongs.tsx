@@ -6,13 +6,13 @@ import SongTable from "src/resources/Songs/components/SongTable";
 import { useSongsQuery } from "src/resources/Songs/queries";
 
 function RecentSongs() {
-  const { data: songs, isLoading, error } = useSongsQuery();
+  const { data: songs, isPending, error } = useSongsQuery();
   const { isLargeScreen } = useScreenSize();
 
   return (
     <section>
       <h2>Songs</h2>
-      <Loader data={songs} isLoading={isLoading} error={error}>
+      <Loader data={songs} isLoading={isPending} error={error}>
         {(songs) => {
           return isLargeScreen ? <SongTable songs={songs} /> : <SongList songs={songs} />;
         }}
