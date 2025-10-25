@@ -11,7 +11,7 @@ import { useLocation } from "react-router-dom";
 
 import neurosongsNote from "src/images/Neurosongs_note.png";
 
-function SongTable() {
+function SongsTable() {
   const location = useLocation();
 
   return (
@@ -73,4 +73,4 @@ function SongTable() {
   );
 }
 
-export default SongTable;
+export default SongsTable;
