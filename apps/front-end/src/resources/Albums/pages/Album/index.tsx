@@ -10,7 +10,7 @@ import { useAlbumQuery } from "src/resources/Albums/queries";
 function Album() {
   const { albumId } = useParams<{ albumId: string }>();
   if (!albumId) {
-    throw new Error("ALBUM_ID_PARAMETER_NOT_FOUND");
+    throw new TypeError("ALBUM_ID_PARAMETER_NOT_FOUND");
   }
   const { data: album, isPending, error } = useAlbumQuery(albumId);
 
