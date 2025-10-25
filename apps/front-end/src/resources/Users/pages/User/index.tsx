@@ -19,7 +19,7 @@ type TabState = "songs" | "albums";
 function UserProfile() {
   const { userId } = useParams<{ userId: string }>();
   if (userId === undefined) {
-    throw new Error("USER_ID_PARAMETER_NOT_FOUND");
+    throw new TypeError("USER_ID_PARAMETER_NOT_FOUND");
   }
   const { data: user, isPending, error } = useUserQuery(userId);
   const [tab, setTab] = useHash<TabState>("songs");
