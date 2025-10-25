@@ -10,7 +10,7 @@ import { useLocation } from "react-router-dom";
 
 import neurosongsNote from "src/images/Neurosongs_note.png";
 
-function SongList() {
+function SongsList() {
   const location = useLocation();
 
   return (
@@ -52,4 +52,4 @@ function SongList() {
   );
 }
 
-export default SongList;
+export default SongsList;
