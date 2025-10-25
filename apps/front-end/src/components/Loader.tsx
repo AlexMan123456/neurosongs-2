@@ -1,9 +1,16 @@
-import type { LoaderProps } from "@alextheman/components";
+import type { DisallowUndefined } from "@alextheman/utility";
+import type { ReactNode } from "react";
+import type { LoaderProviderProps } from "src/components/LoaderProvider";
 
 // eslint-disable-next-line no-restricted-imports
 import { Loader as AlexLoader } from "@alextheman/components";
 
 import ErrorMessage from "src/components/ErrorMessage";
+
+export type LoaderProps<T> = Omit<LoaderProviderProps<T>, "children"> & {
+  children: ReactNode | ((data: DisallowUndefined<T>) => ReactNode);
+  onUndefined?: () => ReactNode | void;
+};
 
 function Loader<T>({ children, ...props }: LoaderProps<T>) {
   return (
