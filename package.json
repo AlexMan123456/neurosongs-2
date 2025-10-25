@@ -33,7 +33,7 @@
     "@alextheman/utility": "^2.2.0"
   },
   "devDependencies": {
-    "@alextheman/eslint-plugin": "^2.2.2",
+    "@alextheman/eslint-plugin": "^2.2.3",
     "@types/node": "^24.9.1",
     "eslint": "^9.38.0",
     "eslint-plugin-package-json": "^0.58.0",
