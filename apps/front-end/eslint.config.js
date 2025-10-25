@@ -34,6 +34,12 @@ export default [
               message:
                 "Use the internal LoaderProvider from src/components/LoaderProvider instead.",
             },
+            {
+              // Disable Loader from @alextheman/components for same reasons as above
+              name: "@alextheman/components",
+              importNames: ["Loader"],
+              message: "Use the internal Loader from src/components/Loader instead.",
+            },
           ],
         },
       ],
