@@ -1,5 +1,6 @@
-import { Loader, useScreenSize } from "@alextheman/components";
+import { useScreenSize } from "@alextheman/components";
 
+import Loader from "src/components/Loader";
 import SongList from "src/resources/Songs/components/SongList";
 import SongTable from "src/resources/Songs/components/SongTable";
 import { useSongsQuery } from "src/resources/Songs/queries";
