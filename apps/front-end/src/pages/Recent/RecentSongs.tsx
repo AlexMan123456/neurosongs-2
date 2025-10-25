@@ -1,6 +1,6 @@
-import { useScreenSize } from "@alextheman/components";
+import { SkeletonRow, useScreenSize } from "@alextheman/components";
 
-import Loader from "src/components/Loader";
+import LoaderProvider from "src/components/LoaderProvider";
 import SongList from "src/resources/Songs/components/SongList";
 import SongTable from "src/resources/Songs/components/SongTable";
 import { useSongsQuery } from "src/resources/Songs/queries";
@@ -12,11 +12,14 @@ function RecentSongs() {
   return (
     <section>
       <h2>Songs</h2>
-      <Loader data={songs} isLoading={isPending} error={error}>
-        {(songs) => {
-          return isLargeScreen ? <SongTable songs={songs} /> : <SongList songs={songs} />;
-        }}
-      </Loader>
+      <LoaderProvider
+        data={songs}
+        isLoading={isPending}
+        error={error}
+        loadingComponent={isLargeScreen ? <SkeletonRow columns={4} /> : undefined}
+      >
+        {isLargeScreen ? <SongTable /> : <SongList />}
+      </LoaderProvider>
     </section>
   );
 }
