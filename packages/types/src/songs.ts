@@ -23,7 +23,6 @@ export type PublicSong = z.infer<typeof publicSongSchema>;
 export function parsePublicSong(data: unknown): PublicSong {
   return publicSongSchema.parse(data);
 }
-
 export function parsePublicSongs(data: unknown): PublicSong[] {
   return z.array(publicSongSchema).parse(data);
 }
