@@ -2,8 +2,8 @@ import { useHash } from "@alextheman/components";
 import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 
-import RecentAlbums from "src/pages/Recent/RecentAlbums";
-import RecentSongs from "src/pages/Recent/RecentSongs";
+import RecentAlbums from "src/resources/Albums/pages/RecentAlbums";
+import RecentSongs from "src/resources/Songs/pages/RecentSongs";
 
 type TabState = "songs" | "albums";
 
