@@ -18,7 +18,7 @@ function UserDropdown() {
         );
       }}
     >
-      <MenuItem component={InternalLink} to={`/users/a05cadd9-479c-43f7-a86f-487e38a282f7`}>
+      <MenuItem component={InternalLink} to="/users/a05cadd9-479c-43f7-a86f-487e38a282f7">
         View Profile
       </MenuItem>
     </DropdownMenu>

@@ -24,9 +24,7 @@
     "preview": "vite preview",
     "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --",
     "use-live-components": "npm uninstall @alextheman/components && npm install @alextheman/components",
-    "use-live-eslint-plugin": "npm uninstall @alextheman/eslint-plugin && npm install --save-dev @alextheman/eslint-plugin",
-    "use-local-components": "dotenv -e .env -- sh -c 'COMPONENTS_PATH=${LOCAL_COMPONENTS_PATH:-../../../components}; npm --prefix \"$COMPONENTS_PATH\" run create-local-package && npm uninstall @alextheman/components && npm install \"$COMPONENTS_PATH\"/alextheman-components-*.tgz'",
-    "use-local-eslint-plugin": "dotenv -e .env -- sh -c 'ESLINT_PLUGIN_PATH=${LOCAL_ESLINT_PLUGIN_PATH:-../../../components}; npm --prefix \"$ESLINT_PLUGIN_PATH\" run create-local-package && npm uninstall @alextheman/eslint-plugin && npm install --save-dev \"$ESLINT_PLUGIN_PATH\"/alextheman-eslint-plugin-*.tgz'"
+    "use-local-components": "dotenv -e .env -- sh -c 'COMPONENTS_PATH=${LOCAL_COMPONENTS_PATH:-../../../components}; npm --prefix \"$COMPONENTS_PATH\" run create-local-package && npm uninstall @alextheman/components && npm install \"$COMPONENTS_PATH\"/alextheman-components-*.tgz'"
   },
   "dependencies": {
     "@alextheman/components": "^5.2.0",
