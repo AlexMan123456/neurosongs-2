@@ -6,6 +6,12 @@ if git diff --cached --quiet; then
   exit 0
 fi
 
+if git diff --name-only | grep package-lock.json; then
+  echo "❌ ERROR: Unstaged package-lock.json changes found. Please add the lockfile."
+  exit 1
+fi
+
+npm run build -- --ui=stream
 npm run format -- -- --ui=stream
 npm run lint -- -- --ui=stream
 npm test -- --ui=stream
