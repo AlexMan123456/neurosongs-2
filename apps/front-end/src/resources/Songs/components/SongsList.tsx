@@ -1,11 +1,10 @@
-import type { PublicSong } from "@neurosongs/types";
-
 import { InternalLink, LoaderData, LoaderError } from "@alextheman/components";
 import Avatar from "@mui/material/Avatar";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
+import { parsePublicSongs } from "@neurosongs/types";
 import { useLocation } from "react-router-dom";
 
 import neurosongsNote from "src/images/Neurosongs_note.png";
@@ -16,7 +15,7 @@ function SongsList() {
   return (
     <>
       <LoaderError />
-      <LoaderData<PublicSong[]>>
+      <LoaderData dataParser={parsePublicSongs}>
         {(songs) => {
           return (
             <List>

@@ -1,5 +1,3 @@
-import type { PublicSong } from "@neurosongs/types";
-
 import { InternalLink, LoaderData, LoaderError } from "@alextheman/components";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -7,11 +5,12 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { parsePublicSongs } from "@neurosongs/types";
 import { useLocation } from "react-router-dom";
 
 import neurosongsNote from "src/images/Neurosongs_note.png";
 
-function SongTable() {
+function SongsTable() {
   const location = useLocation();
 
   return (
@@ -28,7 +27,7 @@ function SongTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            <LoaderData<PublicSong[]>>
+            <LoaderData dataParser={parsePublicSongs}>
               {(songs) => {
                 return (
                   <>
@@ -73,4 +72,4 @@ function SongTable() {
   );
 }
 
-export default SongTable;
+export default SongsTable;
