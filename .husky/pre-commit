@@ -6,7 +6,7 @@ if git diff --cached --quiet; then
   exit 0
 fi
 
-if git diff --name-only HEAD | grep -qx "package-lock.json"; then
+if git diff --name-only | grep -qx "package-lock.json"; then
   echo "❌ ERROR: Detected changes to package-lock.json that are not committed. Please add and commit the lockfile before proceeding."
   exit 1
 fi
