@@ -25,11 +25,11 @@ function UserProfile() {
   if (userId === undefined) {
     throw new Error("USER_ID_PARAMETER_NOT_FOUND");
   }
-  const { data: user, isLoading, error } = useUserQuery(userId);
+  const { data: user, isPending, error } = useUserQuery(userId);
   const [tab, setTab] = useHash<TabState>("songs");
 
   return (
-    <LoaderProvider data={user} isLoading={isLoading} error={error}>
+    <LoaderProvider data={user} isLoading={isPending} error={error}>
       <main>
         <LoaderError />
         <Card>
