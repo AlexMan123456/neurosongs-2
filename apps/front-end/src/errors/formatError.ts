@@ -14,21 +14,27 @@ function formatAPIError(error: APIError, apiErrorMap?: APIErrorMap): string {
     ]);
     for (const code of allErrorCodes) {
       if (
+        // If both the default message and given message both strings, the provided message takes priority.
         (typeof apiErrorMap[code] === "string" && typeof defaultAPIErrors[code] === "string") ||
+        // Or if the given message exists but the default doesn't, we also use the given message.
         (apiErrorMap[code] && !defaultAPIErrors[code])
       ) {
         allErrors[code] = apiErrorMap[code];
       } else if (
+        // If they're both objects, we use a combination of both, always letting the provided ones take priority.
         typeof apiErrorMap[code] === "object" &&
         typeof defaultAPIErrors[code] === "object"
       ) {
         allErrors[code] = { ...defaultAPIErrors[code], ...apiErrorMap[code] };
       } else if (
+        // If provided is string but default is object, use the rest of the default errors but make the default fallback the provided string.
         typeof apiErrorMap[code] === "string" &&
         typeof defaultAPIErrors[code] === "object"
       ) {
         allErrors[code] = { ...defaultAPIErrors[code], default: apiErrorMap[code] };
       } else if (
+        // If provided is object but default is string, use the whole provided mapping,
+        // but if a default fallback is not provided, use the default error as the fallback.
         typeof apiErrorMap[code] === "object" &&
         typeof defaultAPIErrors[code] === "string"
       ) {
