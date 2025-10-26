@@ -1,6 +1,6 @@
 import type { APIErrorMap } from "src/errors/defaultAPIErrors";
 
-import { APIError } from "@alextheman/utility";
+import { APIError, removeDuplicates } from "@alextheman/utility";
 import axios from "axios";
 
 import defaultAPIErrors from "src/errors/defaultAPIErrors";
@@ -8,27 +8,34 @@ import defaultAPIErrors from "src/errors/defaultAPIErrors";
 function formatAPIError(error: APIError, apiErrorMap?: APIErrorMap): string {
   const allErrors: APIErrorMap = !apiErrorMap ? { ...defaultAPIErrors } : {};
   if (apiErrorMap) {
-    for (const key in defaultAPIErrors) {
-      if (typeof apiErrorMap[key] === "string" && typeof defaultAPIErrors[key] === "string") {
-        allErrors[key] = apiErrorMap[key];
-      } else if (
-        typeof apiErrorMap[key] === "object" &&
-        typeof defaultAPIErrors[key] === "object"
+    const allErrorCodes = removeDuplicates([
+      ...Object.keys(defaultAPIErrors),
+      ...Object.keys(apiErrorMap),
+    ]);
+    for (const code of allErrorCodes) {
+      if (
+        (typeof apiErrorMap[code] === "string" && typeof defaultAPIErrors[code] === "string") ||
+        (apiErrorMap[code] && !defaultAPIErrors[code])
       ) {
-        allErrors[key] = { ...defaultAPIErrors[key], ...apiErrorMap[key] };
+        allErrors[code] = apiErrorMap[code];
       } else if (
-        typeof apiErrorMap[key] === "string" &&
-        typeof defaultAPIErrors[key] === "object"
+        typeof apiErrorMap[code] === "object" &&
+        typeof defaultAPIErrors[code] === "object"
       ) {
-        allErrors[key] = { ...defaultAPIErrors[key], default: apiErrorMap[key] };
+        allErrors[code] = { ...defaultAPIErrors[code], ...apiErrorMap[code] };
       } else if (
-        typeof apiErrorMap[key] === "object" &&
-        typeof defaultAPIErrors[key] === "string"
+        typeof apiErrorMap[code] === "string" &&
+        typeof defaultAPIErrors[code] === "object"
       ) {
-        if (!Object.keys(apiErrorMap[key]).includes("default")) {
-          allErrors[key] = { ...apiErrorMap[key], default: defaultAPIErrors[key] };
+        allErrors[code] = { ...defaultAPIErrors[code], default: apiErrorMap[code] };
+      } else if (
+        typeof apiErrorMap[code] === "object" &&
+        typeof defaultAPIErrors[code] === "string"
+      ) {
+        if (!Object.keys(apiErrorMap[code]).includes("default")) {
+          allErrors[code] = { ...apiErrorMap[code], default: defaultAPIErrors[code] };
         } else {
-          allErrors[key] = { ...apiErrorMap[key] };
+          allErrors[code] = { ...apiErrorMap[code] };
         }
       }
     }
