@@ -69,23 +69,27 @@ function formatError(
   apiErrorMap?: APIErrorMap,
   errorFunction?: (error: unknown) => string,
 ): string {
-  if (axios.isAxiosError(error)) {
-    if (error.code === "ERR_NETWORK") {
-      return "This request has been blocked by CORS policy.";
+  try {
+    if (axios.isAxiosError(error)) {
+      if (error.code === "ERR_NETWORK") {
+        return "This request has been blocked by CORS policy.";
+      }
+      if (error.code === "ECONNABORTED") {
+        return "The request to the server timed out. Please try again later.";
+      }
+      if (APIError.check(error.response?.data.error)) {
+        return formatAPIError(error.response.data.error, apiErrorMap);
+      }
+      return error.message;
     }
-    if (error.code === "ECONNABORTED") {
-      return "The request to the server timed out. Please try again later.";
-    }
-    if (APIError.check(error.response?.data.error)) {
-      return formatAPIError(error.response.data.error, apiErrorMap);
-    }
-    return error.message;
-  }
 
-  if (errorFunction) {
-    return errorFunction(error);
+    if (errorFunction) {
+      return errorFunction(error);
+    }
+    return "An unknown error has occured. Please try again later.";
+  } catch {
+    return "An unknown error has occured. Please try again later.";
   }
-  return "An unknown error has occured. Please try again later.";
 }
 
 export default formatError;
