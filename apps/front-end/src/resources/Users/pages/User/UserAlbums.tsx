@@ -1,8 +1,8 @@
 import { InternalLink } from "@alextheman/components";
 import Button from "@mui/material/Button";
 
-import Loader from "src/components/Loader";
-import AlbumGrid from "src/resources/Albums/components/AlbumGrid";
+import LoaderProvider from "src/components/LoaderProvider";
+import AlbumsGrid from "src/resources/Albums/components/AlbumsGrid";
 import { useUserAlbumsQuery } from "src/resources/Users/queries";
 
 interface UserAlbumsProps {
@@ -13,16 +13,12 @@ function UserAlbums({ userId }: UserAlbumsProps) {
   const { data: albums, isPending, error } = useUserAlbumsQuery(userId);
 
   return (
-    <>
+    <LoaderProvider data={albums} isLoading={isPending} error={error}>
       <Button component={InternalLink} to="/albums/create">
         Create Album
       </Button>
-      <Loader data={albums} isLoading={isPending} error={error}>
-        {(albums) => {
-          return <AlbumGrid albums={albums} />;
-        }}
-      </Loader>
-    </>
+      <AlbumsGrid />
+    </LoaderProvider>
   );
 }
 

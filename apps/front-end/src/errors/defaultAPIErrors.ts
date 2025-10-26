@@ -20,7 +20,7 @@ const defaultAPIErrors: APIErrorMap = {
     default: "The thing you are trying to look for does not exist.",
   },
   418: "Enjoy your tea!",
-  500: "An unknown error has occurred. Please try again later.",
+  500: "An internal server error has occured. Please try again later.",
 };
 
 export default defaultAPIErrors;

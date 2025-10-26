@@ -19,6 +19,9 @@ export type PublicAlbum = z.infer<typeof publicAlbumSchema>;
 export function parsePublicAlbum(data: unknown): PublicAlbum {
   return publicAlbumSchema.parse(data);
 }
+export function parsePublicAlbums(data: unknown): PublicAlbum[] {
+  return z.array(publicAlbumSchema).parse(data);
+}
 
 const albumMutationSchema = AlbumInputSchema.omit({
   id: true,

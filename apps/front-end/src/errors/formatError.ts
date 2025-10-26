@@ -48,7 +48,7 @@ function formatAPIError(error: APIError, apiErrorMap?: APIErrorMap): string {
     }
   }
 
-  return "Error with API. Please try again later.";
+  return "An internal server error has occured. Please try again later.";
 }
 
 function formatError(
@@ -57,6 +57,12 @@ function formatError(
   errorFunction?: (error: unknown) => string,
 ): string {
   if (axios.isAxiosError(error)) {
+    if (error.code === "ERR_NETWORK") {
+      return "This request has been blocked by CORS policy.";
+    }
+    if (error.code === "ECONNABORTED") {
+      return "The request to the server timed out. Please try again later.";
+    }
     if (APIError.check(error.response?.data.error)) {
       return formatAPIError(error.response.data.error, apiErrorMap);
     }
