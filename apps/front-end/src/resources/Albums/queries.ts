@@ -1,6 +1,6 @@
 import type { AlbumToPost, PublicAlbum } from "@neurosongs/types";
 
-import { parsePublicAlbum } from "@neurosongs/types";
+import { parsePublicAlbum, parsePublicAlbums } from "@neurosongs/types";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import neurosongsAxiosClient from "src/neurosongsAxiosClient";
@@ -13,6 +13,18 @@ export function useAlbumQuery(albumId: string) {
         data: { album },
       } = await neurosongsAxiosClient.get(`/api/albums/${albumId}`);
       return parsePublicAlbum(album);
+    },
+  });
+}
+
+export function useAlbumsQuery() {
+  return useQuery<PublicAlbum[]>({
+    queryKey: ["albums"],
+    queryFn: async () => {
+      const {
+        data: { albums },
+      } = await neurosongsAxiosClient.get("/api/albums");
+      return parsePublicAlbums(albums);
     },
   });
 }
