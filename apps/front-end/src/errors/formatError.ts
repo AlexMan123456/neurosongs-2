@@ -48,7 +48,7 @@ function formatAPIError(error: APIError, apiErrorMap?: APIErrorMap): string {
     }
   }
 
-  return "Error with API. Please try again later.";
+  return "An internal server error has occured. Please try again later.";
 }
 
 function formatError(
