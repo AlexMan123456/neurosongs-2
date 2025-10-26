@@ -2,7 +2,7 @@ import { InternalLink } from "@alextheman/components";
 import Button from "@mui/material/Button";
 
 import LoaderProvider from "src/components/LoaderProvider";
-import AlbumGrid from "src/resources/Albums/components/AlbumGrid";
+import AlbumsGrid from "src/resources/Albums/components/AlbumsGrid";
 import { useUserAlbumsQuery } from "src/resources/Users/queries";
 
 interface UserAlbumsProps {
@@ -17,7 +17,7 @@ function UserAlbums({ userId }: UserAlbumsProps) {
       <Button component={InternalLink} to="/albums/create">
         Create Album
       </Button>
-      <AlbumGrid />
+      <AlbumsGrid />
     </LoaderProvider>
   );
 }

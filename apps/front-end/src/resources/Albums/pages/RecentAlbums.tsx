@@ -1,5 +1,5 @@
 import LoaderProvider from "src/components/LoaderProvider";
-import AlbumGrid from "src/resources/Albums/components/AlbumGrid";
+import AlbumsGrid from "src/resources/Albums/components/AlbumsGrid";
 import { useAlbumsQuery } from "src/resources/Albums/queries";
 
 function RecentAlbums() {
@@ -8,7 +8,7 @@ function RecentAlbums() {
     <section>
       <h2>Albums</h2>
       <LoaderProvider data={albums} isLoading={isPending} error={error}>
-        <AlbumGrid />
+        <AlbumsGrid />
       </LoaderProvider>
     </section>
   );

@@ -8,7 +8,7 @@ import { parsePublicAlbums } from "@neurosongs/types";
 
 import neurosongsNote from "src/images/Neurosongs_note.png";
 
-function AlbumGrid() {
+function AlbumsGrid() {
   return (
     <>
       <LoaderError />
@@ -49,4 +49,4 @@ function AlbumGrid() {
   );
 }
 
-export default AlbumGrid;
+export default AlbumsGrid;
