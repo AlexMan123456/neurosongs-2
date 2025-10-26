@@ -57,6 +57,9 @@ function formatError(
   errorFunction?: (error: unknown) => string,
 ): string {
   if (axios.isAxiosError(error)) {
+    if (error.code === "ERR_NETWORK") {
+      return "This request has been blocked by CORS policy.";
+    }
     if (APIError.check(error.response?.data.error)) {
       return formatAPIError(error.response.data.error, apiErrorMap);
     }
