@@ -20,7 +20,7 @@ export async function selectAlbums(
   database: PrismaClient,
   limit: number = 50,
   pageNumber: number = 1,
-  filter: Partial<AlbumFilter>,
+  filter?: Partial<AlbumFilter>,
 ): Promise<PaginatedAlbums> {
   const [albums, totalAlbums] = await Promise.all([
     database.album.findMany({

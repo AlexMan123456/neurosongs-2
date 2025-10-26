@@ -3,14 +3,44 @@ import type { ZodError } from "zod";
 
 import { randomUUID } from "crypto";
 
-import { omitProperties } from "@alextheman/utility";
-import { parseAlbum, parsePublicAlbum } from "@neurosongs/types";
+import { fillArray, omitProperties } from "@alextheman/utility";
+import { parseAlbum, parsePublicAlbum, parsePublicAlbums } from "@neurosongs/types";
 import request from "supertest";
 import { albumFactory, userFactory } from "tests/test-utilities/dataFactory";
 import { describe, expect, test } from "vitest";
 
 import getPrismaClient from "src/database/client";
 import app from "src/server/app";
+
+describe("/api/albums", () => {
+  describe("GET", () => {
+    test("200: Responds with an array of albums", async () => {
+      const database = getPrismaClient();
+      const factoryAlbums = await fillArray(async () => {
+        return await albumFactory.create();
+      }, 10);
+
+      const {
+        body: { albums: apiAlbums },
+      } = await request(app).get("/api/albums").expect(200);
+
+      const validatedAPIAlbums = parsePublicAlbums(apiAlbums);
+
+      expect(apiAlbums.length).toBe(10);
+      expect(factoryAlbums).toMatchObject(
+        validatedAPIAlbums.map((album) => {
+          return omitProperties(album, ["artistName", "artistUsername"]);
+        }),
+      );
+
+      for (const album of validatedAPIAlbums) {
+        const artist = await database.user.findUniqueOrThrow({ where: { id: album.userId } });
+        expect(album.artistName).toBe(artist.artistName);
+        expect(album.artistUsername).toBe(artist.username);
+      }
+    });
+  });
+});
 
 describe("/api/albums/:albumId", () => {
   describe("GET", () => {
