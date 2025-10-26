@@ -1,12 +1,25 @@
 import type { APIError, HTTPErrorCodes } from "@alextheman/utility";
 
-export type MessageMap = Record<string, string | ((error: APIError) => string)> & {
-  default: string | ((error: APIError) => string);
-};
+export type MessageMap = Record<string, string | ((error: APIError) => string)>;
 
-export type APIErrorMap = Partial<Record<string | HTTPErrorCodes, string | MessageMap>>;
+export type MappingWithOptionalDefault =
+  | string
+  | (MessageMap & {
+      default?: string | ((error: APIError) => string);
+    });
 
-const defaultAPIErrors: APIErrorMap = {
+export type MappingWithRequiredDefault =
+  | string
+  | (MessageMap & {
+      default: string | ((error: APIError) => string);
+    });
+
+export type APIErrorMap = Partial<Record<string, MappingWithRequiredDefault>> &
+  Partial<Record<HTTPErrorCodes, MappingWithOptionalDefault>>;
+
+type DefaultAPIErrorMap = Partial<Record<HTTPErrorCodes, MappingWithRequiredDefault>>;
+
+const defaultAPIErrors: DefaultAPIErrorMap = {
   400: {
     INVALID_UUID: "The ID type you are trying to send is invalid. Please try again.",
     default: "Error in data being sent. Please try again.",
@@ -20,7 +33,7 @@ const defaultAPIErrors: APIErrorMap = {
     default: "The thing you are trying to look for does not exist.",
   },
   418: "Enjoy your tea!",
-  500: "An internal server error has occured. Please try again later.",
+  500: "An internal server error has occurred. Please try again later.",
 };
 
 export default defaultAPIErrors;
