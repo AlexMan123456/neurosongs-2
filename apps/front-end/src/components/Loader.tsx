@@ -12,11 +12,13 @@ export type LoaderProps<T> = Omit<LoaderProviderProps<T>, "children"> & {
   onUndefined?: () => ReactNode | void;
 };
 
-function Loader<T>({ children, ...props }: LoaderProps<T>) {
+function Loader<T>({ children, apiErrorMap, errorFunction, ...props }: LoaderProps<T>) {
   return (
     <AlexLoader<T>
       errorComponent={(error) => {
-        return <ErrorMessage error={error} />;
+        return (
+          <ErrorMessage error={error} apiErrorMap={apiErrorMap} errorFunction={errorFunction} />
+        );
       }}
       {...props}
     >
