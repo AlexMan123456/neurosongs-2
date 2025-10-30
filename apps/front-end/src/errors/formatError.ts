@@ -1,4 +1,4 @@
-import type { HTTPErrorCodes } from "@alextheman/utility";
+import type { HTTPErrorCode } from "@alextheman/utility";
 import type { APIErrorMap, MappingWithRequiredDefault } from "src/errors/defaultAPIErrors";
 
 import { APIError, parseIntStrict, removeDuplicates } from "@alextheman/utility";
@@ -8,12 +8,12 @@ import defaultAPIErrorsImport from "src/errors/defaultAPIErrors";
 
 function formatAPIError(error: APIError, apiErrorMap?: APIErrorMap): string {
   // I know for a fact that defaultAPIErrors includes a default property, so we can assign it this type.
-  const defaultAPIErrors: Partial<Record<string | HTTPErrorCodes, MappingWithRequiredDefault>> = {
+  const defaultAPIErrors: Partial<Record<string | HTTPErrorCode, MappingWithRequiredDefault>> = {
     ...defaultAPIErrorsImport,
   };
   const allErrors: APIErrorMap = !apiErrorMap ? { ...defaultAPIErrorsImport } : {};
   if (apiErrorMap) {
-    const allErrorCodes: (string | HTTPErrorCodes)[] = removeDuplicates([
+    const allErrorCodes: (string | HTTPErrorCode)[] = removeDuplicates([
       ...Object.keys(defaultAPIErrors),
       ...Object.keys(apiErrorMap),
     ]);

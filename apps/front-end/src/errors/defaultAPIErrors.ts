@@ -1,4 +1,4 @@
-import type { APIError, HTTPErrorCodes } from "@alextheman/utility";
+import type { APIError, HTTPErrorCode } from "@alextheman/utility";
 
 export type MessageMap = Record<string, string | ((error: APIError) => string)>;
 
@@ -15,9 +15,9 @@ export type MappingWithRequiredDefault =
     });
 
 export type APIErrorMap = Partial<Record<string, MappingWithRequiredDefault>> &
-  Partial<Record<HTTPErrorCodes, MappingWithOptionalDefault>>;
+  Partial<Record<HTTPErrorCode, MappingWithOptionalDefault>>;
 
-type DefaultAPIErrorMap = Partial<Record<HTTPErrorCodes, MappingWithRequiredDefault>>;
+type DefaultAPIErrorMap = Partial<Record<HTTPErrorCode, MappingWithRequiredDefault>>;
 
 const defaultAPIErrors: DefaultAPIErrorMap = {
   400: {
