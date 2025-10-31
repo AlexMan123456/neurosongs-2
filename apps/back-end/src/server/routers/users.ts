@@ -2,6 +2,7 @@ import express from "express";
 
 import getPrismaClient from "src/database/client";
 import { selectAlbums } from "src/server/models/albums";
+import { selectSongs } from "src/server/models/songs";
 import { insertUser, selectUserById, selectUsers, updateUser } from "src/server/models/users";
 import parseQueryParameter from "src/utility/parseQueryParameter";
 
@@ -65,6 +66,21 @@ usersRouter.route("/:userId/albums").get<{ userId: string }>(async (request, res
         userId: request.params.userId,
       });
       response.status(200).send(albumsResponse);
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+usersRouter.route("/:userId/songs").get<{ userId: string }>(async (request, response, next) => {
+  const database = getPrismaClient();
+  try {
+    await database.$transaction(async (transaction) => {
+      await selectUserById(transaction, request.params.userId);
+      const limit = parseQueryParameter(request.query.limit, "INVALID_LIMIT");
+      const pageNumber = parseQueryParameter(request.query.page, "INVALID_PAGE_NUMBER");
+      const songsResponse = await selectSongs(transaction, limit, pageNumber);
+      response.status(200).send(songsResponse);
     });
   } catch (error) {
     next(error);

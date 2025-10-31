@@ -1,6 +1,6 @@
-import type { PublicUser, PublicAlbum } from "@neurosongs/types";
+import type { PublicUser, PublicAlbum, PublicSong } from "@neurosongs/types";
 
-import { parsePublicAlbum, parsePublicUser } from "@neurosongs/types";
+import { parsePublicAlbum, parsePublicSongs, parsePublicUser } from "@neurosongs/types";
 import { useQuery } from "@tanstack/react-query";
 
 import neurosongsAxiosClient from "src/neurosongsAxiosClient";
@@ -27,6 +27,18 @@ export function useUserAlbumsQuery(userId: string) {
       return albums.map((album: unknown) => {
         return parsePublicAlbum(album);
       });
+    },
+  });
+}
+
+export function useUserSongsQuery(userId: string) {
+  return useQuery<PublicSong[]>({
+    queryKey: ["users", userId, "songs"],
+    queryFn: async () => {
+      const {
+        data: { songs },
+      } = await neurosongsAxiosClient.get(`/api/users/${userId}/songs`);
+      return parsePublicSongs(songs);
     },
   });
 }

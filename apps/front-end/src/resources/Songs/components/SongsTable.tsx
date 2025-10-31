@@ -1,4 +1,4 @@
-import { InternalLink, LoaderData, LoaderError } from "@alextheman/components";
+import { InternalLink, LoaderData, LoaderError, SkeletonRow } from "@alextheman/components";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -27,7 +27,10 @@ function SongsTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            <LoaderData dataParser={parsePublicSongs}>
+            <LoaderData
+              dataParser={parsePublicSongs}
+              loadingComponent={<SkeletonRow columns={4} />}
+            >
               {(songs) => {
                 return (
                   <>
