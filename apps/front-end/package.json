@@ -27,7 +27,7 @@
     "use-local-components": "dotenv -e .env -- sh -c 'COMPONENTS_PATH=${LOCAL_COMPONENTS_PATH:-../../../components}; npm --prefix \"$COMPONENTS_PATH\" run create-local-package && npm uninstall @alextheman/components && npm install \"$COMPONENTS_PATH\"/alextheman-components-*.tgz'"
   },
   "dependencies": {
-    "@alextheman/components": "^5.2.1",
+    "@alextheman/components": "^5.3.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.3.4",
