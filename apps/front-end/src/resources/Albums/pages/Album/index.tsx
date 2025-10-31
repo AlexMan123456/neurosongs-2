@@ -1,3 +1,4 @@
+import Alert from "@mui/material/Alert";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardHeader from "@mui/material/CardHeader";
@@ -15,7 +16,14 @@ function Album() {
   const { data: album, isPending, error } = useAlbumQuery(albumId);
 
   return (
-    <Loader data={album} isLoading={isPending} error={error}>
+    <Loader
+      data={album}
+      isLoading={isPending}
+      error={error}
+      onNullable={() => {
+        return <Alert severity="error">This album could not be provided.</Alert>;
+      }}
+    >
       {(album) => {
         return (
           <main>
