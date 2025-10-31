@@ -4,9 +4,9 @@ import type { ZodError } from "zod";
 import { randomUUID } from "crypto";
 
 import { APIError, fillArray, omitProperties } from "@alextheman/utility";
-import { parseAPIUser, parsePublicAlbum, parseUser } from "@neurosongs/types";
+import { parseAPIUser, parsePublicAlbum, parsePublicSongs, parseUser } from "@neurosongs/types";
 import request from "supertest";
-import { albumFactory, userFactory } from "tests/test-utilities/dataFactory";
+import { albumFactory, songFactory, userFactory } from "tests/test-utilities/dataFactory";
 import { describe, expect, test } from "vitest";
 
 import getPrismaClient from "src/database/client";
@@ -400,6 +400,57 @@ describe("/api/users/:userId/albums", () => {
       } = await request(app).get(`/api/users/${missingId}/albums`).expect(404);
       expect(APIError.check(error)).toBe(true);
       expect(error.message).toBe("USER_NOT_FOUND");
+    });
+  });
+});
+
+describe("/api/users/:userId/songs", () => {
+  describe("GET", () => {
+    test("200: Responds with all the user's songs", async () => {
+      const factoryUser = await userFactory.create();
+      const factoryAlbum = await albumFactory.create();
+      const factoryUserSongs = await fillArray(async () => {
+        return await songFactory.create({
+          artist: { connect: { id: factoryUser.id } },
+          album: { connect: { id: factoryAlbum.id } },
+        });
+      }, 5);
+
+      const {
+        body: { songs: apiSongs },
+      } = await request(app).get(`/api/users/${factoryUser.id}/songs`).expect(200);
+      const validatedAPISongs = parsePublicSongs(apiSongs);
+
+      expect(factoryUserSongs).toMatchObject(
+        validatedAPISongs.map((song) => {
+          expect(song.albumName).toBe(factoryAlbum.name);
+          expect(song.artistName).toBe(factoryUser.artistName);
+          expect(song.artistUsername).toBe(factoryUser.username);
+          return omitProperties(song, ["albumName", "artistName", "artistUsername"]);
+        }),
+      );
+    });
+    test("200: Returns an empty array if user has no songs", async () => {
+      const factoryUser = await userFactory.create();
+
+      const {
+        body: { songs: apiSongs },
+      } = await request(app).get(`/api/users/${factoryUser.id}/songs`).expect(200);
+
+      expect(apiSongs.length).toBe(0);
+    });
+    test("404: Gives a not found error if user does not exist", async () => {
+      const missingId = randomUUID();
+
+      const {
+        body: { error },
+      } = await request(app).get(`/api/users/${missingId}`).expect(404);
+
+      if (APIError.check(error)) {
+        expect(error.message).toBe("USER_NOT_FOUND");
+      } else {
+        throw error;
+      }
     });
   });
 });

@@ -11,14 +11,20 @@ export interface PaginatedSongs {
   totalPages: number;
 }
 
+export interface SongFilter {
+  userId?: string;
+}
+
 export async function selectSongs(
   database: PrismaClient,
   limit: number = 50,
   pageNumber: number = 1,
+  filter?: Partial<SongFilter>,
 ): Promise<PaginatedSongs> {
   const [songs, totalSongs] = await Promise.all([
     database.song.findMany({
       omit: { serial: true },
+      where: filter,
       include: {
         artist: { select: { artistName: true, username: true } },
         album: { select: { name: true } },
