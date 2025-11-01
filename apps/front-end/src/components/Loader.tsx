@@ -8,7 +8,7 @@ import ErrorMessage from "src/components/ErrorMessage";
 
 export type LoaderProps<T> = Omit<LoaderProviderProps<T>, "children" | "errorComponent"> &
   LoaderErrorProps &
-  Omit<LoaderDataProps<T>, "showOnError" | "onUndefined" | "onNull" | "onNullable">;
+  Omit<LoaderDataProps<T>, "onUndefined" | "onNull" | "onNullable">;
 
 function Loader<T>({ children, apiErrorMap, errorFunction, ...props }: LoaderProps<T>) {
   return (
