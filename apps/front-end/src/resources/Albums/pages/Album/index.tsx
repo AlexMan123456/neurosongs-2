@@ -20,9 +20,7 @@ function Album() {
       data={album}
       isLoading={isPending}
       error={error}
-      onNullable={() => {
-        return <Alert severity="error">This album could not be provided.</Alert>;
-      }}
+      nullableComponent={<Alert severity="error">This album could not be provided.</Alert>}
     >
       {(album) => {
         return (
