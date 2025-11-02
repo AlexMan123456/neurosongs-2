@@ -46,6 +46,7 @@ function LoaderProvider<T>({
           <ErrorMessage error={error} apiErrorMap={apiErrorMap} errorFunction={errorFunction} />
         );
       }}
+      logError={import.meta.env.DEV}
       {...props}
     >
       {children}
