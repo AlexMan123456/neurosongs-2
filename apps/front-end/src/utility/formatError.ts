@@ -115,7 +115,7 @@ function formatError(
     if (errorFunction) {
       return errorFunction(error);
     }
-    return "An unknown error has occured. Please try again later.";
+    return "An unknown error has occurred. Please try again later.";
   } catch (error) {
     if (error instanceof TypeError && error.message === "INTEGER_PARSING_ERROR") {
       console.error("One or more keys in provided apiErrorMap is not an integer.");
