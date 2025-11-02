@@ -1,10 +1,10 @@
 import type { HTTPErrorCode } from "@alextheman/utility";
-import type { APIErrorMap, MappingWithRequiredDefault } from "src/errors/defaultAPIErrors";
+import type { APIErrorMap, MappingWithRequiredDefault } from "src/utility/defaultAPIErrors";
 
 import { APIError, parseIntStrict, removeDuplicates } from "@alextheman/utility";
 import axios from "axios";
 
-import defaultAPIErrorsImport from "src/errors/defaultAPIErrors";
+import defaultAPIErrorsImport from "src/utility/defaultAPIErrors";
 
 function formatAPIError(error: APIError, apiErrorMap?: APIErrorMap): string {
   // I know for a fact that defaultAPIErrors includes a default property, so we can assign it this type.
