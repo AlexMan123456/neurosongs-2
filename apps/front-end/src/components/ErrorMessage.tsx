@@ -1,8 +1,8 @@
-import type { APIErrorMap } from "src/errors/defaultAPIErrors";
+import type { APIErrorMap } from "src/utility/defaultAPIErrors";
 
 import Alert from "@mui/material/Alert";
 
-import formatError from "src/errors/formatError";
+import formatError from "src/utility/formatError";
 
 export interface ErrorProps {
   error: unknown;

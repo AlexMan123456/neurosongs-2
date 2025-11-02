@@ -1,5 +1,4 @@
-import { APIError } from "@alextheman/utility";
-import cors from "cors";
+import { stringListToArray } from "@alextheman/utility";
 import express from "express";
 
 import albumsRouter from "src/server/routers/albums";
@@ -7,30 +6,12 @@ import { customErrors, internalServerError, zodErrors } from "src/server/routers
 import songsRouter from "src/server/routers/songs";
 import usersRouter from "src/server/routers/users";
 import validateUUID from "src/server/validators/validateUUID";
+import setupCors from "src/utility/setupCors";
 
 const app = express();
 
 // Allow Cross Origin Resource Sharing
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin) {
-        return callback(null, true);
-      }
-      if (
-        [
-          "http://localhost:5173",
-          "https://neurosongs.netlify.app",
-          "https://neurosongs.net",
-        ].includes(origin)
-      ) {
-        return callback(null, true);
-      }
-      return callback(new APIError(403, "CORS_ERROR"), false);
-    },
-    credentials: true,
-  }),
-);
+app.use(setupCors(stringListToArray(process.env.ALLOWED_ORIGINS ?? "")));
 
 // Parse request body
 app.use(express.json());

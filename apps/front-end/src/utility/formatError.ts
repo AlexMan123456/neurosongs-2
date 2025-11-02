@@ -1,10 +1,10 @@
 import type { HTTPErrorCode } from "@alextheman/utility";
-import type { APIErrorMap, MappingWithRequiredDefault } from "src/errors/defaultAPIErrors";
+import type { APIErrorMap, MappingWithRequiredDefault } from "src/utility/defaultAPIErrors";
 
 import { APIError, parseIntStrict, removeDuplicates } from "@alextheman/utility";
 import axios from "axios";
 
-import defaultAPIErrorsImport from "src/errors/defaultAPIErrors";
+import defaultAPIErrorsImport from "src/utility/defaultAPIErrors";
 
 function formatAPIError(error: APIError, apiErrorMap?: APIErrorMap): string {
   // I know for a fact that defaultAPIErrors includes a default property, so we can assign it this type.
@@ -101,7 +101,7 @@ function formatError(
   try {
     if (axios.isAxiosError(error)) {
       if (error.code === "ERR_NETWORK") {
-        return "This request has been blocked by CORS policy.";
+        return "An error with the network has occurred. Please check your internet connection or try again later.";
       }
       if (error.code === "ECONNABORTED") {
         return "The request to the server timed out. Please try again later.";
@@ -115,7 +115,7 @@ function formatError(
     if (errorFunction) {
       return errorFunction(error);
     }
-    return "An unknown error has occured. Please try again later.";
+    return "An unknown error has occurred. Please try again later.";
   } catch (error) {
     if (error instanceof TypeError && error.message === "INTEGER_PARSING_ERROR") {
       console.error("One or more keys in provided apiErrorMap is not an integer.");

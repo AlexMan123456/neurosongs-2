@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
-import formatError from "src/errors/formatError";
+import formatError from "src/utility/formatError";
 
 function ErrorPage({ error, resetErrorBoundary }: FallbackProps) {
   const message = formatError(error, undefined, (error) => {
