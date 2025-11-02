@@ -1,3 +1,4 @@
+import { stringListToArray } from "@alextheman/utility";
 import express from "express";
 
 import albumsRouter from "src/server/routers/albums";
@@ -10,9 +11,7 @@ import setupCors from "src/utility/setupCors";
 const app = express();
 
 // Allow Cross Origin Resource Sharing
-app.use(
-  setupCors(["http://localhost:5173", "https://neurosongs.netlify.app", "https://neurosongs.net"]),
-);
+app.use(setupCors(stringListToArray(process.env.ALLOWED_ORIGINS ?? "")));
 
 // Parse request body
 app.use(express.json());
