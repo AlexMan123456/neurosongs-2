@@ -6,9 +6,9 @@ import { Loader as AlexLoader } from "@alextheman/components";
 
 import ErrorMessage from "src/components/ErrorMessage";
 
-export type LoaderProps<T> = Omit<LoaderProviderProps<T>, "children" | "errorComponent"> &
-  LoaderErrorProps &
-  Omit<LoaderDataProps<T>, "onUndefined" | "onNull" | "onNullable">;
+export type LoaderProps<T> = Omit<LoaderProviderProps<T>, "children"> &
+  Omit<LoaderErrorProps, "errorComponent"> &
+  Omit<LoaderDataProps<T>, "showOnError" | "onUndefined" | "onNull" | "onNullable">;
 
 function Loader<T>({ children, apiErrorMap, errorFunction, ...props }: LoaderProps<T>) {
   return (
@@ -18,6 +18,7 @@ function Loader<T>({ children, apiErrorMap, errorFunction, ...props }: LoaderPro
           <ErrorMessage error={error} apiErrorMap={apiErrorMap} errorFunction={errorFunction} />
         );
       }}
+      logError={import.meta.env.DEV}
       {...props}
     >
       {children}
