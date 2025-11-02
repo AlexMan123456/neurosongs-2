@@ -101,7 +101,7 @@ function formatError(
   try {
     if (axios.isAxiosError(error)) {
       if (error.code === "ERR_NETWORK") {
-        return "This request has been blocked by CORS policy.";
+        return "An error with the network has occurred. Please check your internet connection or try again later.";
       }
       if (error.code === "ECONNABORTED") {
         return "The request to the server timed out. Please try again later.";
