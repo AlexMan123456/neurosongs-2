@@ -25,7 +25,10 @@ const defaultAPIErrors: DefaultAPIErrorMap = {
     default: "Error in data being sent. Please try again.",
   },
   401: "You do not have permission to do this.",
-  403: "You do not have permission to do this.",
+  403: {
+    CORS_ERROR: "This request has been blocked by CORS policy.",
+    default: "You do not have permission to do this.",
+  },
   404: {
     USER_NOT_FOUND: "Could not find user.",
     SONG_NOT_FOUND: "Could not find song.",
