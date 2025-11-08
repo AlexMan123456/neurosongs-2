@@ -3,7 +3,7 @@ import type { ZodError } from "zod";
 
 import { randomUUID } from "crypto";
 
-import { APIError, fillArray, omitProperties } from "@alextheman/utility";
+import { APIError, fillArray, getRecordKeys, omitProperties } from "@alextheman/utility";
 import { parsePublicAlbum, parsePublicSongs, parsePublicUser, parseUser } from "@neurosongs/types";
 import request from "supertest";
 import { albumFactory, songFactory, userFactory } from "tests/test-utilities/dataFactory";
@@ -300,13 +300,9 @@ describe("/api/users/:userId", () => {
       expect(changedUser).toMatchObject(changedProperties);
 
       // Check other properties are unaffected
-      const filteredChangedUser: Partial<PublicUser> = { ...changedUser };
-      delete filteredChangedUser.username;
-      delete filteredChangedUser.artistName;
-      delete filteredChangedUser.description;
-      delete filteredChangedUser.profilePicture;
-
-      expect(factoryUser).toMatchObject(filteredChangedUser);
+      expect(factoryUser).toMatchObject(
+        omitProperties(changedUser, getRecordKeys(changedProperties)),
+      );
     });
     test("204: Allow any property to be left out", async () => {
       const factoryUser = await userFactory.create();

@@ -22,19 +22,6 @@ export function parsePublicUser(data: unknown): PublicUser {
   return publicUserSchema.parse(data);
 }
 
-const apiUserSchema = publicUserSchema
-  .omit({
-    memberSince: true,
-  })
-  .extend({
-    memberSince: z.preprocess(parseDate, z.date()),
-  });
-
-export type APIUser = z.infer<typeof apiUserSchema>;
-export function parseAPIUser(data: unknown): APIUser {
-  return apiUserSchema.parse(data);
-}
-
 const userToPostSchema = UserInputSchema.omit({
   id: true,
   serial: true,
