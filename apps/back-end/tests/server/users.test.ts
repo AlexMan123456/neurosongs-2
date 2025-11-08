@@ -1,10 +1,10 @@
-import type { APIUser, PublicUser, UserToPut } from "@neurosongs/types";
+import type { PublicUser, UserToPut } from "@neurosongs/types";
 import type { ZodError } from "zod";
 
 import { randomUUID } from "crypto";
 
 import { APIError, fillArray, omitProperties } from "@alextheman/utility";
-import { parseAPIUser, parsePublicAlbum, parsePublicSongs, parseUser } from "@neurosongs/types";
+import { parsePublicAlbum, parsePublicSongs, parsePublicUser, parseUser } from "@neurosongs/types";
 import request from "supertest";
 import { albumFactory, songFactory, userFactory } from "tests/test-utilities/dataFactory";
 import { describe, expect, test } from "vitest";
@@ -25,18 +25,18 @@ describe("/api/users", () => {
 
       const {
         body: { users: apiUsers },
-      }: { body: { users: (Omit<APIUser, "memberSince"> & { memberSince: string })[] } } =
+      }: { body: { users: (Omit<PublicUser, "memberSince"> & { memberSince: string })[] } } =
         await request(app).get(`/api/users`).expect(200);
 
       expect(apiUsers.length).toBe(10);
       expect(factoryUsers).toMatchObject(
         apiUsers.map((apiUser) => {
-          return parseAPIUser(apiUser);
+          return parsePublicUser(apiUser);
         }),
       );
 
       apiUsers.forEach((apiUser) => {
-        const validatedAPIUser = parseAPIUser(apiUser);
+        const validatedAPIUser = parsePublicUser(apiUser);
 
         expect(validatedAPIUser).not.toHaveProperty("serial");
         expect(validatedAPIUser).not.toHaveProperty("email");
@@ -63,13 +63,13 @@ describe("/api/users", () => {
 
       expect(apiUsers.length).toBe(50);
       expect(factoryUsers.slice(0, 50)).toMatchObject(
-        apiUsers.map((apiUser: APIUser) => {
-          return parseAPIUser(apiUser);
+        apiUsers.map((apiUser: PublicUser) => {
+          return parsePublicUser(apiUser);
         }),
       );
 
-      apiUsers.forEach((apiUser: APIUser) => {
-        const validatedAPIUser = parseAPIUser(apiUser);
+      apiUsers.forEach((apiUser: PublicUser) => {
+        const validatedAPIUser = parsePublicUser(apiUser);
 
         expect(validatedAPIUser).not.toHaveProperty("serial");
         expect(validatedAPIUser).not.toHaveProperty("email");
@@ -96,13 +96,13 @@ describe("/api/users", () => {
 
       expect(apiUsers.length).toBe(25);
       expect(factoryUsers.slice(0, 25)).toMatchObject(
-        apiUsers.map((apiUser: APIUser) => {
-          return parseAPIUser(apiUser);
+        apiUsers.map((apiUser: PublicUser) => {
+          return parsePublicUser(apiUser);
         }),
       );
 
-      apiUsers.forEach((apiUser: APIUser) => {
-        const validatedAPIUser = parseAPIUser(apiUser);
+      apiUsers.forEach((apiUser: PublicUser) => {
+        const validatedAPIUser = parsePublicUser(apiUser);
 
         expect(validatedAPIUser).not.toHaveProperty("serial");
         expect(validatedAPIUser).not.toHaveProperty("email");
@@ -129,13 +129,13 @@ describe("/api/users", () => {
 
       expect(apiUsers.length).toBe(50);
       expect(factoryUsers.slice(50, 100)).toMatchObject(
-        apiUsers.map((apiUser: APIUser) => {
-          return parseAPIUser(apiUser);
+        apiUsers.map((apiUser: PublicUser) => {
+          return parsePublicUser(apiUser);
         }),
       );
 
-      apiUsers.forEach((apiUser: APIUser) => {
-        const validatedAPIUser = parseAPIUser(apiUser);
+      apiUsers.forEach((apiUser: PublicUser) => {
+        const validatedAPIUser = parsePublicUser(apiUser);
 
         expect(validatedAPIUser).not.toHaveProperty("serial");
         expect(validatedAPIUser).not.toHaveProperty("email");
@@ -257,7 +257,7 @@ describe("/api/users/:userId", () => {
         body: { user: apiUser },
       } = await request(app).get(`/api/users/${factoryUser.id}`).expect(200);
 
-      const validatedAPIUser = parseAPIUser(apiUser);
+      const validatedAPIUser = parsePublicUser(apiUser);
       expect(factoryUser).toMatchObject(validatedAPIUser);
 
       expect(validatedAPIUser).not.toHaveProperty("serial");
