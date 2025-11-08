@@ -323,12 +323,9 @@ describe("/api/users/:userId", () => {
       expect(changedUser).toMatchObject(changedProperties);
 
       // Check other properties are unaffected
-      const filteredChangedUser: Partial<PublicUser> = { ...changedUser };
-      delete filteredChangedUser.username;
-      delete filteredChangedUser.artistName;
-      delete filteredChangedUser.description;
-
-      expect(factoryUser).toMatchObject(filteredChangedUser);
+      expect(factoryUser).toMatchObject(
+        omitProperties(changedUser, getRecordKeys(changedProperties)),
+      );
     });
     test("400: Gives an error if userId is not UUID", async () => {
       const changedProperties: UserToPut = {
