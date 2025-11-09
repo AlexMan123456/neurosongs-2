@@ -34,7 +34,7 @@
     "react-error-boundary": "^6.0.0"
   },
   "devDependencies": {
-    "@alextheman/eslint-plugin": "^2.5.0",
+    "@alextheman/eslint-plugin": "^2.7.1",
     "@types/node": "^24.10.0",
     "eslint": "^9.39.1",
     "eslint-plugin-package-json": "^0.64.0",
