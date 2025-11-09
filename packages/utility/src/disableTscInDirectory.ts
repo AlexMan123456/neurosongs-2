@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync, statSync, writeFileSync } from "fs";
 import path from "path";
 
-function disableTscInDirectory(directory: string) {
+function disableTscInDirectory(directory: string): void {
   const files = readdirSync(directory);
 
   for (const file of files) {
