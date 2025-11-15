@@ -27,29 +27,26 @@
     "use-local-components": "dotenv -e .env -- sh -c 'COMPONENTS_PATH=${LOCAL_COMPONENTS_PATH:-../../../components}; npm --prefix \"$COMPONENTS_PATH\" run create-local-package && npm uninstall @alextheman/components && npm install \"$COMPONENTS_PATH\"/alextheman-components-*.tgz'"
   },
   "dependencies": {
-    "@alextheman/components": "^5.5.1",
+    "@alextheman/components": "^5.5.2",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
     "@mui/icons-material": "^7.3.5",
     "@mui/material": "^7.3.5",
     "@neurosongs/types": "^1.0.0",
-    "@tanstack/react-query": "^5.90.7",
+    "@tanstack/react-query": "^5.90.9",
     "axios": "^1.13.2",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.66.0",
-    "react-router-dom": "^7.9.5"
+    "react-router-dom": "^7.9.6"
   },
   "devDependencies": {
-    "@eslint/js": "^9.39.1",
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2",
-    "@vitejs/plugin-react": "^5.1.0",
+    "@types/react": "^19.2.4",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.1",
     "dotenv-cli": "^11.0.0",
-    "eslint": "^9.39.1",
     "globals": "^16.5.0",
     "typescript": "~5.9.3",
-    "typescript-eslint": "^8.46.3",
     "vite": "^7.2.2"
   }
 }
