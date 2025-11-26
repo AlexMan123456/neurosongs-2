@@ -1,4 +1,4 @@
-import { defineConfig } from "tsup";
+import { defineConfig } from "tsdown";
 
 export default defineConfig([
   {
@@ -8,6 +8,7 @@ export default defineConfig([
     clean: true,
     external: ["./generated/prisma"],
     noExternal: [],
+    fixedExtension: false
   },
   {
     entry: ["src/fabbrica.ts"],
@@ -16,6 +17,7 @@ export default defineConfig([
     clean: true,
     external: ["./generated/fabbrica"],
     noExternal: [],
+    fixedExtension: false
   },
   {
     entry: ["src/types.ts"],
@@ -24,5 +26,6 @@ export default defineConfig([
     clean: true,
     external: ["./generated/types/schemas"],
     noExternal: [],
+    fixedExtension: false
   }
 ]);
