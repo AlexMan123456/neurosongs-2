@@ -8,7 +8,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "tsup",
+    "build": "tsdown",
     "clean-update": "bash -c 'npx npm-check-updates -u \"$@\"'",
     "format": "npm run format-prettier && npm run format-eslint",
     "format-eslint": "eslint --fix --suppress-all \"src/**/*.ts\" && rm -f eslint-suppressions.json",
@@ -27,6 +27,6 @@
     "@neurosongs/prisma-client": "^1.0.0"
   },
   "devDependencies": {
-    "tsup": "^8.5.1"
+    "tsdown": "^0.16.7"
   }
 }

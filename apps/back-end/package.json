@@ -10,7 +10,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
+    "build": "tsdown",
     "clean-update": "bash -c 'npx npm-check-updates -u \"$@\"'",
     "dev": "nodemon src/server/index.ts",
     "format": "npm run format-prettier && npm run format-eslint",
@@ -53,7 +53,7 @@
     "nodemon": "^3.1.11",
     "prisma": "^6.19.0",
     "supertest": "^7.1.4",
-    "tsup": "^8.5.1",
+    "tsdown": "^0.16.7",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^4.0.13"
   },
