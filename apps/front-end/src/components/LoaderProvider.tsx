@@ -15,8 +15,10 @@ export interface LoaderProviderPropsWithError<T> extends AlexLoaderProviderProps
   errorFunction?: never;
 }
 
-export interface LoaderProviderPropsWithNeurosongsError<T>
-  extends Omit<AlexLoaderProviderPropsWithError<T>, "errorComponent"> {
+export interface LoaderProviderPropsWithNeurosongsError<T> extends Omit<
+  AlexLoaderProviderPropsWithError<T>,
+  "errorComponent"
+> {
   errorComponent?: never;
   apiErrorMap?: APIErrorMap;
   errorFunction?: (error: unknown) => string;

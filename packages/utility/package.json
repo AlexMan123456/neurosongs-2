@@ -23,6 +23,6 @@
     "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --"
   },
   "devDependencies": {
-    "tsdown": "^0.16.7"
+    "tsdown": "^0.16.8"
   }
 }

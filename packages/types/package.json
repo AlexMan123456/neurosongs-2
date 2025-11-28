@@ -27,6 +27,6 @@
     "@neurosongs/prisma-client": "^1.0.0"
   },
   "devDependencies": {
-    "tsdown": "^0.16.7"
+    "tsdown": "^0.16.8"
   }
 }
