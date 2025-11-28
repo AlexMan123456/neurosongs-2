@@ -42,7 +42,7 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
-    "zod": "^4.1.12"
+    "zod": "^4.1.13"
   },
   "devDependencies": {
     "@chax-at/transactional-prisma-testing": "^1.4.2",
@@ -53,9 +53,9 @@
     "nodemon": "^3.1.11",
     "prisma": "^6.19.0",
     "supertest": "^7.1.4",
-    "tsdown": "^0.16.7",
+    "tsdown": "^0.16.8",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^4.0.13"
+    "vitest": "^4.0.14"
   },
   "prisma": {
     "seed": "npx tsx src/database/seed.ts"
