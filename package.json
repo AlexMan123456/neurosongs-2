@@ -30,16 +30,16 @@
     "use-local-eslint-plugin": "dotenv -e .env -- sh -c 'ESLINT_PLUGIN_PATH=${LOCAL_ESLINT_PLUGIN_PATH:-../../../components}; npm --prefix \"$ESLINT_PLUGIN_PATH\" run create-local-package && npm uninstall @alextheman/eslint-plugin && npm install --save-dev \"$ESLINT_PLUGIN_PATH\"/alextheman-eslint-plugin-*.tgz'"
   },
   "dependencies": {
-    "@alextheman/utility": "^3.3.1",
+    "@alextheman/utility": "^3.3.2",
     "react-error-boundary": "^6.0.0"
   },
   "devDependencies": {
-    "@alextheman/eslint-plugin": "^4.2.2",
+    "@alextheman/eslint-plugin": "^4.2.3",
     "@types/node": "^24.10.1",
     "eslint": "^9.39.1",
     "husky": "^9.1.7",
     "npm-check-updates": "^19.1.2",
-    "prettier": "^3.7.1",
+    "prettier": "^3.7.2",
     "turbo": "^2.6.1",
     "typescript": "5.9.3"
   },
