@@ -41,21 +41,21 @@
     "@prisma/client": "^6.19.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
-    "express": "^5.1.0",
+    "express": "^5.2.1",
     "zod": "^4.1.13"
   },
   "devDependencies": {
     "@chax-at/transactional-prisma-testing": "^1.4.2",
     "@types/cors": "^2.8.19",
-    "@types/express": "^5.0.5",
+    "@types/express": "^5.0.6",
     "@types/supertest": "^6.0.3",
-    "execa": "^9.6.0",
+    "execa": "^9.6.1",
     "nodemon": "^3.1.11",
     "prisma": "^6.19.0",
     "supertest": "^7.1.4",
     "tsdown": "^0.16.8",
     "vite-tsconfig-paths": "^5.1.4",
-    "vitest": "^4.0.14"
+    "vitest": "^4.0.15"
   },
   "prisma": {
     "seed": "npx tsx src/database/seed.ts"
