@@ -34,9 +34,9 @@
     "update-dependencies": "pnpm update --latest && pnpm update"
   },
   "dependencies": {
-    "@neurosongs/prisma-client": "workspace:../../packages/prisma-client",
-    "@neurosongs/types": "workspace:../../packages/types",
-    "@neurosongs/utility": "workspace:../../packages/utility",
+    "@neurosongs/prisma-client": "link:../../packages/prisma-client",
+    "@neurosongs/types": "link:../../packages/types",
+    "@neurosongs/utility": "link:../../packages/utility",
     "@prisma/client": "^6.19.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
@@ -45,7 +45,7 @@
   },
   "devDependencies": {
     "@chax-at/transactional-prisma-testing": "^1.4.2",
-    "@quramy/prisma-fabbrica": "^2.3.2",
+    "@quramy/prisma-fabbrica": "2.3.2",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/express-serve-static-core": "^5.1.0",
@@ -53,7 +53,7 @@
     "execa": "^9.6.1",
     "nodemon": "^3.1.11",
     "prisma": "^6.19.0",
-    "prisma-zod-generator": "^1.32.1",
+    "prisma-zod-generator": "1.32.1",
     "supertest": "^7.1.4",
     "tsdown": "^0.17.0",
     "vite-tsconfig-paths": "^5.1.4",

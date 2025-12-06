@@ -34,15 +34,15 @@
     "update-dependencies": "pnpm update --latest && pnpm update"
   },
   "dependencies": {
-    "@neurosongs/utility": "workspace:../utility",
+    "@neurosongs/utility": "link:../utility",
     "@types/node": "^24.10.1",
     "zod": "^4.1.13"
   },
   "devDependencies": {
     "@prisma/client": "^6.19.0",
-    "@quramy/prisma-fabbrica": "^2.3.2",
+    "@quramy/prisma-fabbrica": "2.3.2",
     "prisma": "^6.19.0",
-    "prisma-zod-generator": "^1.32.1",
+    "prisma-zod-generator": "1.32.1",
     "tsdown": "^0.17.0"
   },
   "peerDependencies": {

@@ -15,8 +15,8 @@ importers:
   .:
     dependencies:
       '@alextheman/utility':
-        specifier: ^3.4.1
-        version: 3.4.1
+        specifier: ^3.4.2
+        version: 3.4.2
       react-error-boundary:
         specifier: ^6.0.0
         version: 6.0.0(react@19.2.1)
@@ -49,13 +49,13 @@ importers:
   apps/back-end:
     dependencies:
       '@neurosongs/prisma-client':
-        specifier: workspace:../../packages/prisma-client
+        specifier: link:../../packages/prisma-client
         version: link:../../packages/prisma-client
       '@neurosongs/types':
-        specifier: workspace:../../packages/types
+        specifier: link:../../packages/types
         version: link:../../packages/types
       '@neurosongs/utility':
-        specifier: workspace:../../packages/utility
+        specifier: link:../../packages/utility
         version: link:../../packages/utility
       '@prisma/client':
         specifier: '>=6.19.0 <7'
@@ -134,7 +134,7 @@ importers:
         specifier: ^7.3.6
         version: 7.3.6(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       '@neurosongs/types':
-        specifier: workspace:../../packages/types
+        specifier: link:../../packages/types
         version: link:../../packages/types
       '@tanstack/react-query':
         specifier: ^5.90.12
@@ -183,7 +183,7 @@ importers:
   packages/prisma-client:
     dependencies:
       '@neurosongs/utility':
-        specifier: workspace:../utility
+        specifier: link:../utility
         version: link:../utility
       '@types/node':
         specifier: ^24.10.1
@@ -211,10 +211,10 @@ importers:
   packages/types:
     dependencies:
       '@neurosongs/prisma-client':
-        specifier: workspace:../prisma-client
+        specifier: link:../prisma-client
         version: link:../prisma-client
       '@neurosongs/utility':
-        specifier: workspace:../utility
+        specifier: link:../utility
         version: link:../utility
       zod:
         specifier: ^4.1.13
@@ -261,9 +261,6 @@ packages:
       typescript-eslint: '>=8.0.0'
       vite-tsconfig-paths: '>=5.1.4'
       vitest: '>=4.0.13'
-
-  '@alextheman/utility@3.4.1':
-    resolution: {integrity: sha512-InoqlaPINya97WESFPBH1ShZVRsJdzr9HL2Rm/SCLYBtDUGEqZKQegd4BlFdQT/0CXxEOHmK2Wz2EzHyUFhrUQ==}
 
   '@alextheman/utility@3.4.2':
     resolution: {integrity: sha512-ZJN+2xkmRV2wWO9DYRo/TICFJdTHu4DpsPASRD5/xQUgaMwRt2mYhDQorkF0zt2BXxvHqYnftivzZyoOdy+JKw==}
@@ -3794,7 +3791,7 @@ snapshots:
 
   '@alextheman/eslint-plugin@4.3.0(@eslint/js@9.39.1)(eslint-config-prettier@10.1.8(eslint@9.39.1(jiti@2.6.1)))(eslint-import-resolver-typescript@4.4.4)(eslint-plugin-import@2.32.0)(eslint-plugin-jsx-a11y@6.10.2(eslint@9.39.1(jiti@2.6.1)))(eslint-plugin-package-json@0.85.0(@types/estree@1.0.8)(eslint@9.39.1(jiti@2.6.1))(jsonc-eslint-parser@2.4.1))(eslint-plugin-perfectionist@4.15.1(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(eslint-plugin-prettier@5.5.4(eslint-config-prettier@10.1.8(eslint@9.39.1(jiti@2.6.1)))(eslint@9.39.1(jiti@2.6.1))(prettier@3.7.4))(eslint-plugin-react-hooks@7.0.1(eslint@9.39.1(jiti@2.6.1)))(eslint-plugin-react-refresh@0.4.24(eslint@9.39.1(jiti@2.6.1)))(eslint-plugin-react@7.37.5(eslint@9.39.1(jiti@2.6.1)))(eslint@9.39.1(jiti@2.6.1))(typescript-eslint@8.48.1(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3))(typescript@5.9.3)(vite-tsconfig-paths@5.1.4(typescript@5.9.3)(vite@7.2.6(@types/node@24.10.1)(jiti@2.6.1)(tsx@4.21.0)))(vitest@4.0.15(@types/node@24.10.1)(jiti@2.6.1)(tsx@4.21.0))':
     dependencies:
-      '@alextheman/utility': 3.4.1
+      '@alextheman/utility': 3.4.2
       '@eslint/js': 9.39.1
       '@typescript-eslint/utils': 8.48.1(eslint@9.39.1(jiti@2.6.1))(typescript@5.9.3)
       common-tags: 1.8.2
@@ -3816,10 +3813,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
       - typescript
-
-  '@alextheman/utility@3.4.1':
-    dependencies:
-      zod: 4.1.13
 
   '@alextheman/utility@3.4.2':
     dependencies:
