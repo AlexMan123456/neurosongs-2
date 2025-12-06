@@ -44,6 +44,6 @@
     "@quramy/prisma-fabbrica": "^2.3.2",
     "prisma": "^6.19.0",
     "prisma-zod-generator": "^1.32.1",
-    "tsdown": "^0.16.8"
+    "tsdown": "^0.17.0"
   }
 }
