@@ -8,26 +8,25 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "turbo run build",
-    "clean-update": "turbo run clean-update && npm-check-updates -u",
+    "build": "bash -c 'turbo run build $@' --",
+    "clean-update": "turbo run clean-update && pnpm-check-updates -u",
     "dev": "turbo run dev",
-    "format": "npm run format-package-json && npm run format-workspaces",
+    "format": "bash -c 'pnpm run format-package-json && pnpm run format-workspaces $@' --",
     "format-package-json": "eslint --fix --suppress-all \"./**/package.json\" && rm -f eslint-suppressions.json",
-    "format-workspaces": "turbo run format",
-    "generate": "turbo run generate",
-    "generate-from-back-end": "turbo run generate --filter=back-end",
-    "lint": "npm run lint-package-json && npm run lint-workspaces",
+    "format-workspaces": "bash -c 'turbo run format $@' --",
+    "generate": "bash -c 'turbo run generate $@' --",
+    "lint": "bash -c 'pnpm run lint-package-json && pnpm run lint-workspaces $@' --",
     "lint-package-json": "eslint \"./**/package.json\"",
-    "lint-workspaces": "turbo run lint",
+    "lint-workspaces": "bash -c 'turbo run lint $@' --",
     "migrate-deploy": "turbo run migrate-deploy --filter=back-end",
     "prepare": "husky",
-    "test": "turbo run test",
-    "update-dependencies": "turbo run clean-update && npm run update-root-dependencies",
-    "update-root-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install --workspaces' --",
+    "test": "bash -c 'turbo run test $@' --",
+    "update-dependencies": "turbo run clean-update && pnpm run update-root-dependencies",
+    "update-root-dependencies": "bash -c 'npx pnpm-check-updates -u \"$@\" && pnpm install --workspaces' --",
     "use-live-components": "turbo run use-live-components --filter=front-end --cache=local:,remote:",
-    "use-live-eslint-plugin": "npm uninstall @alextheman/eslint-plugin && npm install --save-dev @alextheman/eslint-plugin",
+    "use-live-eslint-plugin": "pnpm uninstall @alextheman/eslint-plugin && pnpm install --save-dev @alextheman/eslint-plugin",
     "use-local-components": "turbo run use-local-components --filter=front-end --cache=local:,remote:",
-    "use-local-eslint-plugin": "dotenv -e .env -- sh -c 'ESLINT_PLUGIN_PATH=${LOCAL_ESLINT_PLUGIN_PATH:-../../../components}; npm --prefix \"$ESLINT_PLUGIN_PATH\" run create-local-package && npm uninstall @alextheman/eslint-plugin && npm install --save-dev \"$ESLINT_PLUGIN_PATH\"/alextheman-eslint-plugin-*.tgz'"
+    "use-local-eslint-plugin": "dotenv -e .env -- sh -c 'ESLINT_PLUGIN_PATH=${LOCAL_ESLINT_PLUGIN_PATH:-../../../components}; pnpm --prefix \"$ESLINT_PLUGIN_PATH\" run create-local-package && pnpm uninstall @alextheman/eslint-plugin && pnpm install --save-dev \"$ESLINT_PLUGIN_PATH\"/alextheman-eslint-plugin-*.tgz'"
   },
   "dependencies": {
     "@alextheman/utility": "^3.4.1",
@@ -38,13 +37,20 @@
     "@types/node": "^24.10.1",
     "eslint": "^9.39.1",
     "husky": "^9.1.7",
-    "npm-check-updates": "^19.1.2",
     "prettier": "^3.7.4",
+    "tsx": "^4.21.0",
     "turbo": "^2.6.3",
     "typescript": "5.9.3"
   },
-  "packageManager": "npm@11.6.4",
+  "packageManager": "pnpm@10.24.0+sha512.01ff8ae71b4419903b65c60fb2dc9d34cf8bb6e06d03bde112ef38f7a34d6904c424ba66bea5cdcf12890230bf39f9580473140ed9c946fef328b6e5238a345a",
   "engines": {
     "node": ">=18"
+  },
+  "pnpm": {
+    "overrides": {
+      "prisma": "<17",
+      "@quramy/prisma-fabbrica": "2.3.2",
+      "prisma-zod-generator": "1.32.1"
+    }
   }
 }
