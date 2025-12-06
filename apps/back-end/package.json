@@ -11,7 +11,6 @@
   ],
   "scripts": {
     "build": "tsdown",
-    "clean-update": "bash -c 'npx npm-check-updates -u \"$@\"'",
     "dev": "nodemon src/server/index.ts",
     "format": "npm run format-prettier && npm run format-eslint",
     "format-eslint": "eslint --fix --suppress-all \"src/**/*.ts\" \"tests/**/*.ts\" && rm -f eslint-suppressions.json",
@@ -32,12 +31,12 @@
     "start": "node dist/index.js",
     "test": "vitest run",
     "test-watch": "vitest",
-    "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --"
+    "update-dependencies": "pnpm update --latest && pnpm update"
   },
   "dependencies": {
-    "@neurosongs/prisma-client": "^1.0.0",
-    "@neurosongs/types": "^1.0.0",
-    "@neurosongs/utility": "^1.0.0",
+    "@neurosongs/prisma-client": "workspace:../../packages/prisma-client",
+    "@neurosongs/types": "workspace:../../packages/types",
+    "@neurosongs/utility": "workspace:../../packages/utility",
     "@prisma/client": "^6.19.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
@@ -46,18 +45,21 @@
   },
   "devDependencies": {
     "@chax-at/transactional-prisma-testing": "^1.4.2",
+    "@quramy/prisma-fabbrica": "^2.3.2",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
+    "@types/express-serve-static-core": "^5.1.0",
     "@types/supertest": "^6.0.3",
     "execa": "^9.6.1",
     "nodemon": "^3.1.11",
     "prisma": "^6.19.0",
+    "prisma-zod-generator": "^1.32.1",
     "supertest": "^7.1.4",
     "tsdown": "^0.17.0",
     "vite-tsconfig-paths": "^5.1.4",
     "vitest": "^4.0.15"
   },
   "prisma": {
-    "seed": "npx tsx src/database/seed.ts"
+    "seed": "tsx src/database/seed.ts"
   }
 }

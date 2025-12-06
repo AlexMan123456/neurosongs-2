@@ -27,23 +27,27 @@
   },
   "main": "dist/index.js",
   "scripts": {
-    "build": "rm -rf dist/generated && npm run generate && tsdown && cp -r src/generated dist/generated",
-    "clean-update": "bash -c 'npx npm-check-updates -u \"$@\"'",
+    "build": "rm -rf dist/generated && pnpm run generate && tsdown && cp -r src/generated dist/generated",
     "format": "prisma format",
     "generate": "prisma generate && npx tsx disableTscInDirectory.ts",
     "lint": "prisma format --check",
-    "update-dependencies": "bash -c 'npx npm-check-updates -u \"$@\" && npm install' --"
+    "update-dependencies": "pnpm update --latest && pnpm update"
   },
   "dependencies": {
-    "@neurosongs/utility": "^1.0.0",
-    "@prisma/client": "^6.19.0",
+    "@neurosongs/utility": "workspace:../utility",
     "@types/node": "^24.10.1",
     "zod": "^4.1.13"
   },
   "devDependencies": {
+    "@prisma/client": "^6.19.0",
     "@quramy/prisma-fabbrica": "^2.3.2",
     "prisma": "^6.19.0",
     "prisma-zod-generator": "^1.32.1",
     "tsdown": "^0.17.0"
+  },
+  "peerDependencies": {
+    "@prisma/client": "^6.19.0",
+    "@quramy/prisma-fabbrica": "^2.3.2",
+    "prisma-zod-generator": "^1.32.1"
   }
 }
