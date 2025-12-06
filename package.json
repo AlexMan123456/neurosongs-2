@@ -47,7 +47,8 @@
   },
   "pnpm": {
     "overrides": {
-      "prisma": "<17",
+      "prisma": ">=6.19.0 <7",
+      "@prisma/client": ">=6.19.0 <7",
       "@quramy/prisma-fabbrica": "2.3.2",
       "prisma-zod-generator": "1.32.1"
     }
