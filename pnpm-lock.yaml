@@ -49,13 +49,13 @@ importers:
   apps/back-end:
     dependencies:
       '@neurosongs/prisma-client':
-        specifier: link:../../packages/prisma-client
+        specifier: workspace:../../packages/prisma-client
         version: link:../../packages/prisma-client
       '@neurosongs/types':
-        specifier: link:../../packages/types
+        specifier: workspace:../../packages/types
         version: link:../../packages/types
       '@neurosongs/utility':
-        specifier: link:../../packages/utility
+        specifier: workspace:../../packages/utility
         version: link:../../packages/utility
       '@prisma/client':
         specifier: '>=6.19.0 <7'
@@ -134,7 +134,7 @@ importers:
         specifier: ^7.3.6
         version: 7.3.6(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       '@neurosongs/types':
-        specifier: link:../../packages/types
+        specifier: workspace:../../packages/types
         version: link:../../packages/types
       '@tanstack/react-query':
         specifier: ^5.90.12
@@ -183,7 +183,7 @@ importers:
   packages/prisma-client:
     dependencies:
       '@neurosongs/utility':
-        specifier: link:../utility
+        specifier: workspace:../utility
         version: link:../utility
       '@types/node':
         specifier: ^24.10.1
@@ -211,10 +211,10 @@ importers:
   packages/types:
     dependencies:
       '@neurosongs/prisma-client':
-        specifier: link:../prisma-client
+        specifier: workspace:../prisma-client
         version: link:../prisma-client
       '@neurosongs/utility':
-        specifier: link:../utility
+        specifier: workspace:../utility
         version: link:../utility
       zod:
         specifier: ^4.1.13

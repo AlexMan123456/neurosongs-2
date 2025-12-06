@@ -34,9 +34,9 @@
     "update-dependencies": "pnpm update --latest && pnpm update"
   },
   "dependencies": {
-    "@neurosongs/prisma-client": "link:../../packages/prisma-client",
-    "@neurosongs/types": "link:../../packages/types",
-    "@neurosongs/utility": "link:../../packages/utility",
+    "@neurosongs/prisma-client": "workspace:../../packages/prisma-client",
+    "@neurosongs/types": "workspace:../../packages/types",
+    "@neurosongs/utility": "workspace:../../packages/utility",
     "@prisma/client": "^6.19.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",

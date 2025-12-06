@@ -34,7 +34,7 @@
     "update-dependencies": "pnpm update --latest && pnpm update"
   },
   "dependencies": {
-    "@neurosongs/utility": "link:../utility",
+    "@neurosongs/utility": "workspace:../utility",
     "@types/node": "^24.10.1",
     "zod": "^4.1.13"
   },
