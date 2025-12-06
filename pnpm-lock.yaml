@@ -264,6 +264,9 @@ packages:
   '@alextheman/utility@3.4.1':
     resolution: {integrity: sha512-InoqlaPINya97WESFPBH1ShZVRsJdzr9HL2Rm/SCLYBtDUGEqZKQegd4BlFdQT/0CXxEOHmK2Wz2EzHyUFhrUQ==}
 
+  '@alextheman/utility@3.4.2':
+    resolution: {integrity: sha512-ZJN+2xkmRV2wWO9DYRo/TICFJdTHu4DpsPASRD5/xQUgaMwRt2mYhDQorkF0zt2BXxvHqYnftivzZyoOdy+JKw==}
+
   '@altano/repository-tools@2.0.1':
     resolution: {integrity: sha512-YE/52CkFtb+YtHPgbWPai7oo5N9AKnMuP5LM+i2AG7G1H2jdYBCO1iDnkDE3dZ3C1MIgckaF+d5PNRulgt0bdw==}
 
@@ -3775,7 +3778,7 @@ snapshots:
 
   '@alextheman/components@6.1.2(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react@19.2.1))(@mui/icons-material@7.3.6(@mui/material@7.3.6(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(@types/react@19.2.7)(react@19.2.1))(@mui/material@7.3.6(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react-hook-form@7.68.0(react@19.2.1))(react-router-dom@7.10.1(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)':
     dependencies:
-      '@alextheman/utility': 3.4.1
+      '@alextheman/utility': 3.4.2
       '@emotion/react': 11.14.0(@types/react@19.2.7)(react@19.2.1)
       '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react@19.2.1)
       '@mui/icons-material': 7.3.6(@mui/material@7.3.6(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(@types/react@19.2.7)(react@19.2.1)
@@ -3814,6 +3817,10 @@ snapshots:
       - typescript
 
   '@alextheman/utility@3.4.1':
+    dependencies:
+      zod: 4.1.13
+
+  '@alextheman/utility@3.4.2':
     dependencies:
       zod: 4.1.13
 

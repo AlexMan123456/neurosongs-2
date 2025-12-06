@@ -9,7 +9,6 @@
   ],
   "scripts": {
     "build": "bash -c 'turbo run build $@' --",
-    "clean-update": "turbo run clean-update && pnpm-check-updates -u",
     "dev": "turbo run dev",
     "format": "bash -c 'pnpm run format-package-json && pnpm run format-workspaces $@' --",
     "format-package-json": "eslint --fix --suppress-all \"./**/package.json\" && rm -f eslint-suppressions.json",
@@ -21,8 +20,8 @@
     "migrate-deploy": "turbo run migrate-deploy --filter=back-end",
     "prepare": "husky",
     "test": "bash -c 'turbo run test $@' --",
-    "update-dependencies": "turbo run clean-update && pnpm run update-root-dependencies",
-    "update-root-dependencies": "bash -c 'npx pnpm-check-updates -u \"$@\" && pnpm install --workspaces' --",
+    "update-dependencies": "turbo run update-dependencies && pnpm run update-root-dependencies",
+    "update-root-dependencies": "pnpm update --latest && pnpm update",
     "use-live-components": "turbo run use-live-components --filter=front-end --cache=local:,remote:",
     "use-live-eslint-plugin": "pnpm uninstall @alextheman/eslint-plugin && pnpm install --save-dev @alextheman/eslint-plugin",
     "use-local-components": "turbo run use-local-components --filter=front-end --cache=local:,remote:",
