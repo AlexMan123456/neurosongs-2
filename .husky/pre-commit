@@ -6,14 +6,17 @@ if git diff --cached --quiet; then
   exit 0
 fi
 
-if git diff --name-only | grep -qx "package-lock.json"; then
-  echo "❌ ERROR: Detected changes to package-lock.json that are not committed. Please add and commit the lockfile before proceeding."
+pnpm install --frozen-lockfile
+
+if git diff --name-only | grep -qx "pnpm-lock.yaml"; then
+  echo "❌ ERROR: Detected changes to pnpm-lock.yaml that are not committed. Please add and commit the lockfile before proceeding."
   exit 1
 fi
 
-npm run build -- --ui=stream
-npm run format -- -- --ui=stream
-npm run lint -- -- --ui=stream
-npm test -- --ui=stream
+pnpm run generate --filter=back-end
+pnpm run build --ui=stream
+pnpm run format --ui=stream
+pnpm run lint --ui=stream
+pnpm test --ui=stream
 
 git update-index --again

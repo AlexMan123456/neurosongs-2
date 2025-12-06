@@ -39,12 +39,20 @@ jobs:
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
-    - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+    - name: Checkout the repository
+      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+    - name: Use PNPM
+      uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
+      with:
+        run_install: false
+
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
       with:
         node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+        cache: 'pnpm'
+
     - name: Initialise environment variables
       run: |
         rm -f apps/back-end/.env.test
@@ -52,17 +60,20 @@ jobs:
         touch apps/back-end/.env.development
         echo DATABASE_URL="${{ secrets.DATABASE_URL }}" >> apps/back-end/.env.test
         echo DATABASE_URL="${{ secrets.DATABASE_URL }}" >> apps/back-end/.env.development
+    
     - name: Install dependencies
-      run: npm ci
+      run: pnpm install
+
     - name: Generate Prisma Client
-      # The local utility package needs to be built so that we can disable tsc in the generated output
       run: |
-        npm run migrate-deploy
-        npm run build -- --filter=@neurosongs/utility
-        npm run generate-from-back-end
+        pnpm run migrate-deploy
+        pnpm run generate --filter=back-end
+      
     - name: Build packages
-      run: npm run build --if-present
+      run: pnpm run build
+
     - name: Run linting checks
-      run: npm run lint
+      run: pnpm run lint
+
     - name: Run tests
-      run: npm test
+      run: pnpm test
