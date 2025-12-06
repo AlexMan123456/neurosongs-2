@@ -13,7 +13,7 @@ if git diff --name-only | grep -qx "pnpm-lock.yaml"; then
   exit 1
 fi
 
-pnpm run generate --filter=back-end
+pnpm run generate --filter=back-end --ui=stream
 pnpm run build --ui=stream
 pnpm run format --ui=stream
 pnpm run lint --ui=stream
