@@ -23,8 +23,8 @@
     "update-dependencies": "pnpm update --latest && pnpm update"
   },
   "dependencies": {
-    "@neurosongs/prisma-client": "workspace:../prisma-client",
-    "@neurosongs/utility": "workspace:../utility",
+    "@neurosongs/prisma-client": "workspace:*",
+    "@neurosongs/utility": "workspace:*",
     "zod": "^4.1.13"
   },
   "devDependencies": {
