@@ -5,7 +5,8 @@ settings:
   excludeLinksFromLockfile: false
 
 overrides:
-  prisma: <17
+  prisma: '>=6.19.0 <7'
+  '@prisma/client': '>=6.19.0 <7'
   '@quramy/prisma-fabbrica': 2.3.2
   prisma-zod-generator: 1.32.1
 
@@ -57,7 +58,7 @@ importers:
         specifier: workspace:../../packages/utility
         version: link:../../packages/utility
       '@prisma/client':
-        specifier: ^6.19.0
+        specifier: '>=6.19.0 <7'
         version: 6.19.0(prisma@6.19.0(typescript@5.9.3))(typescript@5.9.3)
       cors:
         specifier: ^2.8.5
@@ -97,7 +98,7 @@ importers:
         specifier: ^3.1.11
         version: 3.1.11
       prisma:
-        specifier: <17
+        specifier: '>=6.19.0 <7'
         version: 6.19.0(typescript@5.9.3)
       prisma-zod-generator:
         specifier: 1.32.1
@@ -192,13 +193,13 @@ importers:
         version: 4.1.13
     devDependencies:
       '@prisma/client':
-        specifier: ^6.19.0
+        specifier: '>=6.19.0 <7'
         version: 6.19.0(prisma@6.19.0(typescript@5.9.3))(typescript@5.9.3)
       '@quramy/prisma-fabbrica':
         specifier: 2.3.2
         version: 2.3.2(@prisma/client@6.19.0(prisma@6.19.0(typescript@5.9.3))(typescript@5.9.3))(typescript@5.9.3)
       prisma:
-        specifier: <17
+        specifier: '>=6.19.0 <7'
         version: 6.19.0(typescript@5.9.3)
       prisma-zod-generator:
         specifier: 1.32.1
@@ -263,6 +264,9 @@ packages:
 
   '@alextheman/utility@3.4.1':
     resolution: {integrity: sha512-InoqlaPINya97WESFPBH1ShZVRsJdzr9HL2Rm/SCLYBtDUGEqZKQegd4BlFdQT/0CXxEOHmK2Wz2EzHyUFhrUQ==}
+
+  '@alextheman/utility@3.4.2':
+    resolution: {integrity: sha512-ZJN+2xkmRV2wWO9DYRo/TICFJdTHu4DpsPASRD5/xQUgaMwRt2mYhDQorkF0zt2BXxvHqYnftivzZyoOdy+JKw==}
 
   '@altano/repository-tools@2.0.1':
     resolution: {integrity: sha512-YE/52CkFtb+YtHPgbWPai7oo5N9AKnMuP5LM+i2AG7G1H2jdYBCO1iDnkDE3dZ3C1MIgckaF+d5PNRulgt0bdw==}
@@ -358,7 +362,7 @@ packages:
     resolution: {integrity: sha512-ZG1KhxA00LtU5LXDwJeZ+Y3Ex1TtDbPnbAo31QFXJPUZFdoDyLOuProXbrVp6h6XglA8LhNnrg6sLQsanPzLGw==}
     engines: {node: '>= 14'}
     peerDependencies:
-      '@prisma/client': ^4.7.0 || 5 || 6
+      '@prisma/client': '>=6.19.0 <7'
 
   '@emnapi/core@1.7.1':
     resolution: {integrity: sha512-o1uhUASyo921r2XtHYOHy7gdkGLge8ghBEQHMWmyJFoXlpU58kIrhhN3w26lpQb6dspetweapMn2CSNwQ8I4wg==}
@@ -927,7 +931,7 @@ packages:
     resolution: {integrity: sha512-QXFT+N/bva/QI2qoXmjBzL7D6aliPffIwP+81AdTGq0FXDoLxLkWivGMawG8iM5B9BKfxLIXxfWWAF6wbuJU6g==}
     engines: {node: '>=18.18'}
     peerDependencies:
-      prisma: <17
+      prisma: '>=6.19.0 <7'
       typescript: '>=5.1.0'
     peerDependenciesMeta:
       prisma:
@@ -989,7 +993,7 @@ packages:
     resolution: {integrity: sha512-9KOWQMn6OP8hwnrVAYSLXZnET/BCaWqr4tFjZrM30wQjgwZeyKD8cgMFU8X4h0054sC+vrNCyBqRrb0Q3MbMRQ==}
     hasBin: true
     peerDependencies:
-      '@prisma/client': ^5.0.0 || ^6.0.0
+      '@prisma/client': '>=6.19.0 <7'
       typescript: ^3.0.0 || ^4.0.0 || ^5.0.0
 
   '@rolldown/binding-android-arm64@1.0.0-beta.53':
@@ -3775,7 +3779,7 @@ snapshots:
 
   '@alextheman/components@6.1.2(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react@19.2.1))(@mui/icons-material@7.3.6(@mui/material@7.3.6(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(@types/react@19.2.7)(react@19.2.1))(@mui/material@7.3.6(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react-dom@19.2.1(react@19.2.1))(react-hook-form@7.68.0(react@19.2.1))(react-router-dom@7.10.1(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(react@19.2.1)':
     dependencies:
-      '@alextheman/utility': 3.4.1
+      '@alextheman/utility': 3.4.2
       '@emotion/react': 11.14.0(@types/react@19.2.7)(react@19.2.1)
       '@emotion/styled': 11.14.1(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react@19.2.1)
       '@mui/icons-material': 7.3.6(@mui/material@7.3.6(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@emotion/styled@11.14.1(@emotion/react@11.14.0(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react@19.2.1))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1))(@types/react@19.2.7)(react@19.2.1)
@@ -3814,6 +3818,10 @@ snapshots:
       - typescript
 
   '@alextheman/utility@3.4.1':
+    dependencies:
+      zod: 4.1.13
+
+  '@alextheman/utility@3.4.2':
     dependencies:
       zod: 4.1.13
 
