@@ -1,10 +1,10 @@
 import type { IconButtonProps } from "@mui/material/IconButton";
 
-import { DropdownMenu, InternalLink } from "@alextheman/components";
+import { DropdownMenu2 as DropdownMenu } from "@alextheman/components";
 import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
-import MenuItem from "@mui/material/MenuItem";
 
+import DropdownMenuLink from "src/components/DropdownMenuLink";
 import neurosongsNote from "src/images/Neurosongs_note.png";
 
 function UserDropdown() {
@@ -18,9 +18,9 @@ function UserDropdown() {
         );
       }}
     >
-      <MenuItem component={InternalLink} to="/users/a05cadd9-479c-43f7-a86f-487e38a282f7">
+      <DropdownMenuLink to="/users/a05cadd9-479c-43f7-a86f-487e38a282f7">
         View Profile
-      </MenuItem>
+      </DropdownMenuLink>
     </DropdownMenu>
   );
 }
