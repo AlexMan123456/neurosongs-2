@@ -31,7 +31,7 @@
     "@alextheman/utility": "^3.4.2"
   },
   "devDependencies": {
-    "@alextheman/eslint-plugin": "^4.3.0",
+    "@alextheman/eslint-plugin": "^4.4.2",
     "@types/node": "^24.10.1",
     "eslint": "^9.39.1",
     "husky": "^9.1.7",
