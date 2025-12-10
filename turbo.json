@@ -30,7 +30,14 @@
     },
     "dev": {
       "dependsOn": ["^dev"],
-      "cache": false,
+      "cache": false
+    },
+    "dev-refresh": {
+      "dependsOn": ["^dev-refresh"],
+      "cache": false
+    },
+    "dev-after-refresh": {
+      "dependsOn": ["front-end#dev-refresh", "back-end#dev"],
       "persistent": true
     },
     "use-local-components": {
@@ -38,6 +45,12 @@
     },
     "use-live-components": {
       "dependsOn": ["^use-live-components"]
+    },
+    "refresh-local-components": {
+      "dependsOn": ["^refresh-local-components"]
+    },
+    "refresh-live-components": {
+      "dependsOn": ["^refresh-live-components"]
     }
   }
 }

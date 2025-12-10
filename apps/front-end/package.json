@@ -8,6 +8,7 @@
   "scripts": {
     "build": "tsc -b && vite build",
     "dev": "vite",
+    "dev-refresh": "vite --force",
     "format": "pnpm run format-prettier && pnpm run format-eslint",
     "format-eslint": "eslint --fix --suppress-all \"src/**/*.{ts,tsx}\" && rm -f eslint-suppressions.json",
     "format-prettier": "pnpm run format-prettier-typescript && pnpm run format-prettier-javascript",
@@ -21,9 +22,11 @@
     "lint-prettier-typescript": "prettier --check --parser typescript \"./**/*.{ts,tsx}\"",
     "lint-tsc": "tsc --noEmit",
     "preview": "vite preview",
+    "refresh-live-components": "pnpm uninstall @alextheman/components && pnpm install @alextheman/components",
+    "refresh-local-components": "dotenv -e ../../.env -- sh -c 'COMPONENTS_PATH=${LOCAL_COMPONENTS_PATH:-../../../components}; pnpm --prefix \"$COMPONENTS_PATH\" run build && pnpm uninstall @alextheman/components && pnpm install file:\"$COMPONENTS_PATH\"'",
     "update-dependencies": "pnpm update --latest && pnpm update",
-    "use-live-components": "pnpm uninstall @alextheman/components && pnpm install @alextheman/components",
-    "use-local-components": "dotenv -e .env -- sh -c 'COMPONENTS_PATH=${LOCAL_COMPONENTS_PATH:-../../../components}; pnpm --prefix \"$COMPONENTS_PATH\" run create-local-package && pnpm uninstall @alextheman/components && pnpm install \"$COMPONENTS_PATH\"/alextheman-components-*.tgz'"
+    "use-live-components": "pnpm run refresh-live-components && pnpm --dir ../../ run dev",
+    "use-local-components": "pnpm run refresh-local-components && pnpm --dir ../../ run dev-after-refresh"
   },
   "dependencies": {
     "@alextheman/components": "^6.2.0",
@@ -44,8 +47,6 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
-    "alex-c-line": "^1.6.1",
-    "dotenv-cli": "^11.0.0",
     "globals": "^16.5.0",
     "typescript": "~5.9.3",
     "vite": "^7.2.6"
