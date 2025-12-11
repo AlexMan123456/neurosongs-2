@@ -46,11 +46,11 @@
     "use-live-components": {
       "dependsOn": ["^use-live-components"]
     },
-    "refresh-local-components": {
-      "dependsOn": ["^refresh-local-components"]
+    "prepare-local-components": {
+      "dependsOn": ["^prepare-local-components"]
     },
-    "refresh-live-components": {
-      "dependsOn": ["^refresh-live-components"]
+    "prepare-live-components": {
+      "dependsOn": ["^prepare-live-components"]
     }
   }
 }

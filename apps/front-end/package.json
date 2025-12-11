@@ -21,9 +21,9 @@
     "lint-prettier-javascript": "prettier --check \"./**/*.js\"",
     "lint-prettier-typescript": "prettier --check --parser typescript \"./**/*.{ts,tsx}\"",
     "lint-tsc": "tsc --noEmit",
+    "prepare-live-components": "pnpm uninstall @alextheman/components && pnpm install @alextheman/components",
+    "prepare-local-components": "dotenv -e ../../.env -- sh -c 'COMPONENTS_PATH=${LOCAL_COMPONENTS_PATH:-../../../components}; pnpm --prefix \"$COMPONENTS_PATH\" run build && pnpm uninstall @alextheman/components && pnpm install file:\"$COMPONENTS_PATH\"'",
     "preview": "vite preview",
-    "refresh-live-components": "pnpm uninstall @alextheman/components && pnpm install @alextheman/components",
-    "refresh-local-components": "dotenv -e ../../.env -- sh -c 'COMPONENTS_PATH=${LOCAL_COMPONENTS_PATH:-../../../components}; pnpm --prefix \"$COMPONENTS_PATH\" run build && pnpm uninstall @alextheman/components && pnpm install file:\"$COMPONENTS_PATH\"'",
     "update-dependencies": "pnpm update --latest && pnpm update",
     "use-live-components": "pnpm run refresh-live-components && pnpm --dir ../../ run dev",
     "use-local-components": "pnpm run refresh-local-components && pnpm --dir ../../ run dev-after-refresh"
