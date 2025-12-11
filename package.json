@@ -31,9 +31,11 @@
     "test": "bash -c 'turbo run test $@' --",
     "update-dependencies": "turbo run update-dependencies && pnpm run update-root-dependencies",
     "update-root-dependencies": "pnpm update --latest && pnpm update",
+    "use-live-alex-c-line": "pnpm run prepare-live-alex-c-line",
     "use-live-components": "turbo run prepare-live-components --filter=front-end --cache=local:,remote: && pnpm run dev",
     "use-live-eslint-plugin": "pnpm run prepare-live-eslint-plugin && pnpm run lint",
     "use-live-utility": "pnpm run prepare-live-utility && pnpm run dev",
+    "use-local-alex-c-line": "pnpm run prepare-local-alex-c-line",
     "use-local-components": "turbo run prepare-local-components --filter=front-end --cache=local:,remote: && pnpm run dev-after-refresh",
     "use-local-eslint-plugin": "pnpm run prepare-local-eslint-plugin && pnpm run lint",
     "use-local-utility": "pnpm run prepare-local-utility && pnpm run dev"
