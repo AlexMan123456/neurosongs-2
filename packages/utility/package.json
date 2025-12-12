@@ -22,6 +22,6 @@
     "update-dependencies": "pnpm update --latest && pnpm update"
   },
   "devDependencies": {
-    "tsdown": "^0.17.0"
+    "tsdown": "^0.17.3"
   }
 }
