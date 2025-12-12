@@ -41,11 +41,11 @@
     "use-local-utility": "pnpm run prepare-local-utility && pnpm run dev"
   },
   "dependencies": {
-    "@alextheman/utility": "^3.4.2"
+    "@alextheman/utility": "^3.5.5"
   },
   "devDependencies": {
-    "@alextheman/eslint-plugin": "^4.4.2",
-    "@types/node": "^24.10.1",
+    "@alextheman/eslint-plugin": "^4.5.1",
+    "@types/node": "^25.0.1",
     "alex-c-line": "^1.7.1",
     "dotenv-cli": "^11.0.0",
     "eslint": "^9.39.1",
