@@ -41,21 +41,21 @@
     "use-local-utility": "pnpm run prepare-local-utility && pnpm run dev"
   },
   "dependencies": {
-    "@alextheman/utility": "^3.5.5"
+    "@alextheman/utility": "^4.0.0"
   },
   "devDependencies": {
-    "@alextheman/eslint-plugin": "^4.5.1",
-    "@types/node": "^25.0.1",
-    "alex-c-line": "^1.7.1",
+    "@alextheman/eslint-plugin": "^4.9.2",
+    "@types/node": "^25.0.3",
+    "alex-c-line": "^1.10.0",
     "dotenv-cli": "^11.0.0",
-    "eslint": "^9.39.1",
+    "eslint": "^9.39.2",
     "husky": "^9.1.7",
     "prettier": "^3.7.4",
     "tsx": "^4.21.0",
-    "turbo": "^2.6.3",
+    "turbo": "^2.7.0",
     "typescript": "5.9.3"
   },
-  "packageManager": "pnpm@10.25.0+sha512.5e82639027af37cf832061bcc6d639c219634488e0f2baebe785028a793de7b525ffcd3f7ff574f5e9860654e098fe852ba8ac5dd5cefe1767d23a020a92f501",
+  "packageManager": "pnpm@10.26.1+sha512.664074abc367d2c9324fdc18037097ce0a8f126034160f709928e9e9f95d98714347044e5c3164d65bd5da6c59c6be362b107546292a8eecb7999196e5ce58fa",
   "engines": {
     "node": ">=18"
   },
