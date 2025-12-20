@@ -1,4 +1,5 @@
 import type { APIError, HTTPErrorCode } from "@alextheman/utility";
+
 import type { APIErrorMap, MappingWithRequiredDefault } from "src/utility/defaultAPIErrors";
 
 import { parseIntStrict, removeDuplicates } from "@alextheman/utility";

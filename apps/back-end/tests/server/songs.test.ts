@@ -1,12 +1,13 @@
 import type { PublicSong } from "@neurosongs/types";
 
-import { randomUUID } from "crypto";
-
 import { fillArray, omitProperties } from "@alextheman/utility";
 import { parsePublicSong } from "@neurosongs/types";
 import request from "supertest";
-import { albumFactory, songFactory, userFactory } from "tests/test-utilities/dataFactory";
 import { describe, expect, test } from "vitest";
+
+import { randomUUID } from "crypto";
+
+import { albumFactory, songFactory, userFactory } from "tests/test-utilities/dataFactory";
 
 import app from "src/server/app";
 
