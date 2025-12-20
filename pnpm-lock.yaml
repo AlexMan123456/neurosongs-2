@@ -7,6 +7,7 @@ settings:
 overrides:
   prisma: '>=6.19.0 <7'
   '@prisma/client': '>=6.19.0 <7'
+  '@prisma/config': '>= 6.19.0 <7'
   '@quramy/prisma-fabbrica': 2.3.2
   prisma-zod-generator: 1.32.1
 
@@ -79,6 +80,9 @@ importers:
       '@chax-at/transactional-prisma-testing':
         specifier: ^1.4.2
         version: 1.4.2(@prisma/client@6.19.1(prisma@6.19.1(typescript@5.9.3))(typescript@5.9.3))
+      '@prisma/config':
+        specifier: '>= 6.19.0 <7'
+        version: 6.19.1
       '@quramy/prisma-fabbrica':
         specifier: 2.3.2
         version: 2.3.2(@prisma/client@6.19.1(prisma@6.19.1(typescript@5.9.3))(typescript@5.9.3))(typescript@5.9.3)
@@ -4794,8 +4798,8 @@ snapshots:
 
   '@typescript-eslint/project-service@8.48.1(typescript@5.9.3)':
     dependencies:
-      '@typescript-eslint/tsconfig-utils': 8.48.1(typescript@5.9.3)
-      '@typescript-eslint/types': 8.48.1
+      '@typescript-eslint/tsconfig-utils': 8.50.0(typescript@5.9.3)
+      '@typescript-eslint/types': 8.50.0
       debug: 4.4.3(supports-color@5.5.0)
       typescript: 5.9.3
     transitivePeerDependencies:

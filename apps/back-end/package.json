@@ -45,6 +45,7 @@
   },
   "devDependencies": {
     "@chax-at/transactional-prisma-testing": "^1.4.2",
+    "@prisma/config": "^6.19.1",
     "@quramy/prisma-fabbrica": "2.3.2",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
