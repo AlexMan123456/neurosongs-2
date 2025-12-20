@@ -1,4 +1,5 @@
 import type { LoaderDataProps, LoaderErrorProps } from "@alextheman/components";
+
 import type { LoaderProviderProps } from "src/components/LoaderProvider";
 
 // eslint-disable-next-line no-restricted-imports

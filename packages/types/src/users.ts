@@ -1,5 +1,4 @@
 import { UserInputSchema, UserModelSchema } from "@neurosongs/prisma-client/types";
-import { parseDate } from "@neurosongs/utility";
 import z from "zod";
 
 const userSchema = UserModelSchema.omit({ songs: true, albums: true });
@@ -15,7 +14,7 @@ const publicUserSchema = UserModelSchema.omit({
   songs: true,
   albums: true,
 }).extend({
-  memberSince: z.preprocess(parseDate, z.date()),
+  memberSince: z.coerce.date(),
 });
 export type PublicUser = z.infer<typeof publicUserSchema>;
 export function parsePublicUser(data: unknown): PublicUser {
@@ -31,7 +30,7 @@ const userToPostSchema = UserInputSchema.omit({
   songs: true,
   albums: true,
 }).extend({
-  dateOfBirth: z.preprocess(parseDate, z.date()),
+  dateOfBirth: z.coerce.date(),
   profilePicture: z.string().optional(),
 });
 
