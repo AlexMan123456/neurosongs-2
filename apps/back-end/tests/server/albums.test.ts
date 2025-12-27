@@ -6,7 +6,7 @@ import { parseAlbum, parsePublicAlbum, parsePublicAlbums } from "@neurosongs/typ
 import request from "supertest";
 import { describe, expect, test } from "vitest";
 
-import { randomUUID } from "crypto";
+import { randomUUID } from "node:crypto";
 
 import { albumFactory, userFactory } from "tests/test-utilities/dataFactory";
 
