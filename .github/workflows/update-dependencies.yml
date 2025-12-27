@@ -11,6 +11,6 @@ permissions:
 jobs:
   update-dependencies:
     if: ${{ github.repository == 'AlexMan123456/neurosongs-2' }}
-    uses: AlexMan123456/github-actions/.github/workflows/update-dependencies.yml@c016c13a6227b8a31b5ddd866063bb5362873e70 # v3.0.1
+    uses: AlexMan123456/github-actions/.github/workflows/update-dependencies.yml@134246f0ec5c5b7efad0b3e332a68c387132b84f # v3.1.2
     secrets:
       PAT_GITHUB: ${{ secrets.PAT_GITHUB }}

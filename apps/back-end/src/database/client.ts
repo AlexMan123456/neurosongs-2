@@ -2,8 +2,8 @@ import { parseEnv } from "@alextheman/utility";
 import { PrismaClient } from "@neurosongs/prisma-client/prisma";
 import dotenv from "dotenv";
 
-import path from "path";
-import { fileURLToPath } from "url";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const nodeEnv = parseEnv(process.env.NODE_ENV ?? "development");
 

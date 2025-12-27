@@ -6,7 +6,7 @@ import { parsePublicAlbum, parsePublicSongs, parsePublicUser, parseUser } from "
 import request from "supertest";
 import { describe, expect, test } from "vitest";
 
-import { randomUUID } from "crypto";
+import { randomUUID } from "node:crypto";
 
 import { albumFactory, songFactory, userFactory } from "tests/test-utilities/dataFactory";
 
