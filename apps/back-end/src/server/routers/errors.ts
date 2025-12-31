@@ -3,7 +3,7 @@ import type { ErrorRequestHandler } from "express";
 import { APIError, parseEnv } from "@alextheman/utility";
 import z, { ZodError } from "zod";
 
-const ENV = parseEnv(process.env.NODE_ENV);
+const ENV = parseEnv(process.env.NODE_ENV ?? "development");
 
 export const zodErrors: ErrorRequestHandler = (error, _request, response, next) => {
   if (error instanceof ZodError) {
