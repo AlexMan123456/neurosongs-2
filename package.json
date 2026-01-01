@@ -1,7 +1,7 @@
 {
   "name": "neurosongs-2",
   "private": true,
-  "description": "Source code for Neurosongs 2",
+  "description": "New version of my music-sharing app, Neurosongs.",
   "type": "module",
   "workspaces": [
     "apps/*",
