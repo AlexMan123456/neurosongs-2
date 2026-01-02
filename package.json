@@ -42,15 +42,15 @@
     "use-local-utility": "pnpm run prepare-local-utility && pnpm run dev"
   },
   "dependencies": {
-    "@alextheman/utility": "^4.3.5"
+    "@alextheman/utility": "^4.3.6"
   },
   "devDependencies": {
-    "@alextheman/eslint-plugin": "^5.4.1",
+    "@alextheman/eslint-plugin": "^5.4.2",
     "@types/node": "^25.0.3",
     "alex-c-line": "^1.15.0",
     "dotenv-cli": "^11.0.0",
     "eslint": "^9.39.2",
-    "eslint-plugin-perfectionist": "^5.1.0",
+    "eslint-plugin-perfectionist": "^5.2.0",
     "husky": "^9.1.7",
     "prettier": "^3.7.4",
     "tsx": "^4.21.0",
