@@ -2,11 +2,11 @@
 
 Please select the option that best describes your changes:
 
-- [Breaking Change](?template=breaking_change.md) - For changes that may require users of the app to drastically change their usage.
-- [New Feature](?template=new_feature.md) - For changes that add a new feature to the app.
-- [Bug Fix](?template=bug_fix.md) - For changes that fix a bug in the app.
-- [Tooling Change](?template=tooling_change.md) - For changes to the app's tooling (dependencies, devDependencies, configs...).
-- [Documentation Change](?template=documentation_change.md) - For changes that affect the way that information about the app is presented to users.
+- [Breaking Change](?template=breaking_change.md) - For changes that may require users of the package to refactor their code.
+- [New Feature](?template=new_feature.md) - For changes that add a new feature to the package.
+- [Bug Fix](?template=bug_fix.md) - For changes that fix a bug in the package.
+- [Tooling Change](?template=tooling_change.md) - For changes to the package's tooling (dependencies, devDependencies, configs...).
+- [Documentation Change](?template=documentation_change.md) - For changes that affect the way that information about the package is presented to users.
 - [Refactor](?template=refactor.md) - For changes that change code quality and structure without affecting runtime behaviour.
 - [Miscellaneous](?template=miscellaneous.md) - For changes that do not fit cleanly into any of the above categories.
 
