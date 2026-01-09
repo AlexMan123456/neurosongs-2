@@ -10,3 +10,5 @@ fi
 
 pnpm run generate --filter=back-end --ui=stream
 pnpm run pre-commit
+
+git update-index --again
