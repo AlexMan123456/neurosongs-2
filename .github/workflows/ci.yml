@@ -16,7 +16,7 @@ jobs:
       # Label used to access the service container
       postgres:
         # Docker Hub PostgreSQL image
-        image: postgres
+        image: postgres:17
         # Provide the password for postgres
         env:
           POSTGRES_USER: postgres
@@ -36,6 +36,8 @@ jobs:
     steps:
     - name: Checkout the repository
       uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+      with:
+        persist-credentials: false
 
     - name: Use PNPM
       uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
