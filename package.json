@@ -68,7 +68,8 @@
       "@prisma/client": ">=6.19.0 <7",
       "@prisma/config": ">= 6.19.0 <7",
       "@quramy/prisma-fabbrica": "2.3.2",
-      "prisma-zod-generator": "1.32.1"
+      "prisma-zod-generator": "1.32.1",
+      "tsdown": "<0.19.0"
     }
   }
 }
