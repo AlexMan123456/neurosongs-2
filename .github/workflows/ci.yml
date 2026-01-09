@@ -31,7 +31,7 @@ jobs:
           # Maps tcp port 5432 on service container to the host
           - 5432:5432
     env:
-      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      DATABASE_URL: postgresql://postgres:prisma@localhost:5432/tests?schema=public
 
     steps:
     - name: Checkout the repository
@@ -55,8 +55,8 @@ jobs:
         rm -f apps/back-end/.env.test
         touch apps/back-end/.env.test
         touch apps/back-end/.env.development
-        echo DATABASE_URL="${{ secrets.DATABASE_URL }}" >> apps/back-end/.env.test
-        echo DATABASE_URL="${{ secrets.DATABASE_URL }}" >> apps/back-end/.env.development
+        echo DATABASE_URL="postgresql://postgres:prisma@localhost:5432/tests?schema=public" >> apps/back-end/.env.test
+        echo DATABASE_URL="postgresql://postgres:prisma@localhost:5432/tests?schema=public" >> apps/back-end/.env.development
     
     - name: Install dependencies
       run: pnpm install
