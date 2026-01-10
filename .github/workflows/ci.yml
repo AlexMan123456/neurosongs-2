@@ -2,12 +2,12 @@ name: CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
   merge_group:
     types: [checks_requested]
-  
+
 permissions:
   contents: read
 
@@ -36,46 +36,46 @@ jobs:
       DATABASE_URL: postgresql://postgres:prisma@localhost:5432/tests?schema=public
 
     steps:
-    - name: Checkout the repository
-      uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-      with:
-        persist-credentials: false
+      - name: Checkout the repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          persist-credentials: false
 
-    - name: Use PNPM
-      uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
-      with:
-        run_install: false
+      - name: Use PNPM
+        uses: pnpm/action-setup@41ff72655975bd51cab0327fa583b6e92b6d3061 # v4.2.0
+        with:
+          run_install: false
 
-    - name: Use Node.js
-      uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
-      with:
-        node-version: 22
-        cache: 'pnpm'
+      - name: Use Node.js
+        uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
+        with:
+          node-version: 22
+          cache: "pnpm"
 
-    - name: Initialise environment variables
-      run: |
-        rm -f apps/back-end/.env.test
-        touch apps/back-end/.env.test
-        touch apps/back-end/.env.development
-        echo DATABASE_URL="postgresql://postgres:prisma@localhost:5432/tests?schema=public" >> apps/back-end/.env.test
-        echo DATABASE_URL="postgresql://postgres:prisma@localhost:5432/tests?schema=public" >> apps/back-end/.env.development
-    
-    - name: Install dependencies
-      run: pnpm install
+      - name: Initialise environment variables
+        run: |
+          rm -f apps/back-end/.env.test
+          touch apps/back-end/.env.test
+          touch apps/back-end/.env.development
+          echo DATABASE_URL="postgresql://postgres:prisma@localhost:5432/tests?schema=public" >> apps/back-end/.env.test
+          echo DATABASE_URL="postgresql://postgres:prisma@localhost:5432/tests?schema=public" >> apps/back-end/.env.development
 
-    - name: Generate Prisma Client
-      run: |
-        pnpm run migrate-deploy
-        pnpm run generate --filter=back-end
-      
-    - name: Build packages
-      run: pnpm run build
+      - name: Install dependencies
+        run: pnpm install
 
-    - name: Run linting checks
-      run: pnpm run lint
+      - name: Generate Prisma Client
+        run: |
+          pnpm run migrate-deploy
+          pnpm run generate --filter=back-end
 
-    - name: Run tests
-      run: pnpm test
-  
+      - name: Build packages
+        run: pnpm run build
+
+      - name: Run linting checks
+        run: pnpm run lint
+
+      - name: Run tests
+        run: pnpm test
+
   actions-ci:
     uses: alextheman231/github-actions/.github/workflows/actions-ci.yml@d94b65a56e0f50cbbd674bc019f732bd606d7063 # v5.0.0
